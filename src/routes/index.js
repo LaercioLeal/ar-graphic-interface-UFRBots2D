@@ -1,6 +1,6 @@
 import { lazy } from "react";
 
-// import { LayoutPublic } from 'layouts'
+import routesPath from "constants/routes";
 
 const views = {
   Home: lazy(() => import("views/Home")),
@@ -8,7 +8,7 @@ const views = {
 
 const routes = [
   {
-    path: "/inicio",
+    path: routesPath.home,
     component: views.Home,
     pageTitle: "Início",
   },

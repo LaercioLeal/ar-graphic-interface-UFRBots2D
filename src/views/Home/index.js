@@ -1,10 +1,12 @@
 import React from "react";
 
+import { Container } from "components";
+
 function Home() {
   return (
-    <>
-      <div></div>
-    </>
+    <Container>
+      <div>Home</div>
+    </Container>
   );
 }
 

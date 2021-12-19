@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 const styles = css`
   margin: 0 auto;
-  max-width: 1200px;
+  max-width: 1600px;
 `;
 
 export const Section = styled.section`
