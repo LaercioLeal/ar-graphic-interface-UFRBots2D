@@ -41,12 +41,15 @@ export const Card = styled.div`
   border-radius: 20px;
   background-color: ${themes.colors.white};
   box-shadow: 2px 2px 4px ${themes.colors.gray};
+
+  cursor: wait;
 `;
 
 export const Logo = styled.img.attrs(() => ({
   src: logo,
-  alt: "Porto Cuida uma empresa Porto Seguro",
+  alt: "UFRBots",
 }))`
+  max-width: 200px;
   width: 40%;
   margin: 20px;
 `;

@@ -4,7 +4,7 @@ import { Container } from "components";
 
 function Home() {
   return (
-    <Container>
+    <Container footer>
       <div>Home</div>
     </Container>
   );
