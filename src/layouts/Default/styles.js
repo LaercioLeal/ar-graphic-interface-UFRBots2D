@@ -6,17 +6,15 @@ export const Container = styled.div`
   grid-template-rows: 160px 1fr;
   grid-template-areas:
     "header"
+    "aside"
     "main";
 
   overflow: hidden;
-  background-color: tomato;
-  margin: 0;
 `;
 
 export const Main = styled.main`
   grid-area: main;
   position: relative;
 
-  background-color: green;
   padding-top: 80px;
 `;

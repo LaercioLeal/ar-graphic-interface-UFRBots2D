@@ -1,12 +1,17 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { Helmet } from "react-helmet";
 import PropTypes from "prop-types";
 
 import * as S from "./styles";
 
-import { Header, Navigation } from "./components";
+import { Navigation } from "./components";
+import routes from "constants/routes";
 
 function Default({ children, pageTitle }) {
+  const isInHome = useMemo(() => {
+    return window.location.pathname === routes.home;
+  }, []);
+
   return (
     <>
       {pageTitle && (
@@ -16,8 +21,7 @@ function Default({ children, pageTitle }) {
       )}
 
       <S.Container>
-        <Header />
-        <Navigation />
+        <Navigation isInHome={isInHome} />
         <S.Main>{children}</S.Main>
       </S.Container>
     </>

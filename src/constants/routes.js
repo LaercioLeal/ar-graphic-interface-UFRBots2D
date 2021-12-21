@@ -4,12 +4,11 @@ const routes = {
   tutorial: "/tutorial",
   watch: "/watch",
   about: "/about",
-  estudar: {
+  study: {
     material: "study/material",
     quiz: "study/quiz",
   },
   apprenticeship: {
-    teste: "/apprenticeship/teste",
     run: "/apprenticeship/run",
     experiments: "/apprenticeship/experiments",
     results: "/apprenticeship/results",
