@@ -21,7 +21,7 @@ export const Container = styled.nav`
   padding: 16px 7%;
   z-index: 13;
 
-  box-shadow: 0px 2px 4px ${transparentize(0.5, themes.colors.primary)};
+  box-shadow: 2px 3px 4px ${transparentize(0.5, themes.colors.primary)};
   border-radius: 0 20px 20px 0;
 
   ${({ top }) =>
