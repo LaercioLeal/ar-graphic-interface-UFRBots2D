@@ -15,7 +15,7 @@ const items = [
   },
   {
     path: routes.study.material,
-    label: "Material de Apoio",
+    label: "Material",
   },
   {
     path: routes.tutorial,

@@ -6,12 +6,13 @@ import { NavLink } from "components";
 
 export const Container = styled.nav`
   position: fixed;
-  transition: margin 0.5s, width 0.5s, border-radius 0.8s, box-shadow 1s;
+  transition: margin 0.5s, width 0.5s, border-radius 1s, box-shadow 1s;
   margin: 20px 0;
   margin-right: 10%;
 
   display: flex;
   width: 90%;
+  overflow: hidden;
   max-height: 60px;
   align-items: center;
   justify-content: space-between;
