@@ -6,6 +6,7 @@ import { NavLink } from "components";
 
 export const Container = styled.nav`
   position: fixed;
+  transition: margin 0.5s, width 0.5s, border-radius 0.8s, box-shadow 1s;
   margin: 20px 0;
   margin-right: 10%;
 
@@ -22,6 +23,16 @@ export const Container = styled.nav`
 
   box-shadow: 0px 2px 4px ${transparentize(0.5, themes.colors.primary)};
   border-radius: 0 20px 20px 0;
+
+  ${({ top }) =>
+    !!top &&
+    `
+    margin: 0;  
+    margin-bottom: 20px;
+    width: 100%;
+    border-radius: 0px;
+    box-shadow: 0px 2px 4px ${transparentize(0.5, themes.colors.gray)};
+  `}
 `;
 
 export const Link = styled(NavLink)`
