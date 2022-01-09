@@ -9,7 +9,11 @@ function Container({ children, htmlElement, ...props }) {
       {children}
     </S.Div>
   ) : (
-    <S.Section data-testid="container-section" {...props}>
+    <S.Section
+      data-testid="container-section"
+      {...props}
+      windowHeight={window.innerHeight}
+    >
       {children}
       {props.footer && (
         <S.FooterContainer>

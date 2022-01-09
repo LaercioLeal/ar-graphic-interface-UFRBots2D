@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { rem, transparentize } from "polished";
 
-import themes from "Provider/theme";
+import themes from "Provider/themes";
 import { NavLink } from "components";
 import logo from "assets/img/logo.png";
 

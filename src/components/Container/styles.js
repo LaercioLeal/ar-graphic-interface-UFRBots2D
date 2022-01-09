@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import themes from "Provider/theme";
+import themes from "Provider/themes";
 
 import logo from "assets/img/logo.png";
 import { rem } from "polished";
@@ -7,7 +7,7 @@ import { rem } from "polished";
 const styles = css`
   margin: 0 auto;
   max-width: 1600px;
-  min-height: 100vh;
+  min-height: ${({ windowHeight }) => windowHeight - 100}px;
 `;
 
 export const Section = styled.section`

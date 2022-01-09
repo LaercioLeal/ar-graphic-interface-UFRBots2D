@@ -2,7 +2,7 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 
 import GlobalStyles from "./global";
-import theme from "./theme";
+import theme from "./themes";
 
 const Provider = (props) => (
   <ThemeProvider theme={theme}>

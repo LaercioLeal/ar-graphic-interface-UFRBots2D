@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import themes from "Provider/theme";
+import themes from "Provider/themes";
 
 import logo from "assets/img/logo.png";
 import { rem } from "polished";
