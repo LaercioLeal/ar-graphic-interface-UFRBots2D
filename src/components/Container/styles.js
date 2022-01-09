@@ -7,6 +7,7 @@ import { rem } from "polished";
 const styles = css`
   margin: 0 auto;
   max-width: 1600px;
+  padding-top: 50px;
   min-height: ${({ windowHeight }) => windowHeight - 100}px;
 `;
 
