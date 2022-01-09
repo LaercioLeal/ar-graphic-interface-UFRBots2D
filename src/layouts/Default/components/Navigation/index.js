@@ -26,6 +26,7 @@ function Navigation() {
           <span>{item.label}</span>
         </S.Link>
       ))}
+      <S.Logo show={isPageNotOnTop} />
       {false && <LinearProgress position="absolute" style={{ bottom: -4 }} />}
     </S.Container>
   );

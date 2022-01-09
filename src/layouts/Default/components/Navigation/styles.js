@@ -3,6 +3,7 @@ import { rem, transparentize } from "polished";
 
 import themes from "Provider/theme";
 import { NavLink } from "components";
+import logo from "assets/img/logo.png";
 
 export const Container = styled.nav`
   position: fixed;
@@ -66,4 +67,13 @@ export const Link = styled(NavLink)`
 
     color: ${themes.colors.gray};
   }
+`;
+
+export const Logo = styled.img.attrs(() => ({
+  src: logo,
+  alt: "UFRBots",
+}))`
+  transition: height 0.5s, opacity 1s linear;
+  height: ${({ show }) => (show ? 40 : 0)}px;
+  opacity: ${({ show }) => (show ? 1 : 0)};
 `;
