@@ -10,6 +10,11 @@ export const Container = styled.div`
 
   align-items: center;
   justify-content: flex-start;
+
+  margin-bottom: 60px;
+  ${themes.medias.lessThan("hd")`
+    margin-bottom: 20px;
+  `}
 `;
 
 export const Image = styled(motion.img)`
