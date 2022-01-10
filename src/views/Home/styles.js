@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 import { Container } from "./components/Item/styles";
 
-export const Title = styled.h1`
+export const Title = styled(motion.h1)`
   line-height: 24px;
   font-size: ${rem(24)};
   font-family: ${themes.fonts.bold};

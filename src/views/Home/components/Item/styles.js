@@ -22,10 +22,19 @@ export const Container = css`
   :hover {
     box-shadow: 0px 0px 0px ${themes.colors.primary};
     background-color: ${transparentize(0.6, themes.colors.primary)};
+
+    img {
+      height: 60px;
+
+      ${themes.medias.lessThan("hd")`
+        height: 56px;
+      `}
+    }
   }
 `;
 
 export const Image = styled.img`
+  transition: height 0.3s;
   height: 64px;
   margin-bottom: 20px;
 

@@ -22,7 +22,7 @@ const items = [
   },
   {
     id: "3",
-    title: "Tá querendo estudar um pouco? Consulte uns materiais aqui",
+    title: "Materiais sobre Aprendizado por Reforço",
     icon: studentIcon,
     link: routes.study.material,
   },
