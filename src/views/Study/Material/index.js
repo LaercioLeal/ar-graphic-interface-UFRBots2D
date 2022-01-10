@@ -1,14 +1,14 @@
 import React from "react";
 
-import { Container } from "components";
+import { Container, Heading } from "components";
 
 import * as S from "./styles";
+import studentIcon from "assets/icon/student.png";
 
 function Material() {
   return (
     <Container>
-      <S.Image layoutId="icon-page-material" transition={{ duration: 1 }} />
-      <div>Material</div>
+      <Heading page="material" title="Material" icon={studentIcon} />
     </Container>
   );
 }

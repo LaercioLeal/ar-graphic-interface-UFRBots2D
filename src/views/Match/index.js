@@ -1,14 +1,14 @@
 import React from "react";
 
-import { Container } from "components";
+import { Container, Heading } from "components";
 
 import * as S from "./styles";
+import goalIcon from "assets/icon/goal.png";
 
 function Match() {
   return (
     <Container>
-      <S.Image layoutId="icon-page-match" transition={{ duration: 1 }} />
-      <div>Match</div>
+      <Heading page="match" title="Partida" icon={goalIcon} />
     </Container>
   );
 }

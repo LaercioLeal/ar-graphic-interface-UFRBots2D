@@ -1,14 +1,14 @@
 import React from "react";
 
-import { Container } from "components";
+import { Container, Heading } from "components";
 
 import * as S from "./styles";
+import aboutIcon from "assets/icon/about.png";
 
 function About() {
   return (
     <Container>
-      <S.Image layoutId="icon-page-about" transition={{ duration: 1 }} />
-      <div>About</div>
+      <Heading page="about" title="About" icon={aboutIcon} />
     </Container>
   );
 }

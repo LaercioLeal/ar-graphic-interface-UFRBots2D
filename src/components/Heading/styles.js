@@ -2,14 +2,19 @@ import { motion } from "framer-motion";
 import themes from "Provider/themes";
 import styled from "styled-components";
 
-import goalIcon from "assets/icon/goal.png";
 import { rem } from "polished";
 
-export const Image = styled(motion.img).attrs(() => ({
-  src: goalIcon,
-}))`
+export const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: flex-start;
+`;
+
+export const Image = styled(motion.img)`
   height: 64px;
-  margin-bottom: 20px;
+  margin-right: 2px;
 
   ${themes.medias.lessThan("hd")`
     height: 60px;
