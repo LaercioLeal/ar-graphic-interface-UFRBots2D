@@ -5,10 +5,14 @@ import logo from "assets/img/logo.png";
 import { rem } from "polished";
 
 const styles = css`
-  margin: 0 auto;
+  margin: 0 10%;
   max-width: 1600px;
   padding-top: 50px;
   min-height: ${({ windowHeight }) => windowHeight - 100}px;
+
+  ${themes.medias.lessThan("hd")`
+    padding: 0;
+  `}
 `;
 
 export const Section = styled.section`

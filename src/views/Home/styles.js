@@ -12,6 +12,10 @@ export const Title = styled.h1`
 
   color: ${themes.colors.gray};
 
+  ${themes.medias.lessThan("hd")`
+    font-size: ${rem(20)};
+  `}
+
   span {
     margin-bottom: 20px;
     line-height: 50px;
@@ -26,6 +30,10 @@ export const WrapperItems = styled(motion.div)`
   grid-gap: 20px;
 
   margin-top: 70px;
+
+  ${themes.medias.lessThan("hd")`
+    margin-top: 30px;
+  `}
 `;
 
 export const Item = styled(motion.a)`

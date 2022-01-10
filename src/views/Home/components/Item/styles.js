@@ -28,6 +28,10 @@ export const Container = css`
 export const Image = styled.img`
   height: 64px;
   margin-bottom: 20px;
+
+  ${themes.medias.lessThan("hd")`
+    height: 60px;
+  `}
 `;
 
 export const Title = styled.h1`
@@ -37,4 +41,8 @@ export const Title = styled.h1`
   text-align: center;
 
   color: ${themes.colors.gray};
+
+  ${themes.medias.lessThan("hd")`
+    font-size: ${rem(16)};
+  `}
 `;
