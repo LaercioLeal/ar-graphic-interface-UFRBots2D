@@ -24,6 +24,17 @@ export const Div = styled.div`
 `;
 
 export const FooterContainer = styled.div`
+  @keyframes showUpFooter {
+    from {
+      margin-bottom: -200px;
+    }
+    to {
+      margin-bottom: 0px;
+    }
+  }
+  animation-name: showUpFooter;
+  animation-duration: 1s;
+
   position: absolute;
   display: flex;
   flex-direction: row;

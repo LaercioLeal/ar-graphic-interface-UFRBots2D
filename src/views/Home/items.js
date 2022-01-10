@@ -13,18 +13,21 @@ const items = [
     title: "Jogue uma partida ;)",
     icon: goalIcon,
     link: routes.match,
+    page: "match",
   },
   {
     id: "2",
     title: "Gerencie seus experimentos",
     icon: experimentsIcon,
     link: routes.apprenticeship.experiments,
+    page: "experiments",
   },
   {
     id: "3",
-    title: "Materiais sobre Aprendizado por Reforço",
+    title: "Venha conhecer um pouco da teoria. Consulte alguns materiais aqui",
     icon: studentIcon,
     link: routes.study.material,
+    page: "material",
   },
   {
     id: "4",
@@ -32,18 +35,21 @@ const items = [
       "Quer aprender melhor como usar a interface? aqui temos alguns tutoriais",
     icon: tutorialIcon,
     link: routes.tutorial,
+    page: "tutorial",
   },
   {
     id: "5",
     title: "Venha rever os grandes momentos dos jogos já realizados por aqui",
     icon: watchdIcon,
     link: routes.watch,
+    page: "watch",
   },
   {
     id: "6",
     title: "Conheça um pouco do projeto",
     icon: aboutIcon,
     link: routes.about,
+    page: "about",
   },
 ];
 

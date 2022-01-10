@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { rem } from "polished";
 import themes from "Provider/themes";
 import { motion } from "framer-motion";
+import { NavLink } from "components";
 
 import { Container } from "./components/Item/styles";
 
@@ -36,6 +37,8 @@ export const WrapperItems = styled(motion.div)`
   `}
 `;
 
-export const Item = styled(motion.a)`
+export const Item = styled(motion.div)`
   ${Container}
 `;
+
+export const Link = styled(NavLink)``;

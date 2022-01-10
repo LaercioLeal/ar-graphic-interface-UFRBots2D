@@ -31,13 +31,11 @@ function Home() {
       >
         {items.map((item) => {
           return (
-            <S.Item
-              id={item.id}
-              href={item.link}
-              variants={animate.shortcuts.items}
-            >
-              <Item item={item} />
-            </S.Item>
+            <S.Link key={item.id} to={item.link}>
+              <S.Item variants={animate.shortcuts.items}>
+                <Item item={item} />
+              </S.Item>
+            </S.Link>
           );
         })}
       </S.WrapperItems>

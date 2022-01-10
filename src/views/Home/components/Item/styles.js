@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
 import themes from "Provider/themes";
 import { rem, transparentize } from "polished";
+import { motion } from "framer-motion";
 
 export const Container = css`
   transition: box-shadow 0.3s, background-color 0.3s;
@@ -33,7 +34,7 @@ export const Container = css`
   }
 `;
 
-export const Image = styled.img`
+export const Image = styled(motion.img)`
   transition: height 0.3s;
   height: 64px;
   margin-bottom: 20px;
@@ -50,6 +51,8 @@ export const Title = styled.h1`
   text-align: center;
 
   color: ${themes.colors.gray};
+
+  min-height: 42px;
 
   ${themes.medias.lessThan("hd")`
     font-size: ${rem(16)};

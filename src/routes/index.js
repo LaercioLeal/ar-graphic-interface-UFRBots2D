@@ -1,15 +1,21 @@
-import { lazy } from "react";
-
 import routesPath from "constants/routes";
 
+import Home from "views/Home";
+import Match from "views/Match";
+import Experiments from "views/Apprenticeship/Experiments";
+import Material from "views/Study/Material";
+import Tutorial from "views/Tutorial";
+import Watch from "views/Watch";
+import About from "views/About";
+
 const views = {
-  Home: lazy(() => import("views/Home")),
-  Match: lazy(() => import("views/Match")),
-  Experiments: lazy(() => import("views/Apprenticeship/Experiments")),
-  Material: lazy(() => import("views/Study/Material")),
-  Tutorial: lazy(() => import("views/Tutorial")),
-  Watch: lazy(() => import("views/Watch")),
-  About: lazy(() => import("views/About")),
+  Home,
+  Match,
+  Experiments,
+  Material,
+  Tutorial,
+  Watch,
+  About,
 };
 
 const routes = [
