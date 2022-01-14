@@ -9,7 +9,7 @@ export default function Heading({ page, title, icon }) {
         src={icon}
         animate={{ rotate: 360, delay: 1 }}
         layoutId={`icon-page-${page}`}
-        transition={{ duration: 1 }}
+        transition={{ duration: 2 }}
       />
       <S.Title
         animate={{ x: 25 }}

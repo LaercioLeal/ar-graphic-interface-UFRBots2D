@@ -8,7 +8,11 @@ export default function NotSupported() {
       <S.Card>
         <h1>Dispositivo não suportado</h1>
         <S.Logo />
-        <h2>Tente novamente acessando configurações de desktop</h2>
+        <h2>
+          Acesse através de um
+          <br />
+          desktop com SO Linux
+        </h2>
       </S.Card>
     </S.Container>
   );
