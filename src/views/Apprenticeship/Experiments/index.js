@@ -2,7 +2,6 @@ import React from "react";
 
 import { Container, Heading } from "components";
 
-import * as S from "./styles";
 import experimentsIcon from "assets/icon/experiments.png";
 
 function Apprenticeship() {
