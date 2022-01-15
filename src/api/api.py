@@ -23,4 +23,9 @@ app.config["DEBUG"] = True
 def home():
     return jsonify({ "message": "running .." })
 
+# retornar todos os experimentos cadastrados
+@app.route('/experiments', methods=['GET'])
+def experiments():
+    return jsonify({ "experiments": [{"title": "experiment base"}] })
+
 app.run(host='localhost', port=3001)

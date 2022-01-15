@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.24.0",
     "framer-motion": "^3.10.2",
     "polished": "3.6.5",
     "react": "^16.13.1",
