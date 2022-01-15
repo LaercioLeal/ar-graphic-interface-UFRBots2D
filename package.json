@@ -21,6 +21,7 @@
     "@testing-library/user-event": "^12.1.10",
     "commitizen": "^4.1.2",
     "lerna": "^3.22.1",
+    "npm-run-all": "^4.1.5",
     "react-is": "^17.0.1"
   },
   "config": {
@@ -29,7 +30,9 @@
     }
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "run-p start:app start:api",
+    "start:app": "react-scripts start",
+    "start:api": "python3 src/api/api.py",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
