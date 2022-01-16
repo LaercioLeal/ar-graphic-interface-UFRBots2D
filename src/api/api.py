@@ -63,12 +63,12 @@ def getDirectory():
 
   # verificando se a pasta é de um time agent2d ou uva
   
-  isExists = os.path.exists('.' + path + '/start.sh') or os.path.exists('.' + path + 'src/start.sh')
+  isExists = (os.path.exists(path + '/start.sh') or  os.path.exists(path + 'src/start.sh'))
 
   if ( isExists ):
     return formatResponse(False, { "path": path, "teamName": teamName })
   else:
-    return formatResponse(True, {}, " Diretório de time inválido!")
+    return formatResponse(True, { "path": path, "teamName": teamName }, " Diretório de time inválido!")
 
 # retornar todos os experimentos cadastrados
 @app.route('/experiments/<experiment_id>', methods=['GET'])
