@@ -38,5 +38,6 @@ def formatResponse(error, res, message="empty"):
 # import declared routes
 import routes.experiments
 import routes.directory
+import routes.monitor
 
 app.run(host='localhost', port=3001)
