@@ -3,8 +3,11 @@
   "version": "2.0.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.24.0",
     "framer-motion": "^3.10.2",
+    "notistack": "^1.0.10",
     "polished": "3.6.5",
     "react": "^16.13.1",
     "react-device-detect": "1.13.1",

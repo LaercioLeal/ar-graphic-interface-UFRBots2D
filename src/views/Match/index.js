@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
+import { useSnackbar } from "notistack";
 
 import { Container, Heading, Button } from "components";
 
@@ -8,6 +9,7 @@ import { TeammateOne, TeammateTwo } from "./components";
 import { getDirectory } from "services";
 
 function Match() {
+  const { enqueueSnackbar } = useSnackbar();
   const [teams, setTeams] = useState({ first: null, second: null });
 
   const atLeastOne = useMemo(() => {
@@ -25,14 +27,19 @@ function Match() {
   const handleSelect = useCallback(
     async (position) => {
       if (!teams[position]) {
-        let { data } = await getDirectory();
-        setTeams({
-          ...teams,
-          [position]: {
-            path: data.path,
-            name: data.teamName,
-          },
-        });
+        let { data, isError, message } = await getDirectory();
+        console.log({ data, isError, message });
+        if (!isError) {
+          setTeams({
+            ...teams,
+            [position]: {
+              path: data.path,
+              name: data.teamName,
+            },
+          });
+        } else {
+          enqueueSnackbar(message, { variant: "error" });
+        }
       } else {
         setTeams({
           ...teams,
@@ -40,7 +47,7 @@ function Match() {
         });
       }
     },
-    [teams]
+    [teams, enqueueSnackbar]
   );
 
   const handleStart = () => {
