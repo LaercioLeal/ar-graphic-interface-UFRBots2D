@@ -7,6 +7,7 @@ from tkinter import filedialog
 
 import os
 import subprocess
+from pathlib import Path
 
 import sqlite3
 
@@ -31,13 +32,13 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 
 app.config["DEBUG"] = True
 
-def formatResponse(error, res):
+def formatResponse(error, res, message="empty"):
   statusCode = 400 if error else 200
-  message = "Error" if error else "Success"
+  msg = message if message != "empty" else "Error" if error else "Success"
   return jsonify(isError= error,
-                    message= message,
+                    message= msg,
                     statusCode= statusCode,
-                    data= res), statusCode
+                    data= res), 200
 
 # rota de status do servidor
 @app.route('/', methods=['GET'])
@@ -59,7 +60,15 @@ def getDirectory():
   teamName = paths[len(paths) - 1]
   gui.destroy()
   gui.quit()
-  return formatResponse(False, { "path": path, "teamName": teamName })
+
+  # verificando se a pasta é de um time agent2d ou uva
+  
+  isExists = os.path.exists('.' + path + '/start.sh') or os.path.exists('.' + path + 'src/start.sh')
+
+  if ( isExists ):
+    return formatResponse(False, { "path": path, "teamName": teamName })
+  else:
+    return formatResponse(True, {}, " Diretório de time inválido!")
 
 # retornar todos os experimentos cadastrados
 @app.route('/experiments/<experiment_id>', methods=['GET'])
