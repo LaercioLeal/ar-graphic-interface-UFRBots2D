@@ -7,3 +7,9 @@ CREATE TABLE results (
     resultTeam1 TEXT NOT NULL,
     resultTeam2 TEXT NOT NULL
 );
+
+CREATE TABLE experiments (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    createdAt TEXT NOT NULL,
+);
