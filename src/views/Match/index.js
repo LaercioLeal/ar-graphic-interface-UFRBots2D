@@ -5,6 +5,7 @@ import { Container, Heading, Button } from "components";
 import * as S from "./styles";
 import goalIcon from "assets/icon/goal.png";
 import { TeammateOne, TeammateTwo } from "./components";
+import { getDirectory } from "services";
 
 function Match() {
   const [teams, setTeams] = useState({ first: null, second: null });
@@ -22,13 +23,14 @@ function Match() {
   }, [teams]);
 
   const handleSelect = useCallback(
-    (position) => {
+    async (position) => {
       if (!teams[position]) {
+        let { data } = await getDirectory();
         setTeams({
           ...teams,
           [position]: {
-            path: "../",
-            name: `Time ${position.toUpperCase()}`,
+            path: data.path,
+            name: data.teamName,
           },
         });
       } else {
