@@ -21,7 +21,7 @@ export const Bottom = styled.section`
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-top: 30px;
   width: 100%;
 `;
@@ -44,17 +44,23 @@ export const Title = styled.h2`
 `;
 
 export const Teammate = styled.div`
-  width: 100%;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-direction: column;
 
+  width: 100%;
+  margin-bottom: 50px;
+
   transition: border-right 1s linear, border-color 1s linear;
   border-right: ${({ divisor }) => (divisor ? "1" : "0")}px solid;
   border-color: ${({ divisor }) =>
     divisor ? themes.colors.lightGray : themes.colors.white};
+
+  button {
+    align-self: center;
+    margin: auto;
+  }
 
   :last-child {
     border: none;

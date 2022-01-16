@@ -8,7 +8,7 @@ export const Infos = styled.div`
   flex-direction: column;
 
   width: 100%;
-  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 export const Title = styled.text`
@@ -26,4 +26,9 @@ export const Title = styled.text`
     font-style: italic;
     color: ${themes.colors.blue};
   }
+
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 95%;
 `;

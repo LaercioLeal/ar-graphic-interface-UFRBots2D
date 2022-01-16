@@ -1,13 +1,13 @@
 import React from "react";
 
-import { Container, Heading } from "components";
+import { Container, HeadingPage } from "components";
 
 import studentIcon from "assets/icon/student.png";
 
 function Material() {
   return (
     <Container>
-      <Heading page="material" title="Material" icon={studentIcon} />
+      <HeadingPage page="material" title="Material" icon={studentIcon} />
     </Container>
   );
 }

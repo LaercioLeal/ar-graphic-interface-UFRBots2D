@@ -3,23 +3,23 @@ import { Button } from "components";
 
 import * as S from "./styles";
 
-export default function TeammateOne({ handleSelect, isTeam, teams }) {
+export default function TeammateOne({ handleSelect, isTeam, teams, position }) {
   const team = useMemo(() => {
-    return teams["first"];
-  }, [teams]);
+    return teams[position];
+  }, [teams, position]);
 
   return (
     <div>
       {!isTeam && (
-        <Button onClick={() => handleSelect("first")}>
-          Selecione o Time 1
+        <Button
+          onClick={() => handleSelect(position)}
+          variant={position === "first" ? "primary" : "secondary"}
+        >
+          Selecione o Time {position === "first" ? 1 : 2}
         </Button>
       )}
       {isTeam && (
         <>
-          <Button onClick={() => handleSelect("first")} color="red">
-            Remover {team.name}
-          </Button>
           <S.Infos>
             <S.Title>
               <span>Nome:</span> {team.name}
@@ -28,6 +28,9 @@ export default function TeammateOne({ handleSelect, isTeam, teams }) {
               <span>Diretório:</span> {team.path}
             </S.Title>
           </S.Infos>
+          <Button onClick={() => handleSelect(position)} color="red">
+            Remover
+          </Button>
         </>
       )}
     </div>

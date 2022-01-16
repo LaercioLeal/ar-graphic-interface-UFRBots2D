@@ -7,7 +7,8 @@ import logo from "assets/img/logo.png";
 
 export const Container = styled.nav`
   position: fixed;
-  transition: margin 0.5s, width 0.5s, border-radius 1s, box-shadow 1s;
+  transition: margin 0.5s, width 0.5s, border-radius 1s, box-shadow 2s,
+    padding 0.5s;
   margin: 20px 0;
   margin-right: 10%;
 
@@ -20,7 +21,7 @@ export const Container = styled.nav`
 
   background-color: ${themes.colors.white};
 
-  padding: 16px 7%;
+  padding: 16px 0 16px 7%;
   z-index: 13;
 
   box-shadow: 2px 3px 4px ${transparentize(0.5, themes.colors.primary)};
@@ -29,11 +30,15 @@ export const Container = styled.nav`
   ${({ top }) =>
     !!top &&
     `
+    padding: 16px 7%;
     margin: 0;  
     margin-bottom: 20px;
     width: 100%;
     border-radius: 0px;
-    box-shadow: 0px 2px 4px ${transparentize(0.5, themes.colors.gray)};
+    box-shadow: rgba(255, 139, 40, 0.3) 0px 0px 0px 1px,
+      rgba(255, 139, 40, 0.4) 0 5px, rgba(255, 139, 40, 0.3) 0 10px,
+      rgba(255, 139, 40, 0.2) 0 15px, rgba(255, 139, 40, 0.1) 0 20px,
+      rgba(255, 139, 40, 0.05) 0 25px;
   `}
 `;
 

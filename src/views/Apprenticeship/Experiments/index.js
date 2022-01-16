@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import { Container, Heading } from "components";
+import { Container, HeadingPage } from "components";
 
 import experimentsIcon from "assets/icon/experiments.png";
 import { getExperiments } from "services";
@@ -16,7 +16,7 @@ function Apprenticeship() {
 
   return (
     <Container>
-      <Heading
+      <HeadingPage
         page="experiments"
         title="Apprenticeship"
         icon={experimentsIcon}
