@@ -28,7 +28,6 @@ function Match() {
     async (position) => {
       if (!teams[position]) {
         let { data, isError, message } = await getDirectory();
-        console.log({ data, isError, message });
         if (!isError) {
           setTeams({
             ...teams,
