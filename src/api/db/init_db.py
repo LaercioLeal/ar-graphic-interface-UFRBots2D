@@ -1,10 +1,10 @@
 import sqlite3
 
-connection = sqlite3.connect('db/database.db')
+def init():
+  myPath = 'src/api/db/database.db'
+  connection = sqlite3.connect(myPath)
 
-with open('db/schema.sql') as f:
+  with open('src/api/db/schema.sql') as f:
     connection.executescript(f.read())
-
-cur = connection.cursor()
-connection.commit()
-connection.close()
+  connection.commit()
+  connection.close()

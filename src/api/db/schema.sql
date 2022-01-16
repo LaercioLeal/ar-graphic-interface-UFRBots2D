@@ -1,6 +1,4 @@
-DROP TABLE IF EXISTS results;
-
-CREATE TABLE results (
+CREATE TABLE IF NOT EXISTS results (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     team1 TEXT NOT NULL,
     team2 TEXT NOT NULL,
@@ -8,8 +6,8 @@ CREATE TABLE results (
     resultTeam2 TEXT NOT NULL
 );
 
-CREATE TABLE experiments (
+CREATE TABLE IF NOT EXISTS experiments (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
-    createdAt TEXT NOT NULL,
+    createdAt TEXT NOT NULL
 );
