@@ -79,4 +79,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ```
   pip3 install flask flask_cors
+
+  apt-get install python3-tk
 ```
