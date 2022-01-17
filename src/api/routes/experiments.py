@@ -1,7 +1,7 @@
 from flask import request
 from __main__ import app
-from __main__ import formatResponse
-from __main__ import get_db_connection
+from codes.methods import formatResponse
+from codes.methods import get_db_connection
 
 # retornar todos os experimentos cadastrados
 @app.route('/experiments', methods=['GET'])

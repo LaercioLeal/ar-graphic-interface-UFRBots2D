@@ -1,6 +1,6 @@
 from flask import request
 from __main__ import app
-from __main__ import formatResponse
+from codes.methods import formatResponse
 import os              
 
 # retornar todos os experimentos cadastrados

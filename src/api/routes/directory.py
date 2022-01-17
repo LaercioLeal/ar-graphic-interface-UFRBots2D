@@ -1,6 +1,6 @@
 from __main__ import app
-from __main__ import getUserName
-from __main__ import formatResponse
+from codes.methods import getUserName
+from codes.methods import formatResponse
 
 
 import os
@@ -11,20 +11,24 @@ from tkinter import filedialog
 @app.route('/directory', methods=['GET'])
 def getDirectory():
   gui = Tk()
-  gui.geometry("400x300")
+  gui.geometry('')
   gui.withdraw()
   gui.directory = filedialog.askdirectory(
-            initialdir = "/home/" + getUserName() + "/Documents/",
-            title = "Acesse diretório do time"
+            initialdir = "/home/" + getUserName(),
+            title = "Acesse diretório do time",
         )
   path = gui.directory
-  paths = path.split('/')
-  teamName = paths[len(paths) - 1]
+  paths = path
+  teamName = path
   gui.destroy()
   gui.quit()
+  if (path != ()):
+    paths = path.split('/')
+    teamName = paths[len(paths) - 1]
+  else:
+    return formatResponse(False, { "path": '', "teamName": '' })
 
   # verificando se a pasta é de um time agent2d ou uva
-  
   isExists = (os.path.exists(path + '/start.sh') or  os.path.exists(path + 'src/start.sh'))
 
   if ( isExists ):
