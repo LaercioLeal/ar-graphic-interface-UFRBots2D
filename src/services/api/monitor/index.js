@@ -2,7 +2,7 @@ import api from "../index";
 
 export async function openMonitor() {
   try {
-    const response = await api.get("/monitor/open");
+    const response = await api.get("/monitor/open?mode=2");
 
     return response.data;
   } catch (error) {
