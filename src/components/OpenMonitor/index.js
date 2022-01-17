@@ -1,11 +1,10 @@
-import React, { useCallback } from "react";
+import React from "react";
 
 import icon from "assets/icon/power-button.png";
 import * as S from "./styles";
+import { openMonitor } from "services";
 
 export default function OpenMonitor() {
-  const handleOpen = useCallback(() => {}, []);
-
   return (
     <S.Container
       initial="hidden"
@@ -24,7 +23,7 @@ export default function OpenMonitor() {
         },
       }}
       whileTap={{ scale: 0.9 }}
-      onClick={handleOpen}
+      onClick={openMonitor}
     >
       <S.Image src={icon} />
     </S.Container>

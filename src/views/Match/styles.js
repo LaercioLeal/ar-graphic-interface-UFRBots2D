@@ -1,4 +1,4 @@
-import { rem } from "polished";
+import { rem, transparentize } from "polished";
 import themes from "Provider/themes";
 import styled from "styled-components";
 
@@ -18,11 +18,26 @@ export const Bottom = styled.section`
   margin-top: 50px;
 `;
 
+export const Section = styled.section`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  row-gap: 20px;
+
+  > div {
+    margin: 0 10px 0 50px;
+  }
+
+  button {
+    margin-left: auto;
+  }
+`;
+
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
-  margin-top: 30px;
+  margin-top: 50px;
   width: 100%;
 `;
 
@@ -31,11 +46,21 @@ export const Title = styled.h2`
   font-size: ${rem(20)};
   font-family: ${themes.fonts.bold};
 
-  color: ${themes.colors.lightGray};
+  color: ${transparentize(0.5, themes.colors.gray)};
 
   ${themes.medias.lessThan("hd")`
-    font-size: ${rem(20)};
+    font-size: ${rem(18)};
   `}
+
+  p {
+    color: ${transparentize(0.5, themes.colors.gray)};
+    font-size: ${rem(16)};
+    .info {
+      color: ${themes.colors.lightGray};
+      font-size: ${rem(14)};
+      font-style: italic;
+    }
+  }
 
   span {
     font-style: italic;
@@ -50,7 +75,7 @@ export const Teammate = styled.div`
   flex-direction: column;
 
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 
   transition: border-right 1s linear, border-color 1s linear;
   border-right: ${({ divisor }) => (divisor ? "1" : "0")}px solid;
