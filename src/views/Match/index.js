@@ -14,7 +14,7 @@ function Match() {
   const { enqueueSnackbar } = useSnackbar();
   const [teams, setTeams] = useState({ first: null, second: null });
   const [isRunning, setRunning] = useState(false);
-  const [isChecked, setChecked] = useState(true);
+  const [isChecked, setChecked] = useState(false);
 
   const atLeastOne = useMemo(() => {
     return teams["first"]?.name || teams["second"]?.name;
@@ -72,13 +72,13 @@ function Match() {
   );
 
   const handleStart = async () => {
-    console.log(teams["first"].path, teams["second"].path);
-    await startMatch(
+    setRunning(true);
+    let response = await startMatch(
       isChecked ? 1 : 2,
       teams["first"].path,
       teams["second"].path
     );
-    handleFinish();
+    if (!!response) handleFinish();
     return true;
   };
 
@@ -96,6 +96,7 @@ function Match() {
             <S.Teammate divisor={atLeastOne}>
               <Teammate
                 handleSelect={handleSelect}
+                isRunning={isRunning}
                 isTeam={isTeam1}
                 teams={teams}
                 position="first"
@@ -104,6 +105,7 @@ function Match() {
             <S.Teammate>
               <Teammate
                 handleSelect={handleSelect}
+                isRunning={isRunning}
                 isTeam={isTeam2}
                 teams={teams}
                 position="second"
@@ -116,8 +118,8 @@ function Match() {
             <p>
               Aqui você pode trocar a velocidade da partida
               <br />
-              <p className="info">Modo Normal - entre 5 e 10 minutos</p>
-              <p className="info">Modo Rápido - em torno de 3 minutos</p>
+              <p className="info">Modo Normal - por volta de 10 minutos </p>
+              <p className="info">Modo Rápido - em média apenas 3 minutos </p>
             </p>
           </S.Title>
 
@@ -128,6 +130,7 @@ function Match() {
             checkedIcon={false}
             onColor={themes.colors.blue}
             offColor={themes.colors.success}
+            disabled={isRunning}
           />
           <S.Title>
             <p className="info">Modo {isChecked ? "Normal" : "Rápido"}</p>
@@ -135,13 +138,12 @@ function Match() {
           <Button
             onClick={handleStart}
             color="success"
-            isDisabled={!isTeam1 || !isTeam2}
+            isDisabled={!isTeam1 || !isTeam2 || isRunning}
             bold
           >
-            INICIAR PARTIDA
+            {isRunning ? "PARTIDA EM ANDAMENTO" : "INICIAR PARTIDA"}
           </Button>
         </S.Section>
-        <S.Bottom></S.Bottom>
       </S.Content>
     </Container>
   );

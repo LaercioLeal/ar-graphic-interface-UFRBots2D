@@ -11,13 +11,6 @@ export const Body = styled.section`
   align-items: flex-start;
 `;
 
-export const Bottom = styled.section`
-  display: flex;
-  justify-content: flex-end;
-
-  margin-top: 50px;
-`;
-
 export const Section = styled.section`
   display: flex;
   flex-direction: row;

@@ -3,7 +3,13 @@ import { Button } from "components";
 
 import * as S from "./styles";
 
-export default function TeammateOne({ handleSelect, isTeam, teams, position }) {
+export default function TeammateOne({
+  handleSelect,
+  isTeam,
+  isRunning,
+  teams,
+  position,
+}) {
   const team = useMemo(() => {
     return teams[position];
   }, [teams, position]);
@@ -28,7 +34,11 @@ export default function TeammateOne({ handleSelect, isTeam, teams, position }) {
               <span>Diretório:</span> {team.path}
             </S.Title>
           </S.Infos>
-          <Button onClick={() => handleSelect(position)} color="red">
+          <Button
+            onClick={() => handleSelect(position)}
+            color="red"
+            isDisabled={isRunning}
+          >
             Remover
           </Button>
         </>
