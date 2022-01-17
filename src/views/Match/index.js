@@ -72,7 +72,12 @@ function Match() {
   );
 
   const handleStart = async () => {
-    await startMatch(isChecked ? 1 : 2);
+    console.log(teams["first"].path, teams["second"].path);
+    await startMatch(
+      isChecked ? 1 : 2,
+      teams["first"].path,
+      teams["second"].path
+    );
     handleFinish();
     return true;
   };

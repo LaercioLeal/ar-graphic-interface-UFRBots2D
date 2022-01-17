@@ -87,6 +87,12 @@ export const Teammate = styled.div`
     margin: auto;
   }
 
+  :first-child {
+    ${themes.medias.lessThan("hd")`
+      margin-right: 50px;
+    `}
+  }
+
   :last-child {
     border: none;
   }
