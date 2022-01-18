@@ -18,10 +18,6 @@ export const Title = styled.text`
 
   color: ${themes.colors.lightGray};
 
-  ${themes.medias.lessThan("hd")`
-    font-size: ${rem(20)};
-  `}
-
   span {
     font-style: italic;
     color: ${themes.colors.blue};

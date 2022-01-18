@@ -73,5 +73,5 @@ def startMatch():
       print(scores)
       break
 
-  message="partida finalizada"
+  message="Partida finalizada"
   return formatResponse(False, {'scores': {'team1': scores[0], 'team2': scores[1]}}, message=message)

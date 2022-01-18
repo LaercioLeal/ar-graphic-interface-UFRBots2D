@@ -16,7 +16,6 @@ export const Section = styled.section`
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
-  row-gap: 20px;
 
   > div {
     margin: 0 10px 0 50px;

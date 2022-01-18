@@ -6,13 +6,14 @@ import { Container, HeadingPage, Button } from "components";
 
 import * as S from "./styles";
 import goalIcon from "assets/icon/goal.png";
-import { Teammate } from "./components";
+import { Results, Teammate } from "./components";
 import { getDirectory, startMatch } from "services";
 import themes from "Provider/themes";
 
 function Match() {
   const { enqueueSnackbar } = useSnackbar();
   const [teams, setTeams] = useState({ first: null, second: null });
+  const [results, setResults] = useState(null);
   const [isRunning, setRunning] = useState(false);
   const [isChecked, setChecked] = useState(false);
 
@@ -72,13 +73,31 @@ function Match() {
   );
 
   const handleStart = async () => {
+    setResults(null);
     setRunning(true);
-    let response = await startMatch(
+    let { data, isError, message } = await startMatch(
       isChecked ? 1 : 2,
       teams["first"].path,
       teams["second"].path
     );
-    if (!!response) handleFinish();
+    enqueueSnackbar(message, { variant: "success" });
+    if (!isError) {
+      let { scores } = data;
+      setResults({
+        team1: {
+          score: scores.team1,
+          name: teams["first"].name,
+          winner: scores.team1 > scores.team2,
+        },
+        team2: {
+          score: scores.team2,
+          name: teams["second"].name,
+          winner: scores.team2 > scores.team1,
+        },
+        empate: scores.team2 === scores.team1,
+      });
+    }
+    handleFinish();
     return true;
   };
 
@@ -89,6 +108,7 @@ function Match() {
   return (
     <Container>
       <HeadingPage page="match" title="Partida" icon={goalIcon} />
+      <Results results={results} />
       <S.Content>
         <S.Body>
           <S.Title dangerouslySetInnerHTML={{ __html: pageInfo }} />
