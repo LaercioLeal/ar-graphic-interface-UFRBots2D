@@ -1,16 +1,29 @@
-import { motion } from "framer-motion";
-import themes from "Provider/themes";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
-import studentIcon from "assets/icon/student.png";
+export const Content = styled.div``;
 
-export const Image = styled(motion.img).attrs(() => ({
-  src: studentIcon,
-}))`
-  height: 64px;
-  margin-bottom: 20px;
+export const IFrames = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  row-gap: 50px;
+  column-gap: 20px;
 
-  ${themes.medias.lessThan("hd")`
-    height: 60px;
-  `}
+  iframe {
+    transition: transform 0.5s, opacity 0.3s;
+    margin: auto;
+    border-radius: 8px;
+    opacity: 0.5;
+
+    ${({ selected }) =>
+      selected &&
+      css`
+        transform: scale(2);
+        opacity: 1;
+      `}
+
+    :hover {
+      transform: scale(1.5);
+      opacity: 1;
+    }
+  }
 `;
