@@ -2,6 +2,9 @@ import React, { useState, useCallback, useMemo } from "react";
 import { useSnackbar } from "notistack";
 import Switch from "react-switch";
 
+import Lottie from "react-lottie";
+import animationData from "./soccer.json";
+
 import { Container, HeadingPage, Button } from "components";
 
 import * as S from "./styles";
@@ -9,6 +12,37 @@ import goalIcon from "assets/icon/goal.png";
 import { Results, Teammate } from "./components";
 import { getDirectory, startMatch } from "services";
 import themes from "Provider/themes";
+import { motion } from "framer-motion";
+
+const defaultOptions = {
+  loop: true,
+  autoplay: true,
+  animationData: animationData,
+  rendererSettings: {
+    preserveAspectRatio: "xMidYMid slice",
+  },
+};
+
+const variants = {
+  hidden: {
+    y: -20,
+    x: 20,
+    opacity: 0,
+    transition: {
+      ease: "easeInOut",
+      duration: 0.5,
+    },
+  },
+  visible: {
+    y: 0,
+    x: 0,
+    opacity: 1,
+    transition: {
+      ease: "easeInOut",
+      duration: 0.5,
+    },
+  },
+};
 
 function Match() {
   const { enqueueSnackbar } = useSnackbar();
@@ -113,7 +147,7 @@ function Match() {
         <S.Body>
           <S.Title dangerouslySetInnerHTML={{ __html: pageInfo }} />
           <S.Wrapper>
-            <S.Teammate divisor={atLeastOne}>
+            <S.Teammate divisor={atLeastOne && !isRunning}>
               <Teammate
                 handleSelect={handleSelect}
                 isRunning={isRunning}
@@ -122,6 +156,17 @@ function Match() {
                 position="first"
               />
             </S.Teammate>
+            <motion.div
+              initial="hidden"
+              animate={isRunning ? "visible" : "hidden"}
+              variants={variants}
+            >
+              <Lottie
+                options={defaultOptions}
+                width={isRunning ? 512 / 2 : 0}
+                height={isRunning ? 390 / 2 : 0}
+              />
+            </motion.div>
             <S.Teammate>
               <Teammate
                 handleSelect={handleSelect}
