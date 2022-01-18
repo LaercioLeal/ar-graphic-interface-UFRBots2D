@@ -49,7 +49,6 @@ export default function Results({ results }) {
               <p className="resume">{whoWon}</p>
             </S.Title>
             <S.Title>
-              <span className="placar-title">Placar:</span>{" "}
               <span className="team-name">{results.team1.name}</span>
               <S.Value
                 empate={results.empate}
@@ -59,7 +58,7 @@ export default function Results({ results }) {
               >
                 {results.team1.score}
               </S.Value>{" "}
-              <span className="extra">x</span>{" "}
+              x{" "}
               <S.Value
                 empate={results.empate}
                 winner={
