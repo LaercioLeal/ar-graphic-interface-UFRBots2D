@@ -36,7 +36,7 @@ def addExperiment():
     connection.close()
     return formatResponse(False, [], "Experimento adicionado")
 
-# retornar os detalhes de um experimento
+# remove um experimento através do id
 @app.route('/experiments/delete', methods=['POST'])
 def deleteExperiment():
     data = request.get_json()
@@ -48,3 +48,17 @@ def deleteExperiment():
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Experimento removido")
+
+# atualziar um experimento
+@app.route('/experiments/update', methods=['POST'])
+def updateExperiment():
+    data = request.get_json()
+    id = data["id"]
+    title = data["title"]
+
+    connection = get_db_connection()
+    cur = connection.cursor()
+    cur.execute("UPDATE experiments SET title='%s' WHERE id=%d" % (title, id))
+    connection.commit()
+    connection.close()
+    return formatResponse(False, [], "Experimento atualizado")
