@@ -13,8 +13,10 @@ export const Container = styled.div`
   justify-content: center;
 
   padding: 20px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
-    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: ${({ shadow }) =>
+    shadow
+      ? "rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px"
+      : "none"};
   border-radius: 20px;
 
   h1,

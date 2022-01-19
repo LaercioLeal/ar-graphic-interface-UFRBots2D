@@ -2,7 +2,6 @@ import React, { useLayoutEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 
 import { Container, HeadingPage } from "components";
-import * as S from "./styles";
 
 import experimentsIcon from "assets/icon/experiments.png";
 import { getExperiments, addExperiment } from "services";
@@ -22,13 +21,14 @@ function Apprenticeship() {
       setLoading(true);
       await addExperiment({
         title,
-        createdAt: `${day}/${month}/${year}`,
+        createdAt: `${day < 10 ? "0" + day : day}/${
+          month < 10 ? "0" + month : month
+        }/${year}`,
       })
         .then((response) => {
           const { isError, message } = response;
           if (!isError) enqueueSnackbar(message, { variant: "success" });
           else enqueueSnackbar(message, { variant: "error" });
-          setLoading(false);
           handleGetExperiments();
         })
         .catch(() => {
@@ -41,11 +41,13 @@ function Apprenticeship() {
   };
 
   const handleGetExperiments = () => {
+    setLoading(true);
     getExperiments()
       .then((response) => {
         setExperiments(response.data);
+        setLoading(false);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => setLoading(false));
   };
 
   useLayoutEffect(() => {
@@ -59,22 +61,16 @@ function Apprenticeship() {
         title="Experimentos"
         icon={experimentsIcon}
       />
-      <S.Content>
-        <NoExperiments
-          data={experiments}
-          isLoading={isLoading}
-          handleAddExperiment={handleAddExperiment}
-        />
-        <Table data={experiments} handleAddExperiment={handleAddExperiment} />
-        {experiments.map((experiment) => {
-          return (
-            <div key={experiment.id}>
-              <p>{experiment.title}</p>
-              <p>{experiment.createdAt}</p>
-            </div>
-          );
-        })}
-      </S.Content>
+      <NoExperiments
+        data={experiments}
+        isLoading={isLoading}
+        handleAddExperiment={handleAddExperiment}
+      />
+      <Table
+        data={experiments}
+        isLoading={isLoading}
+        handleAddExperiment={handleAddExperiment}
+      />
     </Container>
   );
 }

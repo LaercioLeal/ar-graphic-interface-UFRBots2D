@@ -10,6 +10,7 @@
     "notistack": "^1.0.10",
     "polished": "3.6.5",
     "react": "^16.13.1",
+    "react-data-table-component": "^7.4.6",
     "react-device-detect": "1.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
