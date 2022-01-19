@@ -6,4 +6,5 @@ export { default as NotSupported } from "./NotSupported";
 export { default as LinearProgress } from "./LinearProgress";
 
 export { default as Modal } from "./Modal";
+export { default as Input } from "./Input";
 export { default as Button } from "./Button";
