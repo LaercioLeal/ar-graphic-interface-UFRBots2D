@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchOutlined from "@material-ui/icons/SearchOutlined";
@@ -6,8 +6,11 @@ import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import { Button } from "components";
 
 import * as S from "./styles";
+import Add from "../../../Add";
 
-function Heading({ onAddButtonClick, disabledAddButton, onFilter }) {
+function Heading({ handleAddExperiment, disabledAddButton, onFilter }) {
+  const [showAdd, setShowAdd] = useState(false);
+
   const handleChange = useCallback(
     (e) => {
       onFilter(e.target.value);
@@ -17,28 +20,36 @@ function Heading({ onAddButtonClick, disabledAddButton, onFilter }) {
 
   return (
     <S.Container>
-      <S.Top>
-        <S.Input
-          id="search"
-          name="search"
-          placeholder="Buscar por termo"
-          startAdornment={
-            <InputAdornment position="start">
-              <SearchOutlined />
-            </InputAdornment>
-          }
-          onChange={handleChange}
-          autoComplete="off"
-        />
+      <Add
+        add={handleAddExperiment}
+        cancel={() => setShowAdd(!showAdd)}
+        show={showAdd}
+        large
+      />
+      {!showAdd && (
+        <S.Top>
+          <S.Input
+            id="search"
+            name="search"
+            placeholder="Buscar por termo"
+            startAdornment={
+              <InputAdornment position="start">
+                <SearchOutlined />
+              </InputAdornment>
+            }
+            onChange={handleChange}
+            autoComplete="off"
+          />
 
-        <Button
-          variant="secondary"
-          onClick={onAddButtonClick}
-          disabled={disabledAddButton}
-        >
-          + Adicionar
-        </Button>
-      </S.Top>
+          <Button
+            variant="secondary"
+            onClick={() => setShowAdd(!showAdd)}
+            disabled={disabledAddButton || showAdd}
+          >
+            + Adicionar
+          </Button>
+        </S.Top>
+      )}
 
       <S.Title>Lista de Experimentos</S.Title>
     </S.Container>

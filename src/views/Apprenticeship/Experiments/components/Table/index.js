@@ -25,12 +25,16 @@ const paginationOptions = {
   selectAllRowsItemText: "Todos",
 };
 
-export default function Table({ data, isLoading, handleAddExperiment }) {
+export default function Table({
+  data,
+  isLoading,
+  handleAddExperiment,
+  handleDeleteExperiment,
+  handleUpdateExperiment,
+}) {
   const [tableData, setTableData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isCreatingNewExperiment, setIsCreatingNewExperiment] = useState(false);
-  const [experimentWithRowExpanded, setExperimentWithRowExpanded] =
-    useState("");
 
   const handleCancel = useCallback(() => {
     setTableData(data);
@@ -53,7 +57,6 @@ export default function Table({ data, isLoading, handleAddExperiment }) {
         rowElement.classList.add("expanded");
       } else {
         rowElement.classList.remove("expanded");
-        setExperimentWithRowExpanded("");
       }
 
       if (isCreatingNewExperiment) {
@@ -93,17 +96,15 @@ export default function Table({ data, isLoading, handleAddExperiment }) {
         paginationComponentOptions={paginationOptions}
         highlightOnHover
         pointerOnHover
-        subHeader={!isLoading && data.length > 0}
+        subHeader={data.length > 0}
         expandableRows
         expandOnRowClicked
-        expandableRowExpanded={(row) => {
-          return experimentWithRowExpanded === row.id || row.defaultExpanded;
-        }}
+        expandableRowExpanded={(row) => row.defaultExpanded}
         progressPending={isLoading}
         progressComponent={<Loader />}
         subHeaderComponent={
           <Heading
-            onAddButtonClick={handleAddExperiment}
+            handleAddExperiment={handleAddExperiment}
             disabledAddButton={isCreatingNewExperiment}
             onFilter={handleFilter}
           />
@@ -111,14 +112,10 @@ export default function Table({ data, isLoading, handleAddExperiment }) {
         expandableRowsComponent={({ data }) => (
           <Form
             data={data}
-            isUpdate={!isCreatingNewExperiment}
+            onUpdate={handleUpdateExperiment}
             onCancel={handleCancel}
-            // onSubmit={(values) => handleSubmit(data.id, values)}
-            // onToggleActivation={(values, method) =>
-            //   handleSubmit(data.id, values, method)
-            // }
-            // isLoading={isFormLoading}
-            // loadingText={formLoadingText}
+            onDelete={handleDeleteExperiment}
+            isLoading={isLoading}
           />
         )}
         noDataComponent={

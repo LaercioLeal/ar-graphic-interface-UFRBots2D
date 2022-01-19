@@ -4,7 +4,7 @@ import { useSnackbar } from "notistack";
 import { Container, HeadingPage } from "components";
 
 import experimentsIcon from "assets/icon/experiments.png";
-import { getExperiments, addExperiment } from "services";
+import { getExperiments, addExperiment, deleteExperiment } from "services";
 import { NoExperiments, Table } from "./components";
 
 function Apprenticeship() {
@@ -40,6 +40,42 @@ function Apprenticeship() {
     }
   };
 
+  const handleDeleteExperiment = async (id) => {
+    if (id) {
+      setLoading(true);
+      await deleteExperiment({ id })
+        .then((response) => {
+          const { isError, message } = response;
+          if (!isError) {
+            setExperiments(experiments.filter((item) => item.id !== id));
+            enqueueSnackbar(message, { variant: "success" });
+          } else enqueueSnackbar(message, { variant: "error" });
+          handleGetExperiments();
+        })
+        .catch(() => {
+          enqueueSnackbar("Ocorreu um erro, tente novamente", {
+            variant: "error",
+          });
+          setLoading(false);
+        });
+    }
+  };
+
+  const handleUpdateExperiment = (experiment) => {
+    addExperiment(experiment)
+      .then((response) => {
+        const { isError, message } = response;
+        if (!isError) enqueueSnackbar(message, { variant: "success" });
+        else enqueueSnackbar(message, { variant: "error" });
+        handleGetExperiments();
+      })
+      .catch(() => {
+        enqueueSnackbar("Ocorreu um erro, tente novamente", {
+          variant: "error",
+        });
+      });
+  };
+
   const handleGetExperiments = () => {
     setLoading(true);
     getExperiments()
@@ -61,15 +97,19 @@ function Apprenticeship() {
         title="Experimentos"
         icon={experimentsIcon}
       />
-      <NoExperiments
-        data={experiments}
-        isLoading={isLoading}
-        handleAddExperiment={handleAddExperiment}
-      />
+      {!isLoading && !experiments.length && (
+        <NoExperiments
+          data={experiments}
+          isLoading={isLoading}
+          handleAddExperiment={handleAddExperiment}
+        />
+      )}
       <Table
         data={experiments}
         isLoading={isLoading}
+        handleDeleteExperiment={handleDeleteExperiment}
         handleAddExperiment={handleAddExperiment}
+        handleUpdateExperiment={handleUpdateExperiment}
       />
     </Container>
   );

@@ -17,8 +17,8 @@ export const Top = styled.div`
     width: 151px;
   }
 
-  div {
-    max-height: 39px;
+  .MuiInputBase-root {
+    height: 39px !important;
   }
 `;
 

@@ -22,8 +22,13 @@ const variants = {
   },
 };
 
-export default function Add({ isLoading, add, cancel, show }) {
+export default function Add({ isLoading, add, cancel, show, large }) {
   const [name, setName] = useState();
+
+  const handleAdd = () => {
+    add(name);
+    setName("");
+  };
 
   return (
     <S.Container
@@ -31,6 +36,7 @@ export default function Add({ isLoading, add, cancel, show }) {
       animate={show ? "visible" : "closed"}
       inherit={false}
       variants={variants}
+      large={large}
     >
       <S.Content>
         <Input
@@ -45,7 +51,7 @@ export default function Add({ isLoading, add, cancel, show }) {
           </Button>
           <Button
             variant="secondary"
-            onClick={() => add(name)}
+            onClick={handleAdd}
             isDisabled={!name || isLoading}
           >
             {isLoading ? "SALVANDO" : "SALVAR"}

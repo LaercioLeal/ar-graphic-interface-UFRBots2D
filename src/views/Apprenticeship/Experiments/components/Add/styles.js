@@ -7,7 +7,7 @@ export const Container = styled(motion.div)`
   overflow: hidden;
   border-radius: 8px;
   width: 100%;
-  max-width: 600px;
+  max-width: ${({ large }) => (large ? "100%" : "600px")};
   background-color: ${transparentize(0.8, themes.colors.lightGray)};
 `;
 

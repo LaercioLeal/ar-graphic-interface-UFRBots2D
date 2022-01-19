@@ -23,3 +23,27 @@ export async function addExperiment(experiment) {
     throw error;
   }
 }
+
+export async function deleteExperiment(id) {
+  try {
+    const response = await api.post("/experiments/delete", id);
+
+    return response.data;
+  } catch (error) {
+    if (error?.response?.status === 404) return false;
+
+    throw error;
+  }
+}
+
+export async function updateExperiment(experiment) {
+  try {
+    const response = await api.post("/experiments/update", experiment);
+
+    return response.data;
+  } catch (error) {
+    if (error?.response?.status === 404) return false;
+
+    throw error;
+  }
+}
