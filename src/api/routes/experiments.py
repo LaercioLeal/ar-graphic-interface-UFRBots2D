@@ -22,6 +22,22 @@ def getExperiments():
           )
   return formatResponse(False, response)
 
+# cadastrar um experimento
+@app.route('/experiments/add', methods=['POST'])
+def addContact():
+    data = request.get_json()
+    title = data["title"]
+    createdAt = data["createdAt"]
+
+    connection = get_db_connection()
+    cur = connection.cursor()
+    cur.execute("INSERT INTO experiments (title, createdAt) VALUES (?, ?)",
+            (title, createdAt)
+            )
+    connection.commit()
+    connection.close()
+    return formatResponse(False, [], message="Experimento adicionado")
+
 # retornar os detalhes de um experimento
 @app.route('/experiments/detail/<experiment_id>', methods=['GET'])
 def getExperimentDetail():
