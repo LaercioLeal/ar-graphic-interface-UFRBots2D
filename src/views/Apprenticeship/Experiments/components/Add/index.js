@@ -1,5 +1,5 @@
-import React from "react";
-import { Button } from "components";
+import React, { useState } from "react";
+import { Button, Input } from "components";
 
 import * as S from "./styles";
 
@@ -22,7 +22,9 @@ const variants = {
   },
 };
 
-export default function Add({ add, cancel, show }) {
+export default function Add({ isLoading, add, cancel, show }) {
+  const [name, setName] = useState();
+
   return (
     <S.Container
       initial="closed"
@@ -31,12 +33,22 @@ export default function Add({ add, cancel, show }) {
       variants={variants}
     >
       <S.Content>
+        <Input
+          value={name}
+          placeholder="Nome do Experimento"
+          onChange={(text) => setName(text)}
+          disabled={isLoading}
+        />
         <S.Buttons>
-          <Button color="red" onClick={cancel}>
+          <Button color="red" onClick={cancel} isDisabled={isLoading}>
             CANCELAR
           </Button>
-          <Button variant="secondary" onClick={() => add("title")}>
-            SALVAR
+          <Button
+            variant="secondary"
+            onClick={() => add(name)}
+            isDisabled={!name || isLoading}
+          >
+            {isLoading ? "SALVANDO" : "SALVAR"}
           </Button>
         </S.Buttons>
       </S.Content>

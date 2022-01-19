@@ -5,7 +5,11 @@ import Add from "../Add";
 
 import * as S from "./styles";
 
-export default function NoExperiments({ handleAddExperiment, data }) {
+export default function NoExperiments({
+  handleAddExperiment,
+  isLoading,
+  data,
+}) {
   const [showAdd, setShowAdd] = useState(false);
 
   if (data.length > 0) return null;
@@ -21,6 +25,7 @@ export default function NoExperiments({ handleAddExperiment, data }) {
       )}
       <Add
         add={handleAddExperiment}
+        isLoading={isLoading}
         cancel={() => setShowAdd(!showAdd)}
         show={showAdd}
       />

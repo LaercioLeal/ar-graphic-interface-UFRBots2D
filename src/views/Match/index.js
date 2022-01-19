@@ -68,7 +68,7 @@ function Match() {
       ? "Aguarde o fim da partida .."
       : isTeam1 && isTeam2
       ? "Agora você já pode iniciar a partida!"
-      : "Primeiro, escolha os seus times <span>:D</span>";
+      : "Primeiro, escolha os seus times <span>=D</span>";
   }, [isTeam1, isTeam2, isRunning]);
 
   const handleSelect = useCallback(

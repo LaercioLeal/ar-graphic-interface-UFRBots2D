@@ -12,9 +12,8 @@ export async function getExperiments() {
   }
 }
 
-export async function addExperiment({ experiment }) {
+export async function addExperiment(experiment) {
   try {
-    if (!experiment) return false;
     const response = await api.post("/experiments/add", experiment);
 
     return response.data;

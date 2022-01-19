@@ -10,15 +10,17 @@ import { NoExperiments, Table } from "./components";
 
 function Apprenticeship() {
   const { enqueueSnackbar } = useSnackbar();
+  const [isLoading, setLoading] = useState(false);
   const [experiments, setExperiments] = useState([]);
 
-  const handleAddExperiment = ({ title }) => {
+  const handleAddExperiment = async (title) => {
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    if (title)
-      addExperiment({
+    if (title) {
+      setLoading(true);
+      await addExperiment({
         title,
         createdAt: `${day}/${month}/${year}`,
       })
@@ -26,12 +28,16 @@ function Apprenticeship() {
           const { isError, message } = response;
           if (!isError) enqueueSnackbar(message, { variant: "success" });
           else enqueueSnackbar(message, { variant: "error" });
+          setLoading(false);
+          handleGetExperiments();
         })
         .catch(() => {
           enqueueSnackbar("Ocorreu um erro, tente novamente", {
             variant: "error",
           });
+          setLoading(false);
         });
+    }
   };
 
   const handleGetExperiments = () => {
@@ -56,6 +62,7 @@ function Apprenticeship() {
       <S.Content>
         <NoExperiments
           data={experiments}
+          isLoading={isLoading}
           handleAddExperiment={handleAddExperiment}
         />
         <Table data={experiments} handleAddExperiment={handleAddExperiment} />
