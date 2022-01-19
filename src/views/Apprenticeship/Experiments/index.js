@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
+import { useSnackbar } from "notistack";
 
 import { Container, HeadingPage } from "components";
 import * as S from "./styles";
@@ -8,17 +9,29 @@ import { getExperiments, addExperiment } from "services";
 import { NoExperiments, Table } from "./components";
 
 function Apprenticeship() {
+  const { enqueueSnackbar } = useSnackbar();
   const [experiments, setExperiments] = useState([]);
 
-  const handleAddExperiment = () => {
+  const handleAddExperiment = ({ title }) => {
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
-    addExperiment({
-      title: "",
-      createdAt: `${day}/${month}/${year}`,
-    });
+    if (title)
+      addExperiment({
+        title,
+        createdAt: `${day}/${month}/${year}`,
+      })
+        .then((response) => {
+          const { isError, message } = response;
+          if (!isError) enqueueSnackbar(message, { variant: "success" });
+          else enqueueSnackbar(message, { variant: "error" });
+        })
+        .catch(() => {
+          enqueueSnackbar("Ocorreu um erro, tente novamente", {
+            variant: "error",
+          });
+        });
   };
 
   const handleGetExperiments = () => {
@@ -37,7 +50,7 @@ function Apprenticeship() {
     <Container>
       <HeadingPage
         page="experiments"
-        title="Apprenticeship"
+        title="Experimentos"
         icon={experimentsIcon}
       />
       <S.Content>
