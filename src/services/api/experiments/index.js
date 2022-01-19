@@ -11,3 +11,16 @@ export async function getExperiments() {
     throw error;
   }
 }
+
+export async function addExperiment({ experiment }) {
+  try {
+    if (!experiment) return false;
+    const response = await api.post("/experiments/add", experiment);
+
+    return response.data;
+  } catch (error) {
+    if (error?.response?.status === 404) return false;
+
+    throw error;
+  }
+}
