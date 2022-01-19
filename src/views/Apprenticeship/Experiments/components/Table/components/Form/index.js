@@ -84,6 +84,9 @@ function Form({ data, onUpdate, onDelete, isLoading }) {
             onChange={(text) => setName(text)}
             disabled={isLoading}
           />
+          <Button color="red" onClick={() => setEdit(!showEdit)}>
+            CANCELAR
+          </Button>
           <Button variant="secondary" onClick={handleUpdate}>
             SALVAR
           </Button>
