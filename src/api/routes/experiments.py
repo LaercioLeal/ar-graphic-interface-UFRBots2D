@@ -37,17 +37,14 @@ def addExperiment():
     return formatResponse(False, [], "Experimento adicionado")
 
 # retornar os detalhes de um experimento
-@app.route('/experiments/detail/<experiment_id>', methods=['GET'])
-def getExperimentDetail():
-  experiment_id = request.args.get('experiment_id')
-  querySelect = 'SELECT * FROM experiments WHERE id=' + experiment_id
+@app.route('/experiments/delete', methods=['POST'])
+def deleteExperiment():
+    data = request.get_json()
+    id = data["id"]
 
-  conn = get_db_connection()
-  experiments = conn.execute(querySelect).fetchall()
-  conn.close()
-  response = {
-    "id": experiments[0]["id"], 
-    "title": experiments[0]["title"], 
-    "createdAt": experiments[0]["createdAt"]
-  }
-  return formatResponse(False, response)
+    connection = get_db_connection()
+    cur = connection.cursor()
+    cur.execute("DELETE FROM experiments WHERE id=(?)", (id))
+    connection.commit()
+    connection.close()
+    return formatResponse(False, [], "Experimento removido")
