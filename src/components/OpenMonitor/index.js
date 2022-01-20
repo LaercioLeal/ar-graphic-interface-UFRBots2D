@@ -5,7 +5,7 @@ import icon from "assets/icon/power-button.png";
 import * as S from "./styles";
 import { openMonitor } from "services";
 
-export default function OpenMonitor() {
+export default function OpenMonitor({ show }) {
   return (
     <Tooltip
       arrow
@@ -15,9 +15,16 @@ export default function OpenMonitor() {
     >
       <S.Container
         initial="hidden"
-        animate="visible"
+        animate={show ? "visible" : "hidden"}
         variants={{
-          hidden: { x: -50, opacity: 0 },
+          hidden: {
+            x: -50,
+            opacity: 0,
+            transition: {
+              ease: "easeInOut",
+              duration: 0.5,
+            },
+          },
           visible: {
             y: 0,
             x: 0,
@@ -25,7 +32,6 @@ export default function OpenMonitor() {
             transition: {
               ease: "easeInOut",
               duration: 0.5,
-              delay: 2,
             },
           },
         }}

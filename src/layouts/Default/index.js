@@ -13,7 +13,6 @@ function Default({ children, pageTitle }) {
   const location = useLocation();
 
   const showOpenMonitor = useMemo(() => {
-    console.log(location);
     return (
       location.pathname === routes.match ||
       location.pathname === routes.apprenticeship.run ||
@@ -32,7 +31,7 @@ function Default({ children, pageTitle }) {
       <S.Container>
         <Navigation />
         <S.Main>{children}</S.Main>
-        {showOpenMonitor && <OpenMonitor />}
+        <OpenMonitor show={showOpenMonitor} />
       </S.Container>
     </>
   );

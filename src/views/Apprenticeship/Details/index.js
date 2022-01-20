@@ -75,13 +75,6 @@ export default function Details() {
 
   useEffect(() => {
     if (!!experiment && !location.pathname.includes(`pageExp=${value + 1}`)) {
-      console.log(
-        "change",
-        `pageExp=${value + 1}`,
-        `?createdAt=${experiment.createdAt}&id=${experiment.id}&title=${
-          experiment.title
-        }&pageExp=${value + 1}`.includes(`pageExp=${value + 1}`)
-      );
       history.replace(
         routes.apprenticeship.details +
           `?createdAt=${experiment.createdAt}&id=${experiment.id}&title=${
