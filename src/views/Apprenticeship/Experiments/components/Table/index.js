@@ -6,17 +6,8 @@ import { sortDate } from "./functions";
 import * as S from "./styles";
 import NoExperiments from "../NoExperiments";
 import { Form, Heading, Loader } from "./components";
-
-const tableColumns = [
-  { name: "Título", selector: ({ title }) => title, sortable: true, grow: 1.5 },
-  {
-    name: "Data de Criação",
-    selector: ({ createdAt }) => createdAt,
-    sortable: true,
-    sortFunction: (a, b) => sortDate(a, b, "createdAt"),
-    grow: 0.5,
-  },
-];
+import { Button } from "components";
+import routes from "constants/routes";
 
 const paginationOptions = {
   rowsPerPageText: "Linhas por página",
@@ -35,6 +26,37 @@ export default function Table({
   const [tableData, setTableData] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [isCreatingNewExperiment, setIsCreatingNewExperiment] = useState(false);
+
+  const tableColumns = [
+    {
+      name: "Título",
+      selector: ({ title }) => title,
+      sortable: true,
+      grow: 1.5,
+    },
+    {
+      name: "Data de Criação",
+      selector: ({ createdAt }) => createdAt,
+      sortable: true,
+      sortFunction: (a, b) => sortDate(a, b, "createdAt"),
+      grow: 0.3,
+    },
+    {
+      cell: (row) => (
+        <S.Link
+          to={
+            routes.apprenticeship.details +
+            `?createdAt=${row.createdAt}&id=${row.id}&title=${row.title}`
+          }
+        >
+          <Button onClick={() => {}}>Acessar</Button>
+        </S.Link>
+      ),
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
+    },
+  ];
 
   const handleCancel = useCallback(() => {
     setTableData(data);
@@ -93,6 +115,7 @@ export default function Table({
         columns={tableColumns}
         data={filteredData}
         pagination
+        dense
         paginationComponentOptions={paginationOptions}
         highlightOnHover
         pointerOnHover

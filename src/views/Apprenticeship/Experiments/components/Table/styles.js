@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { rem, rgba, size } from "polished";
 import themes from "Provider/themes";
+import { NavLink } from "react-router-dom";
 
 export const Container = styled.section`
   margin-bottom: 32px;
@@ -77,3 +78,5 @@ export const Container = styled.section`
     font-family: ${themes.fonts.medium};
   }
 `;
+
+export const Link = styled(NavLink)``;

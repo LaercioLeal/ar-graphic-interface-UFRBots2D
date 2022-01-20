@@ -9,6 +9,7 @@
     "framer-motion": "^3.10.2",
     "notistack": "^1.0.10",
     "polished": "3.6.5",
+    "qs": "^6.10.3",
     "react": "^16.13.1",
     "react-data-table-component": "^7.4.6",
     "react-device-detect": "1.13.1",

@@ -10,8 +10,9 @@ const routes = {
   },
   apprenticeship: {
     run: "/apprenticeship/run",
-    experiments: "/apprenticeship/experiments",
     results: "/apprenticeship/results",
+    details: "/apprenticeship/details",
+    experiments: "/apprenticeship/experiments",
   },
 };
 
