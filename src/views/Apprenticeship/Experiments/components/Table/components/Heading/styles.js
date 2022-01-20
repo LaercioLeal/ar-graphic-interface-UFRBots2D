@@ -13,6 +13,8 @@ export const Top = styled.div`
   align-items: center;
   justify-content: space-between;
 
+  margin-bottom: 20px;
+
   button {
     width: 151px;
   }

@@ -21,12 +21,12 @@ function Navigation() {
 
   return (
     <S.Container top={isPageNotOnTop}>
+      <S.Logo show={isPageNotOnTop} />
       {items.map((item) => (
         <S.Link key={item.path} to={item.path}>
           <span>{item.label}</span>
         </S.Link>
       ))}
-      <S.Logo show={isPageNotOnTop} />
       {false && <LinearProgress position="absolute" style={{ bottom: -4 }} />}
     </S.Container>
   );

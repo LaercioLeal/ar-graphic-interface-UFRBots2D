@@ -1,13 +1,5 @@
 import { Button, Input } from "components";
 import React, { useState } from "react";
-// import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
-// import { Grid } from "@material-ui/core";
-// import { FormikProvider, useFormik } from "formik";
-
-// import { themes } from '@saude-facil/styles'
-// import { isZipcode, useDebounce } from '@saude-facil/tools'
-// import { Button, Input, Select, Modals } from '@saude-facil/componentsv2'
-// import { getAddressByZipcode } from '@saude-facil/services/lib/api/addresses'
 
 import * as S from "./styles";
 

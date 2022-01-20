@@ -20,36 +20,34 @@ function Heading({ handleAddExperiment, disabledAddButton, onFilter }) {
 
   return (
     <S.Container>
+      <S.Top>
+        <S.Input
+          id="search"
+          name="search"
+          placeholder="Buscar por termo"
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchOutlined />
+            </InputAdornment>
+          }
+          onChange={handleChange}
+          autoComplete="off"
+        />
+
+        <Button
+          variant="secondary"
+          onClick={() => setShowAdd(true)}
+          isDisabled={disabledAddButton || showAdd}
+        >
+          + Adicionar
+        </Button>
+      </S.Top>
       <Add
         add={handleAddExperiment}
         cancel={() => setShowAdd(!showAdd)}
         show={showAdd}
         large
       />
-      {!showAdd && (
-        <S.Top>
-          <S.Input
-            id="search"
-            name="search"
-            placeholder="Buscar por termo"
-            startAdornment={
-              <InputAdornment position="start">
-                <SearchOutlined />
-              </InputAdornment>
-            }
-            onChange={handleChange}
-            autoComplete="off"
-          />
-
-          <Button
-            variant="secondary"
-            onClick={() => setShowAdd(!showAdd)}
-            disabled={disabledAddButton || showAdd}
-          >
-            + Adicionar
-          </Button>
-        </S.Top>
-      )}
 
       <S.Title>Lista de Experimentos</S.Title>
     </S.Container>

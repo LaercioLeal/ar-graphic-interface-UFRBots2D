@@ -21,7 +21,7 @@ export const Container = styled.nav`
 
   background-color: ${themes.colors.white};
 
-  padding: 16px 0 16px 7%;
+  padding: 16px 7%;
   z-index: 13;
 
   box-shadow: 2px 3px 4px ${transparentize(0.5, themes.colors.primary)};
@@ -78,7 +78,8 @@ export const Logo = styled.img.attrs(() => ({
   src: logo,
   alt: "UFRBots",
 }))`
-  transition: height 0.5s, opacity 1s linear;
+  transition: height 0.5s, width 0.5s, opacity 1s linear;
   height: ${({ show }) => (show ? 40 : 0)}px;
+  width: ${({ show }) => (show ? "auto" : "0px")};
   opacity: ${({ show }) => (show ? 1 : 0)};
 `;
