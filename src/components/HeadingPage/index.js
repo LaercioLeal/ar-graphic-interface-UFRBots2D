@@ -14,9 +14,8 @@ export default function Heading({ page, title, icon }) {
       <S.Title
         animate={{ x: 25 }}
         transition={{ type: "spring", stiffness: 50, delay: 1 }}
-      >
-        {title}
-      </S.Title>
+        dangerouslySetInnerHTML={{ __html: title }}
+      />
     </S.Container>
   );
 }

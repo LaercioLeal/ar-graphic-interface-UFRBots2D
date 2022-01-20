@@ -43,4 +43,11 @@ export const Title = styled(motion.h1)`
     text-decoration-line: underline;
     text-decoration-style: double;
   }
+
+  p {
+    text-decoration: none;
+    color: ${themes.colors.blue};
+    font-size: ${rem(18)};
+    text-align: left;
+  }
 `;

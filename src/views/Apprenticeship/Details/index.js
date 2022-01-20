@@ -1,5 +1,7 @@
+import { Container, HeadingPage } from "components";
 import React, { useEffect, useState } from "react";
 import { useQuery } from "utils";
+import experimentsIcon from "assets/icon/experiments.png";
 
 export default function Details() {
   const [experiment, setExperiment] = useState();
@@ -15,9 +17,14 @@ export default function Details() {
   }, []); // eslint-disable-line
 
   return (
-    <div>
+    <Container>
+      <HeadingPage
+        page="experiments"
+        title={`${experiment?.title}<p>Criado em ${experiment?.createdAt}</p>`}
+        icon={experimentsIcon}
+      />
       <h3>{experiment?.title}</h3>
       <p>{experiment?.createdAt}</p>
-    </div>
+    </Container>
   );
 }

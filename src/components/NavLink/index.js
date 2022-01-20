@@ -4,13 +4,20 @@ import PropTypes from "prop-types";
 
 function NavLink({ children, to, ...props }) {
   // istanbul ignore next
-  const checkActivePath = useCallback((path, location) => {
-    const isActive =
-      (path.length > 1 && location.pathname.includes(path)) ||
-      path === location.pathname;
+  const checkActivePath = useCallback(
+    (path, location) => {
+      const isActive =
+        (path.length > 1 && location.pathname.includes(path)) ||
+        path === location.pathname;
 
-    return isActive;
-  }, []);
+      if (props?.item) {
+        return location.pathname.includes(props?.item?.base);
+      }
+
+      return isActive;
+    },
+    [props?.item]
+  );
 
   return (
     <Link
