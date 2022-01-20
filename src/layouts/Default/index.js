@@ -13,11 +13,13 @@ function Default({ children, pageTitle }) {
   const location = useLocation();
 
   const showOpenMonitor = useMemo(() => {
+    console.log(location);
     return (
       location.pathname === routes.match ||
-      location.pathname === routes.apprenticeship.run
+      location.pathname === routes.apprenticeship.run ||
+      location.search.includes("pageExp=3")
     );
-  }, [location.pathname]);
+  }, [location]);
 
   return (
     <>
