@@ -4,54 +4,20 @@ import SwipeableViews from "react-swipeable-views";
 import { useQuery } from "utils";
 
 import { Container, HeadingPage } from "components";
-import {
-  AppBar,
-  Box,
-  Tab,
-  Tabs,
-  Typography,
-  useTheme,
-} from "@material-ui/core";
+import { AppBar, Box, Tab, Tabs, useTheme } from "@material-ui/core";
 import * as S from "./styles";
 
 import experimentsIcon from "assets/icon/experiments.png";
-import { Page1, Page2, Page3 } from "./components";
-import { useLocation } from "react-router-dom";
+import { a11yProps, Page1, Page2, Page3, TabPanel } from "./components";
 import { useHistory } from "react-router-dom";
 import routes from "constants/routes";
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`full-width-tabpanel-${index}`}
-      aria-labelledby={`full-width-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-function a11yProps(index) {
-  return {
-    id: `full-width-tab-${index}`,
-    "aria-controls": `full-width-tabpanel-${index}`,
-  };
-}
-
 export default function Details() {
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
-  const location = useLocation();
+  const [value, setValue] = React.useState(1);
   const history = useHistory();
+  const [experiment, setExperiment] = useState();
+  const query = useQuery();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -60,9 +26,6 @@ export default function Details() {
   const handleChangeIndex = (index) => {
     setValue(index);
   };
-
-  const [experiment, setExperiment] = useState();
-  const query = useQuery();
 
   useEffect(() => {
     async function fetchData() {
@@ -74,15 +37,17 @@ export default function Details() {
   }, []); // eslint-disable-line
 
   useEffect(() => {
-    if (!!experiment && !location.pathname.includes(`pageExp=${value + 1}`)) {
+    if (!!experiment) {
       history.replace(
         routes.apprenticeship.details +
           `?createdAt=${experiment.createdAt}&id=${experiment.id}&title=${
             experiment.title
-          }&pageExp=${value + 1}`
+          }&openM=${value === 2 ? "true" : "false"}`
       );
     }
-  }, [value, experiment, history]); // eslint-disable-line
+  }, [value]); // eslint-disable-line
+
+  if (!experiment) return null;
 
   return (
     <Container>
@@ -107,14 +72,10 @@ export default function Details() {
                 label="Dados Gerados"
                 {...a11yProps(0)}
               />
-              <Tab
-                active={value === 1}
-                label="Adicionar Ensaio"
-                {...a11yProps(1)}
-              />
+              <Tab active={value === 1} label="Ensaios" {...a11yProps(1)} />
               <Tab
                 active={value === 2}
-                label="Executar Ensaio"
+                label="Executar Ensaios"
                 {...a11yProps(2)}
               />
             </Tabs>
@@ -125,7 +86,7 @@ export default function Details() {
             onChangeIndex={handleChangeIndex}
           >
             <TabPanel value={value} index={0} dir={theme.direction}>
-              <Page1 />
+              <Page1 experiment_id={experiment.id} />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
               <Page2 />

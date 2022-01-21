@@ -16,7 +16,7 @@ function Default({ children, pageTitle }) {
     return (
       location.pathname === routes.match ||
       location.pathname === routes.apprenticeship.run ||
-      location.search.includes("pageExp=3")
+      location.search.includes("openM=true")
     );
   }, [location]);
 

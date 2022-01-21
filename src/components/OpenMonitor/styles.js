@@ -9,6 +9,7 @@ export const Container = styled(motion.div)`
   left: -20px;
   padding: 10px 10px 5px 30px;
   border-radius: 0 20px 20px 0;
+  cursor: pointer;
 
   transition: left 0.1s, box-shadow 0.2s;
 
