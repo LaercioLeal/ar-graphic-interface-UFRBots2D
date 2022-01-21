@@ -14,6 +14,7 @@ import routes.experiments
 import routes.directory
 import routes.monitor
 import routes.match
+import routes.data.get
 
 # inicializando api
 port = 3001

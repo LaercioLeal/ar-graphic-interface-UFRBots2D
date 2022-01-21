@@ -1,5 +1,5 @@
-from flask import request
 from __main__ import app
+from flask import request
 from codes.methods import formatResponse
 from codes.methods import get_db_connection
 
