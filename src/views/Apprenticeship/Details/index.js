@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
 
 import SwipeableViews from "react-swipeable-views";
 import { useQuery } from "utils";
@@ -12,12 +12,20 @@ import { a11yProps, Page1, Page2, Page3, TabPanel } from "./components";
 import { useHistory } from "react-router-dom";
 import routes from "constants/routes";
 
+import { getTrainingData } from "services/api/training";
+
 export default function Details() {
   const theme = useTheme();
   const [value, setValue] = React.useState(1);
   const history = useHistory();
   const [experiment, setExperiment] = useState();
   const query = useQuery();
+
+  const [trainingData, setTrainingData] = useState([]);
+
+  const havingData = useMemo(() => {
+    return trainingData.length > 0;
+  }, [trainingData]);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -27,10 +35,13 @@ export default function Details() {
     setValue(index);
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     async function fetchData() {
       const { createdAt, title, id } = query;
       setExperiment({ createdAt, title, id });
+
+      const data = await getTrainingData(id);
+      setTrainingData(data.data);
     }
 
     fetchData();
@@ -69,13 +80,15 @@ export default function Details() {
             >
               <Tab
                 active={value === 0}
-                label="Dados Gerados"
+                disabled={!havingData}
+                label="Dados"
                 {...a11yProps(0)}
               />
               <Tab active={value === 1} label="Ensaios" {...a11yProps(1)} />
               <Tab
                 active={value === 2}
-                label="Executar Ensaios"
+                disabled={!havingData}
+                label="Executar"
                 {...a11yProps(2)}
               />
             </Tabs>
@@ -86,13 +99,13 @@ export default function Details() {
             onChangeIndex={handleChangeIndex}
           >
             <TabPanel value={value} index={0} dir={theme.direction}>
-              <Page1 experiment_id={experiment.id} />
+              <Page1 data={trainingData} havingData={havingData} />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
-              <Page2 />
+              <Page2 data={trainingData} havingData={havingData} />
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
-              <Page3 />
+              <Page3 data={trainingData} havingData={havingData} />
             </TabPanel>
           </SwipeableViews>
         </Box>

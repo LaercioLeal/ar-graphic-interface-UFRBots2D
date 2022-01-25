@@ -7,4 +7,5 @@ export { default as LinearProgress } from "./LinearProgress";
 
 export { default as Modal } from "./Modal";
 export { default as Input } from "./Input";
+export { default as Form } from "./Form";
 export { default as Button } from "./Button";

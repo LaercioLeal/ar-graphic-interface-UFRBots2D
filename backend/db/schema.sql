@@ -17,9 +17,10 @@ CREATE TABLE IF NOT EXISTS experiments (
 CREATE TABLE IF NOT EXISTS training ( 
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     idExperiment INTEGER NOT NULL,
-    done BOOLEAN DEFAULT 'true',
+    done BOOLEAN DEFAULT 'false',
     createdAt TEXT NOT NULL,
-    epsilon TEXT NOT NULL,
-    alpha TEXT NOT NULL,
-    gamma TEXT NOT NULL
+    numEpisodes INTEGER NOT NULL,
+    epsilon DECIMAL(1,3) NOT NULL,
+    alpha DECIMAL(1,3) NOT NULL,
+    gamma DECIMAL(1,3) NOT NULL
 );
