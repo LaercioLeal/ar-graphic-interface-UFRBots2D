@@ -14,7 +14,7 @@ def getDirectory():
   gui.geometry('')
   gui.withdraw()
   gui.directory = filedialog.askdirectory(
-            initialdir = "/home/" + getUserName(),
+            initialdir = "/home/" + getUserName() + '/TIMES',
             title = "Acesse diretório do time",
         )
   path = gui.directory
