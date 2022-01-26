@@ -6,49 +6,27 @@ import SearchOutlined from "@material-ui/icons/SearchOutlined";
 import { Button } from "components";
 
 import * as S from "./styles";
+import Form from "../Form";
 
-function Heading({ handleAddExperiment, disabledAddButton, onFilter }) {
+function Heading({ handleAddExperiment, hasData, disabledAddButton }) {
   const [showAdd, setShowAdd] = useState(false);
 
-  const handleChange = useCallback(
-    (e) => {
-      onFilter(e.target.value);
-    },
-    [onFilter]
-  );
+  const handleSubmit = () => {};
 
   return (
     <S.Container>
       <S.Top>
-        <S.Input
-          id="search"
-          name="search"
-          placeholder="Buscar por termo"
-          startAdornment={
-            <InputAdornment position="start">
-              <SearchOutlined />
-            </InputAdornment>
-          }
-          onChange={handleChange}
-          autoComplete="off"
-        />
+        <S.Title>{hasData && "Lista de Ensaios"}</S.Title>
 
         <Button
           variant="secondary"
-          onClick={() => setShowAdd(true)}
-          isDisabled={disabledAddButton || showAdd}
+          onClick={() => setShowAdd(!showAdd)}
+          color={showAdd ? "red" : "blue"}
         >
-          + Adicionar
+          {showAdd ? "Cancelar" : "+ Adicionar"}
         </Button>
       </S.Top>
-      {/* <Add
-        add={handleAddExperiment}
-        cancel={() => setShowAdd(!showAdd)}
-        show={showAdd}
-        large
-      /> */}
-
-      <S.Title>Lista de Experimentos</S.Title>
+      <Form show={showAdd} onSubmit={handleSubmit} />
     </S.Container>
   );
 }

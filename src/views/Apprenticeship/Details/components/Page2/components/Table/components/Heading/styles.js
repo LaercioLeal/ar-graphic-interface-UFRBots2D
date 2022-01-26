@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import OutlinedInput from "@material-ui/core/OutlinedInput";
 import { rem } from "polished";
 import themes from "Provider/themes";
 
@@ -16,31 +15,11 @@ export const Top = styled.div`
   margin-bottom: 20px;
 
   button {
-    width: 151px;
+    width: 31%;
   }
 
   .MuiInputBase-root {
     height: 39px !important;
-  }
-`;
-
-export const Input = styled(OutlinedInput).attrs({
-  size: "small",
-})`
-  && {
-    border-radius: 8px;
-
-    font-size: ${rem(14)};
-    color: ${themes.colors.gray};
-    font-family: ${themes.fonts.medium};
-
-    fieldset {
-      border-color: ${themes.colors.gray100};
-    }
-
-    svg {
-      color: ${themes.colors.darkblue};
-    }
   }
 `;
 

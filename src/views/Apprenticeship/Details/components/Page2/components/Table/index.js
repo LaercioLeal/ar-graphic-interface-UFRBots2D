@@ -4,7 +4,7 @@ import DataTable from "react-data-table-component";
 
 import { sortDate } from "./functions";
 import * as S from "./styles";
-import { Heading } from "./components";
+import { Empty, Heading } from "./components";
 
 const paginationOptions = {
   rowsPerPageText: "Linhas por página",
@@ -19,12 +19,12 @@ export default function Table({ data, isLoading }) {
   const [isCreatingNewExperiment, setIsCreatingNewExperiment] = useState(false);
 
   const tableColumns = [
-    {
-      name: "Título",
-      selector: ({ title }) => title,
-      sortable: true,
-      grow: 1.5,
-    },
+    // {
+    //   name: "Título",
+    //   selector: ({ title }) => title,
+    //   sortable: true,
+    //   grow: 1.5,
+    // },
     {
       name: "Data de Criação",
       selector: ({ createdAt }) => createdAt,
@@ -98,7 +98,6 @@ export default function Table({ data, isLoading }) {
     });
   }, [searchTerm, tableData, isCreatingNewExperiment]);
 
-  if (data.length === 0) return null;
   return (
     <S.Container>
       <DataTable
@@ -110,7 +109,7 @@ export default function Table({ data, isLoading }) {
         paginationComponentOptions={paginationOptions}
         highlightOnHover
         pointerOnHover
-        subHeader={data.length > 0}
+        subHeader
         expandableRows
         expandOnRowClicked
         expandableRowExpanded={(row) => row.defaultExpanded}
@@ -120,6 +119,7 @@ export default function Table({ data, isLoading }) {
           <Heading
             // handleAddExperiment={handleAddExperiment}
             disabledAddButton={isCreatingNewExperiment}
+            hasData={data.length > 0}
             onFilter={handleFilter}
           />
         }
@@ -132,13 +132,7 @@ export default function Table({ data, isLoading }) {
         //     isLoading={isLoading}
         //   />
         // )}
-        // noDataComponent={
-        //   <NoExperiments
-        //     data={data}
-        //     isLoading={isLoading}
-        //     handleAddExperiment={handleAddExperiment}
-        //   />
-        // }
+        noDataComponent={<Empty />}
         sortIcon={<ArrowDownwardOutlined style={{ marginLeft: 4 }} />}
         onRowExpandToggled={handleRowExpansion}
       />

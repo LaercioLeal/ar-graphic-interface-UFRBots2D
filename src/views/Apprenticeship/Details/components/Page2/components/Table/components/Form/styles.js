@@ -3,6 +3,7 @@ import styled, { keyframes } from "styled-components";
 import { Form as FormComponent } from "components";
 import { rem } from "polished";
 import themes from "Provider/themes";
+import { motion } from "framer-motion";
 
 const fadeIdAnimation = keyframes`
   from {
@@ -13,19 +14,17 @@ const fadeIdAnimation = keyframes`
   }
 `;
 
-export const Container = styled.div`
+export const Container = styled(motion.div)`
   position: relative;
 
   overflow: hidden;
 `;
 
 export const Content = styled.div`
-  padding: 28px 40px 66px;
   animation: ${fadeIdAnimation} 0.5s;
 
   button {
     width: 100%;
-    /* align-self: flex-end; */
     margin-top: 20px;
   }
 `;

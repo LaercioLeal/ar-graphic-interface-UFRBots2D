@@ -2,10 +2,7 @@ import { rem, transparentize } from "polished";
 import themes from "Provider/themes";
 import styled from "styled-components";
 
-export const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+export const Container = styled.div``;
 
 export const Title = styled.h2`
   line-height: 24px;

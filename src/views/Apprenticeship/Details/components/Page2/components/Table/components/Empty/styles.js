@@ -11,7 +11,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
 
-  padding: 20px;
+  padding: 40px 20px 20px;
 
   h1,
   h3 {

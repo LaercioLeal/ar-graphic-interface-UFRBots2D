@@ -6,12 +6,31 @@ import { FormikProvider, useFormik } from "formik";
 import * as S from "./styles";
 import validationSchema from "./validations";
 import { Button, Input } from "components";
-// import { InputContainer as Input } from "components/Input/styles";
+
+const variants = {
+  visible: {
+    opacity: 1,
+    height: "auto",
+    transition: {
+      ease: "easeInOut",
+      duration: 0.5,
+    },
+  },
+  closed: {
+    opacity: 0,
+    height: 0,
+    transition: {
+      ease: "easeInOut",
+      duration: 0.5,
+    },
+  },
+};
 
 function Form({
   data,
   isUpdate,
   onSubmit,
+  show,
   onCancel,
   onToggleActivation,
   isLoading,
@@ -27,7 +46,7 @@ function Form({
 
   const form = useFormik({
     initialValues: {
-      episodes: "",
+      episodes: "10",
       alpha: "0.0",
       gamma: "0.0",
       epsilon: "0.0",
@@ -42,7 +61,12 @@ function Form({
   }, [form]);
 
   return (
-    <S.Container>
+    <S.Container
+      initial="closed"
+      animate={show ? "visible" : "closed"}
+      inherit={false}
+      variants={variants}
+    >
       <S.Content>
         <FormikProvider value={form}>
           <S.Form onSubmit={form.handleSubmit} offsetOnScroll={400}>
