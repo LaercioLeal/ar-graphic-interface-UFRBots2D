@@ -5,8 +5,8 @@ import { FormikProvider, useFormik } from "formik";
 
 import * as S from "./styles";
 import validationSchema from "./validations";
-import { Button } from "components";
-import { InputContainer as Input } from "components/Input/styles";
+import { Button, Input } from "components";
+// import { InputContainer as Input } from "components/Input/styles";
 
 function Form({
   data,
@@ -20,7 +20,6 @@ function Form({
 }) {
   const handleSubmit = useCallback(
     (values) => {
-      console.log(values);
       onSubmit(values);
     },
     [onSubmit]
@@ -28,15 +27,19 @@ function Form({
 
   const form = useFormik({
     initialValues: {
-      episodes: data?.episodes,
-      alpha: data?.alpha,
-      gamma: data?.gamma,
-      epsilon: data?.epsilon,
+      episodes: "",
+      alpha: "0.0",
+      gamma: "0.0",
+      epsilon: "0.0",
     },
     onSubmit: handleSubmit,
     validationSchema,
-    validateOnChange: false,
+    validateOnChange: true,
   });
+
+  const handleClick = useCallback(() => {
+    form.handleSubmit();
+  }, [form]);
 
   return (
     <S.Container>
@@ -50,27 +53,29 @@ function Form({
                 </Grid>
               </Grid>
               <Grid container spacing={3}>
-                <Grid item xs={4}>
+                <Grid item xs={8}>
                   <Input
                     type="number"
+                    id="episodes"
                     name="episodes"
-                    placeholder="Número de episódios"
+                    placeholder="Número de Episódios"
+                    label="Número de Episódios"
+                    onChange={form.handleChange}
+                    value={form.values.episodes}
+                    error={form.errors.episodes}
                   />
                 </Grid>
 
                 <Grid item xs={4}>
                   <Input
                     type="number"
+                    step=".001"
                     name="alpha"
                     placeholder="Taxa de Aprendizado"
-                  />
-                </Grid>
-
-                <Grid item xs={4}>
-                  <Input
-                    type="number"
-                    name="gamma"
-                    placeholder="Fator de Desconto"
+                    label="Taxa de Aprendizado"
+                    onChange={form.handleChange}
+                    value={form.values.alpha}
+                    error={form.errors.alpha}
                   />
                 </Grid>
               </Grid>
@@ -78,16 +83,26 @@ function Form({
                 <Grid item xs={4}>
                   <Input
                     type="number"
+                    step=".001"
                     name="gamma"
                     placeholder="Fator de Desconto"
+                    label="Fator de Desconto"
+                    onChange={form.handleChange}
+                    value={form.values.gamma}
+                    error={form.errors.gamma}
                   />
                 </Grid>
 
                 <Grid item xs={4}>
                   <Input
                     type="number"
+                    step=".001"
                     name="epsilon"
                     placeholder="Política e-greedy"
+                    label="Política e-greedy"
+                    onChange={form.handleChange}
+                    value={form.values.epsilon}
+                    error={form.errors.epsilon}
                   />
                 </Grid>
 
@@ -95,8 +110,8 @@ function Form({
                   <Button
                     type="submit"
                     variant="secondary"
-                    // onClick={() => form.onSubmit()}
-                    disabled={!form.isValid}
+                    onClick={handleClick}
+                    isDisabled={!form.isValid}
                   >
                     Adicionar
                   </Button>

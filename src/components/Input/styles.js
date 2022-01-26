@@ -21,6 +21,14 @@ export const InputContainer = styled.input`
   ${textStyle}
   color: ${transparentize(0.2, themes.colors.gray)};
 
+  ${({ hasError }) =>
+    hasError &&
+    css`
+      color: ${transparentize(0.2, themes.colors.red)};
+      font-style: italic;
+      font-size: ${rem(13)};
+    `}
+
   :focus {
     outline: none !important;
     border: 1px solid ${themes.colors.blue};

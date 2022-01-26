@@ -25,6 +25,8 @@ export const Content = styled.div`
 
   button {
     width: 100%;
+    /* align-self: flex-end; */
+    margin-top: 20px;
   }
 `;
 

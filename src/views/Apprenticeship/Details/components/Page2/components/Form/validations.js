@@ -1,16 +1,31 @@
 import * as yup from "yup";
 
+const validDecimal = (value) => (value + "").match(/^\d*\.{1}\d*$/);
+const validRange = (value) => value > 0 && value <= 1;
+
 export default yup.object().shape({
   episodes: yup
-    .number()
+    .string()
+    .required("Campo obrigatório")
     .min(1, "Número inválido.")
-    .max(100)
-    .required("Campo obrigatório."),
-  alpha: yup
-    .number()
-    .test("is-decimal", "invalid decimal", (value) =>
-      (value + "").match(/^\d*\.{1}\d*$/)
+    .test(
+      "is-valid",
+      "número deve ser maior ou igual a 1",
+      (value) => value >= 1
     ),
-  gamma: yup.number().min(0).max(1).required("Campo obrigatório."),
-  epsilon: yup.number().min(0).max(1).required("Campo obrigatório."),
+  alpha: yup
+    .string()
+    .required("Campo obrigatório")
+    .test("is-decimal", "número deve estar em 0 e 1", validDecimal)
+    .test("is-decimal", "número deve estar em 0 e 1", validRange),
+  gamma: yup
+    .string()
+    .required("Campo obrigatório")
+    .test("is-decimal", "número deve estar em 0 e 1", validDecimal)
+    .test("is-decimal", "número deve estar em 0 e 1", validRange),
+  epsilon: yup
+    .string()
+    .required("Campo obrigatório")
+    .test("is-decimal", "número deve estar em 0 e 1", validDecimal)
+    .test("is-decimal", "número deve estar em 0 e 1", validRange),
 });
