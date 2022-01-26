@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS training (
     idExperiment INTEGER NOT NULL,
     done BOOLEAN DEFAULT 'false',
     createdAt TEXT NOT NULL,
-    numEpisodes INTEGER NOT NULL,
+    episodes INTEGER NOT NULL,
     epsilon DECIMAL(1,3) NOT NULL,
     alpha DECIMAL(1,3) NOT NULL,
     gamma DECIMAL(1,3) NOT NULL
