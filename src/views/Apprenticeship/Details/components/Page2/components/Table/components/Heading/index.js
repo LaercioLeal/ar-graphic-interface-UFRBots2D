@@ -8,10 +8,8 @@ import { Button } from "components";
 import * as S from "./styles";
 import Form from "../Form";
 
-function Heading({ handleAddExperiment, hasData, disabledAddButton }) {
+function Heading({ handleAdd, hasData }) {
   const [showAdd, setShowAdd] = useState(false);
-
-  const handleSubmit = () => {};
 
   return (
     <S.Container>
@@ -26,7 +24,7 @@ function Heading({ handleAddExperiment, hasData, disabledAddButton }) {
           {showAdd ? "Cancelar" : "+ Adicionar"}
         </Button>
       </S.Top>
-      <Form show={showAdd} onSubmit={handleSubmit} />
+      <Form show={showAdd} onSubmit={handleAdd} />
     </S.Container>
   );
 }

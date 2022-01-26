@@ -13,3 +13,15 @@ export async function getTrainingData(experiment_id) {
     throw error;
   }
 }
+
+export async function addTraining(values) {
+  try {
+    const response = await api.post("/experiments/data/training/add", values);
+
+    return response.data;
+  } catch (error) {
+    if (error?.response?.status === 404) return false;
+
+    throw error;
+  }
+}

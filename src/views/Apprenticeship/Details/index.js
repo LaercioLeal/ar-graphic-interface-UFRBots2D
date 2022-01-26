@@ -1,4 +1,11 @@
-import React, { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
+import { useSnackbar } from "notistack";
 
 import SwipeableViews from "react-swipeable-views";
 import { useQuery } from "utils";
@@ -12,9 +19,12 @@ import { a11yProps, Page1, Page2, Page3, TabPanel } from "./components";
 import { useHistory } from "react-router-dom";
 import routes from "constants/routes";
 
+import { addTraining } from "services";
+
 import { getTrainingData } from "services/api/training";
 
 export default function Details() {
+  const { enqueueSnackbar } = useSnackbar();
   const theme = useTheme();
   const [value, setValue] = React.useState(1);
   const history = useHistory();
@@ -35,15 +45,47 @@ export default function Details() {
     setValue(index);
   };
 
-  useLayoutEffect(() => {
-    async function fetchData() {
-      const { createdAt, title, id } = query;
-      setExperiment({ createdAt, title, id });
+  const fetchData = useCallback(async () => {
+    const { createdAt, title, id } = query;
+    setExperiment({ createdAt, title, id });
 
-      const data = await getTrainingData(id);
-      setTrainingData(data.data);
+    const data = await getTrainingData(id);
+    if (data.isError) {
+      enqueueSnackbar(data.message, { variant: "error" });
+      history.replace(routes.apprenticeship.details);
     }
+    setTrainingData(data.data);
+  }, [enqueueSnackbar, setTrainingData, setExperiment, history, query]);
 
+  const handleAdd = useCallback(
+    (values) => {
+      const date = new Date();
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      addTraining({
+        ...values,
+        idExperiment: experiment.id,
+        createdAt: `${day < 10 ? "0" + day : day}/${
+          month < 10 ? "0" + month : month
+        }/${year}`,
+      })
+        .then((response) => {
+          const { isError, message } = response;
+          if (!isError) enqueueSnackbar(message, { variant: "success" });
+          else enqueueSnackbar(message, { variant: "error" });
+          fetchData();
+        })
+        .catch(() => {
+          enqueueSnackbar("Ocorreu um erro, tente novamente", {
+            variant: "error",
+          });
+        });
+    },
+    [enqueueSnackbar, fetchData, experiment]
+  );
+
+  useLayoutEffect(() => {
     fetchData();
   }, []); // eslint-disable-line
 
@@ -102,7 +144,7 @@ export default function Details() {
               <Page1 data={trainingData} havingData={havingData} />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
-              <Page2 data={trainingData} havingData={havingData} />
+              <Page2 data={trainingData} handleAdd={handleAdd} />
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
               <Page3 data={trainingData} havingData={havingData} />

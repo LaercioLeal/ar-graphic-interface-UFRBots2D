@@ -41,6 +41,7 @@ export const InputContainer = styled.input`
 `;
 
 export const Container = styled.div`
+  width: 100%;
   label {
     ${textStyle}
     color: ${transparentize(0.1, themes.colors.gray)};

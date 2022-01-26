@@ -26,22 +26,12 @@ const variants = {
   },
 };
 
-function Form({
-  data,
-  isUpdate,
-  onSubmit,
-  show,
-  onCancel,
-  onToggleActivation,
-  isLoading,
-  loadingText,
-  isWarningDate,
-}) {
+function Form({ handleAdd, show }) {
   const handleSubmit = useCallback(
     (values) => {
-      onSubmit(values);
+      handleAdd(values);
     },
-    [onSubmit]
+    [handleAdd]
   );
 
   const form = useFormik({
@@ -55,10 +45,6 @@ function Form({
     validationSchema,
     validateOnChange: true,
   });
-
-  const handleClick = useCallback(() => {
-    form.handleSubmit();
-  }, [form]);
 
   return (
     <S.Container
@@ -85,7 +71,7 @@ function Form({
                     placeholder="Número de Episódios"
                     label="Número de Episódios"
                     onChange={form.handleChange}
-                    value={form.values.episodes}
+                    value={parseInt(form.values.episodes)}
                     error={form.errors.episodes}
                   />
                 </Grid>
@@ -93,7 +79,7 @@ function Form({
                 <Grid item xs={4}>
                   <Input
                     type="number"
-                    step=".001"
+                    step=".1"
                     name="alpha"
                     placeholder="Taxa de Aprendizado"
                     label="Taxa de Aprendizado"
@@ -107,7 +93,7 @@ function Form({
                 <Grid item xs={4}>
                   <Input
                     type="number"
-                    step=".001"
+                    step=".1"
                     name="gamma"
                     placeholder="Fator de Desconto"
                     label="Fator de Desconto"
@@ -120,7 +106,7 @@ function Form({
                 <Grid item xs={4}>
                   <Input
                     type="number"
-                    step=".001"
+                    step=".1"
                     name="epsilon"
                     placeholder="Política e-greedy"
                     label="Política e-greedy"
@@ -134,7 +120,7 @@ function Form({
                   <Button
                     type="submit"
                     variant="secondary"
-                    onClick={handleClick}
+                    onClick={form.handleSubmit}
                     isDisabled={!form.isValid}
                   >
                     Adicionar

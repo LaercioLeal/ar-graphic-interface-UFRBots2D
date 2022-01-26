@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useLayoutEffect } from "react";
+import React, { useState, useMemo, useLayoutEffect } from "react";
 import ArrowDownwardOutlined from "@material-ui/icons/ArrowDownwardOutlined";
 import DataTable from "react-data-table-component";
 
@@ -13,18 +13,10 @@ const paginationOptions = {
   selectAllRowsItemText: "Todos",
 };
 
-export default function Table({ data, isLoading }) {
+export default function Table({ data, handleAdd }) {
   const [tableData, setTableData] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [isCreatingNewExperiment, setIsCreatingNewExperiment] = useState(false);
 
   const tableColumns = [
-    // {
-    //   name: "Título",
-    //   selector: ({ title }) => title,
-    //   sortable: true,
-    //   grow: 1.5,
-    // },
     {
       name: "Data de Criação",
       selector: ({ createdAt }) => createdAt,
@@ -32,76 +24,19 @@ export default function Table({ data, isLoading }) {
       sortFunction: (a, b) => sortDate(a, b, "createdAt"),
       grow: 0.3,
     },
-    // {
-    //   cell: (row) => (
-    //     <S.Link
-    //       to={
-    //         routes.apprenticeship.details +
-    //         `?createdAt=${row.createdAt}&id=${row.id}&title=${row.title}`
-    //       }
-    //     >
-    //       <Button onClick={() => {}}>Acessar</Button>
-    //     </S.Link>
-    //   ),
-    //   ignoreRowClick: true,
-    //   allowOverflow: true,
-    //   button: true,
-    // },
   ];
-
-  const handleCancel = useCallback(() => {
-    setTableData(data);
-
-    setIsCreatingNewExperiment(false);
-  }, [data]);
-
-  const handleFilter = useCallback((value) => {
-    setSearchTerm(value);
-  }, []);
-
-  const handleRowExpansion = useCallback(
-    (expanded, row) => {
-      const index = data.indexOf(row);
-      const rowElement = document.querySelector(`#row-${index + 1}`);
-
-      if (!rowElement) return;
-
-      if (expanded) {
-        rowElement.classList.add("expanded");
-      } else {
-        rowElement.classList.remove("expanded");
-      }
-
-      if (isCreatingNewExperiment) {
-        handleCancel();
-      }
-    },
-    [data, isCreatingNewExperiment, handleCancel]
-  );
 
   useLayoutEffect(() => {
     setTableData(data);
   }, [data]);
 
   const filteredData = useMemo(() => {
-    if (isCreatingNewExperiment) {
-      setSearchTerm("");
-
-      return tableData;
-    }
-
-    return tableData.filter((item) => {
-      return (
-        item?.title?.toLowerCase()?.includes(searchTerm.toLowerCase()) ||
-        item?.createdAt?.includes(searchTerm)
-      );
-    });
-  }, [searchTerm, tableData, isCreatingNewExperiment]);
+    return tableData;
+  }, [tableData]);
 
   return (
     <S.Container>
       <DataTable
-        key={isCreatingNewExperiment ? 1 : 0} // remount component
         columns={tableColumns}
         data={filteredData}
         pagination
@@ -110,31 +45,17 @@ export default function Table({ data, isLoading }) {
         highlightOnHover
         pointerOnHover
         subHeader
-        expandableRows
-        expandOnRowClicked
+        expandableRows={false}
+        expandOnRowClicked={false}
         expandableRowExpanded={(row) => row.defaultExpanded}
-        progressPending={isLoading}
-        // progressComponent={<Loader />}
         subHeaderComponent={
           <Heading
-            // handleAddExperiment={handleAddExperiment}
-            disabledAddButton={isCreatingNewExperiment}
+            handleAdd={(values) => handleAdd(values)}
             hasData={data.length > 0}
-            onFilter={handleFilter}
           />
         }
-        // expandableRowsComponent={({ data }) => (
-        //   <Form
-        //     data={data}
-        //     onUpdate={handleUpdateExperiment}
-        //     onCancel={handleCancel}
-        //     onDelete={handleDeleteExperiment}
-        //     isLoading={isLoading}
-        //   />
-        // )}
         noDataComponent={<Empty />}
         sortIcon={<ArrowDownwardOutlined style={{ marginLeft: 4 }} />}
-        onRowExpandToggled={handleRowExpansion}
       />
     </S.Container>
   );
