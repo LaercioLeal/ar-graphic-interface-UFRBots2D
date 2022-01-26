@@ -1,11 +1,12 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback } from "react";
 // import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { Grid } from "@material-ui/core";
 import { FormikProvider, useFormik } from "formik";
 
 import * as S from "./styles";
 import validationSchema from "./validations";
-import { Button, Input } from "components";
+import { Button } from "components";
+import { InputContainer as Input } from "components/Input/styles";
 
 function Form({
   data,
@@ -17,10 +18,9 @@ function Form({
   loadingText,
   isWarningDate,
 }) {
-  const inputNameRef = useRef(null);
-
   const handleSubmit = useCallback(
     (values) => {
+      console.log(values);
       onSubmit(values);
     },
     [onSubmit]
@@ -28,7 +28,10 @@ function Form({
 
   const form = useFormik({
     initialValues: {
-      name: data?.name || "",
+      episodes: data?.episodes,
+      alpha: data?.alpha,
+      gamma: data?.gamma,
+      epsilon: data?.epsilon,
     },
     onSubmit: handleSubmit,
     validationSchema,
@@ -38,185 +41,66 @@ function Form({
   return (
     <S.Container>
       <S.Content>
-        <S.Heading>
-          <S.Title>
-            {isUpdate
-              ? "Dados de expansão da linha"
-              : "Insira os dados do novo colaborador"}
-          </S.Title>
-
-          <S.Actions>
-            <Button
-              variant="secondary"
-              // onClick={handleUpdateClick}
-              // disabled={isWarningDate}
-            >
-              Salvar
-            </Button>
-            <Button
-              color="red"
-              // onClick={isUpdate ? toggleDialogVisibility : onCancel}
-              // disabled={isWarningDate}
-            >
-              Cancelar
-            </Button>
-          </S.Actions>
-        </S.Heading>
-
         <FormikProvider value={form}>
           <S.Form onSubmit={form.handleSubmit} offsetOnScroll={400}>
             <S.Fieldset>
               <Grid container spacing={3}>
-                <Grid item xs={4}>
-                  <Input
-                    fullWidth
-                    borderRounded
-                    variant="outlined"
-                    labelVariant="secondary"
-                    name="name"
-                    label="Nome Completo*"
-                    placeholder="Insira o nome completo"
-                    size="small"
-                    // disabled={!isFormEnabled}
-                    inputRef={inputNameRef}
-                    // checkAdornment={!isFormEnabled}
-                  />
+                <Grid item xs={12}>
+                  <S.Title>Insira os dados do novo ensaio</S.Title>
                 </Grid>
-
-                <Grid item xs={2}>
-                  <Input
-                    fullWidth
-                    borderRounded
-                    variant="outlined"
-                    labelVariant="secondary"
-                    name="document"
-                    label="CPF*"
-                    placeholder="000.000.000-00"
-                    mask="document"
-                    size="small"
-                    // disabled={!isFormEnabled}
-                    // checkAdornment={!isFormEnabled}
-                  />
-                </Grid>
-
-                {/* <Grid item xs={2}>
-                  <Select
-                    fullWidth
-                    borderRounded
-                    variant="outlined"
-                    labelVariant="secondary"
-                    name="gender"
-                    label="Gênero*"
-                    placeholder="Selecione"
-                    size="small"
-                    options={[
-                      { value: 'F', label: 'Feminino' },
-                      { value: 'M', label: 'Masculino' },
-                      { value: 'O', label: 'Não quero informar' },
-                    ]}
-                    disabled={!isFormEnabled}
-                    checkAdornment={!isFormEnabled}
-                  />
-                </Grid> */}
-
-                {isUpdate && (
-                  <>
-                    <Grid item xs={2}>
-                      <Input
-                        fullWidth
-                        borderRounded
-                        variant="outlined"
-                        labelVariant="secondary"
-                        name="createdAt"
-                        label="Data Inclusão"
-                        placeholder="00/00/0000"
-                        size="small"
-                        disabled
-                        // checkAdornment={!isFormEnabled}
-                      />
-                    </Grid>
-
-                    <Grid item xs={2}>
-                      <Input
-                        fullWidth
-                        borderRounded
-                        variant="outlined"
-                        labelVariant="secondary"
-                        name="status"
-                        label="Status"
-                        size="small"
-                        placeholder="--"
-                        disabled
-                      />
-                    </Grid>
-                  </>
-                )}
               </Grid>
-
               <Grid container spacing={3}>
                 <Grid item xs={4}>
                   <Input
-                    fullWidth
-                    borderRounded
-                    variant="outlined"
-                    labelVariant="secondary"
-                    name="email"
-                    label="E-mail*"
-                    placeholder="nome@email.com"
-                    size="small"
-                    // disabled={!isFormEnabled}
-                    // checkAdornment={!isFormEnabled}
+                    type="number"
+                    name="episodes"
+                    placeholder="Número de episódios"
                   />
                 </Grid>
 
-                <Grid item xs={2}>
+                <Grid item xs={4}>
                   <Input
-                    fullWidth
-                    borderRounded
-                    variant="outlined"
-                    labelVariant="secondary"
-                    name="phone"
-                    label="Celular*"
-                    placeholder="(00) 0 0000-0000"
-                    mask="cellphone"
-                    size="small"
-                    // disabled={!isFormEnabled}
-                    // checkAdornment={!isFormEnabled}
+                    type="number"
+                    name="alpha"
+                    placeholder="Taxa de Aprendizado"
                   />
                 </Grid>
 
-                <Grid item xs={2}>
+                <Grid item xs={4}>
                   <Input
-                    fullWidth
-                    borderRounded
-                    variant="outlined"
-                    labelVariant="secondary"
-                    name="birthdate"
-                    label="Data de Nascimento*"
-                    placeholder="00/00/0000"
-                    size="small"
-                    mask="date"
-                    // disabled={!isFormEnabled}
-                    // checkAdornment={!isFormEnabled}
+                    type="number"
+                    name="gamma"
+                    placeholder="Fator de Desconto"
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={3}>
+                <Grid item xs={4}>
+                  <Input
+                    type="number"
+                    name="gamma"
+                    placeholder="Fator de Desconto"
                   />
                 </Grid>
 
-                {isUpdate && (
-                  <Grid item xs={2}>
-                    <Input
-                      fullWidth
-                      borderRounded
-                      variant="outlined"
-                      labelVariant="secondary"
-                      name="deletedAt"
-                      label="Data Inativação"
-                      placeholder="00/00/0000"
-                      size="small"
-                      disabled
-                      // checkAdornment={!isFormEnabled && data.deletedAt}
-                    />
-                  </Grid>
-                )}
+                <Grid item xs={4}>
+                  <Input
+                    type="number"
+                    name="epsilon"
+                    placeholder="Política e-greedy"
+                  />
+                </Grid>
+
+                <Grid item xs={4}>
+                  <Button
+                    type="submit"
+                    variant="secondary"
+                    // onClick={() => form.onSubmit()}
+                    disabled={!form.isValid}
+                  >
+                    Adicionar
+                  </Button>
+                </Grid>
               </Grid>
             </S.Fieldset>
           </S.Form>

@@ -18,7 +18,7 @@ function Container({ children, htmlElement, ...props }) {
       {props.footer && (
         <S.FooterContainer>
           <S.Footer>
-            <span>Copyright © 2022 Higor Santos | v1.0.0</span>
+            <span>Copyright © 2022 Higor Santos | v2.0.0</span>
             <span>UFRBots | @ufrbots | ufrbots@gmail.com</span>
           </S.Footer>
           <S.Logo />

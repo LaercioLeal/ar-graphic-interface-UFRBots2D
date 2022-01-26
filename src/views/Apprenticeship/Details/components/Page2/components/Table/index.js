@@ -5,8 +5,6 @@ import DataTable from "react-data-table-component";
 import { sortDate } from "./functions";
 import * as S from "./styles";
 import { Heading } from "./components";
-import { Button } from "components";
-import routes from "constants/routes";
 
 const paginationOptions = {
   rowsPerPageText: "Linhas por página",
