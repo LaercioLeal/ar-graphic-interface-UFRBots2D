@@ -1,14 +1,25 @@
 import React from "react";
 
-import { InputContainer } from "./styles";
+import { Container, InputContainer } from "./styles";
 
-export default function Input({ placeholder, value, onChange, disabled }) {
+export default function Input({
+  label,
+  placeholder,
+  value,
+  onChange,
+  disabled,
+  props,
+}) {
   return (
-    <InputContainer
-      value={value}
-      placeholder={placeholder}
-      onChange={(e) => onChange(e.target.value)}
-      disabled={disabled}
-    />
+    <Container>
+      {label && <label>{label}</label>}
+      <InputContainer
+        {...props}
+        value={value}
+        placeholder={placeholder}
+        onChange={onChange}
+        disabled={disabled}
+      />
+    </Container>
   );
 }

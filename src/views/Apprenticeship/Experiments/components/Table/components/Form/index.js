@@ -73,7 +73,7 @@ function Form({ data, onUpdate, onDelete, isLoading }) {
           <Input
             value={name}
             placeholder="Nome do Experimento"
-            onChange={(text) => setName(text)}
+            onChange={(e) => setName(e.target.value)}
             disabled={isLoading}
           />
           <Button color="red" onClick={() => setEdit(!showEdit)}>

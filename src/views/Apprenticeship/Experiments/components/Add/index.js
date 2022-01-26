@@ -42,7 +42,7 @@ export default function Add({ isLoading, add, cancel, show, large }) {
         <Input
           value={name}
           placeholder="Nome do Experimento"
-          onChange={(text) => setName(text)}
+          onChange={(e) => setName(e.target.value)}
           disabled={isLoading}
         />
         <S.Buttons>

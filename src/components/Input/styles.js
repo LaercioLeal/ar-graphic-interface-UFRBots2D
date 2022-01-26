@@ -31,3 +31,11 @@ export const InputContainer = styled.input`
     color: ${themes.colors.lightGray};
   }
 `;
+
+export const Container = styled.div`
+  label {
+    ${textStyle}
+    color: ${transparentize(0.1, themes.colors.gray)};
+    margin-left: 10px;
+  }
+`;
