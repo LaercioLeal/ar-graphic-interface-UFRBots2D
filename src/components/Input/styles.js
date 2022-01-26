@@ -38,4 +38,8 @@ export const Container = styled.div`
     color: ${transparentize(0.1, themes.colors.gray)};
     margin-left: 10px;
   }
+  .error {
+    color: ${transparentize(0.1, themes.colors.red)};
+    font-size: ${rem(12)};
+  }
 `;
