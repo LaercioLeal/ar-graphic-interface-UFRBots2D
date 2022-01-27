@@ -66,7 +66,7 @@ def addTraining():
 
 # remove um ensaio através do id
 @app.route('/experiments/data/training/delete', methods=['POST'])
-def deleteExperiment():
+def deleteTraining():
     data = request.get_json()
     id = data["id"]
 
@@ -79,7 +79,7 @@ def deleteExperiment():
 
 # atualziar um ensaio
 @app.route('/experiments/data/training/update', methods=['POST'])
-def updateExperiment():
+def updateTraining():
     data = request.get_json()
     id = data["id"]
     done = bool(data["done"])

@@ -19,7 +19,7 @@ import { a11yProps, Page1, Page2, Page3, TabPanel } from "./components";
 import { useHistory } from "react-router-dom";
 import routes from "constants/routes";
 
-import { addTraining } from "services";
+import { addTraining, deleteTraining } from "services";
 
 import { getTrainingData } from "services/api/training";
 
@@ -85,10 +85,27 @@ export default function Details() {
     [enqueueSnackbar, fetchData, experiment]
   );
 
-  const handleRemove = useCallback((id) => {
-    // remover ensaio
-    console.log(`remover ensaio com id ${id}`);
-  }, []);
+  const handleRemove = useCallback(
+    async (id) => {
+      if (id) {
+        await deleteTraining({ id })
+          .then((response) => {
+            const { isError, message } = response;
+            if (!isError) {
+              setTrainingData(trainingData.filter((item) => item.id !== id));
+              enqueueSnackbar(message, { variant: "success" });
+            } else enqueueSnackbar(message, { variant: "error" });
+            fetchData();
+          })
+          .catch(() => {
+            enqueueSnackbar("Ocorreu um erro, tente novamente", {
+              variant: "error",
+            });
+          });
+      }
+    },
+    [enqueueSnackbar, setTrainingData, trainingData, fetchData]
+  );
 
   useLayoutEffect(() => {
     fetchData();
