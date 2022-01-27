@@ -19,6 +19,33 @@ export default function Table({ data, handleAdd, handleRemove }) {
 
   const tableColumns = [
     {
+      name: "Status",
+      selector: ({ done }) => done,
+      sortable: true,
+      cell: (row) => {
+        return (
+          <S.Status done={row.done}>
+            {row.done ? "Concluído" : "Aguardando"}
+          </S.Status>
+        );
+      },
+    },
+    {
+      name: "Alpha",
+      selector: ({ alpha }) => alpha,
+      sortable: true,
+    },
+    {
+      name: "Gamma",
+      selector: ({ gamma }) => gamma,
+      sortable: true,
+    },
+    {
+      name: "Epsilon",
+      selector: ({ epsilon }) => epsilon,
+      sortable: true,
+    },
+    {
       name: "Data de Criação",
       selector: ({ createdAt }) => createdAt,
       sortable: true,
@@ -33,7 +60,6 @@ export default function Table({ data, handleAdd, handleRemove }) {
       ignoreRowClick: true,
       allowOverflow: true,
       button: true,
-      grow: 0.3,
     },
   ];
 

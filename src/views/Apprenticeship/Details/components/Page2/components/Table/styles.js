@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { rem, rgba, size } from "polished";
+import { rem, rgba, size, transparentize } from "polished";
 import themes from "Provider/themes";
 import { NavLink } from "react-router-dom";
 
@@ -80,3 +80,20 @@ export const Container = styled.section`
 `;
 
 export const Link = styled(NavLink)``;
+
+export const Status = styled.text`
+  font-size: ${rem(14)};
+  font-family: ${themes.fonts.bold};
+
+  color: ${({ done }) =>
+    done ? themes.colors.success : themes.colors.primary};
+
+  border: 1px solid
+    ${({ done }) => (done ? themes.colors.success : themes.colors.primary)};
+  background-color: ${({ done }) =>
+    transparentize(0.9, done ? themes.colors.success : themes.colors.primary)};
+  text-align: center;
+  padding: 5px;
+
+  border-radius: 8px;
+`;

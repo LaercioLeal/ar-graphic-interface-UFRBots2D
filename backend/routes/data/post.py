@@ -27,7 +27,7 @@ def addTraining():
         ') VALUES (?, ?, ?, ?, ?, ?, ?)',
       (
         idExperiment, 
-        'false',
+        False,
         createdAt,
         episodes,
         epsilon,
