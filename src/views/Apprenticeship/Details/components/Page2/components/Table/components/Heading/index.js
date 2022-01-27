@@ -1,7 +1,4 @@
-import React, { useCallback, useState } from "react";
-
-import InputAdornment from "@material-ui/core/InputAdornment";
-import SearchOutlined from "@material-ui/icons/SearchOutlined";
+import React, { useState } from "react";
 
 import { Button } from "components";
 
@@ -24,7 +21,7 @@ function Heading({ handleAdd, hasData }) {
           {showAdd ? "Cancelar" : "+ Adicionar"}
         </Button>
       </S.Top>
-      <Form show={showAdd} onSubmit={handleAdd} />
+      <Form show={showAdd} handleAdd={handleAdd} />
     </S.Container>
   );
 }

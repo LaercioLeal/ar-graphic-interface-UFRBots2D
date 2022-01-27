@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-// import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import { Grid } from "@material-ui/core";
 import { FormikProvider, useFormik } from "formik";
 
@@ -37,9 +36,9 @@ function Form({ handleAdd, show }) {
   const form = useFormik({
     initialValues: {
       episodes: "10",
-      alpha: "0.0",
-      gamma: "0.0",
-      epsilon: "0.0",
+      alpha: "0.1",
+      gamma: "0.1",
+      epsilon: "0.1",
     },
     onSubmit: handleSubmit,
     validationSchema,

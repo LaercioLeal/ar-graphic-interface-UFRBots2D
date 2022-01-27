@@ -100,8 +100,6 @@ export default function Details() {
     }
   }, [value]); // eslint-disable-line
 
-  if (!experiment) return null;
-
   return (
     <Container>
       <HeadingPage
