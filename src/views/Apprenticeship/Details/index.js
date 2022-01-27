@@ -85,6 +85,11 @@ export default function Details() {
     [enqueueSnackbar, fetchData, experiment]
   );
 
+  const handleRemove = useCallback((id) => {
+    // remover ensaio
+    console.log(`remover ensaio com id ${id}`);
+  }, []);
+
   useLayoutEffect(() => {
     fetchData();
   }, []); // eslint-disable-line
@@ -142,7 +147,11 @@ export default function Details() {
               <Page1 data={trainingData} havingData={havingData} />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
-              <Page2 data={trainingData} handleAdd={handleAdd} />
+              <Page2
+                data={trainingData}
+                handleAdd={handleAdd}
+                handleRemove={handleRemove}
+              />
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
               <Page3 data={trainingData} havingData={havingData} />

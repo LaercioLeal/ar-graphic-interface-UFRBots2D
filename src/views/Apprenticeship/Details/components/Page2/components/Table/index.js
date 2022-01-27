@@ -5,6 +5,7 @@ import DataTable from "react-data-table-component";
 import { sortDate } from "./functions";
 import * as S from "./styles";
 import { Empty, Heading } from "./components";
+import { Button } from "components";
 
 const paginationOptions = {
   rowsPerPageText: "Linhas por página",
@@ -13,7 +14,7 @@ const paginationOptions = {
   selectAllRowsItemText: "Todos",
 };
 
-export default function Table({ data, handleAdd }) {
+export default function Table({ data, handleAdd, handleRemove }) {
   const [tableData, setTableData] = useState([]);
 
   const tableColumns = [
@@ -22,6 +23,16 @@ export default function Table({ data, handleAdd }) {
       selector: ({ createdAt }) => createdAt,
       sortable: true,
       sortFunction: (a, b) => sortDate(a, b, "createdAt"),
+    },
+    {
+      cell: (row) => (
+        <Button color="red" onClick={() => handleRemove(row.id)}>
+          Remover
+        </Button>
+      ),
+      ignoreRowClick: true,
+      allowOverflow: true,
+      button: true,
       grow: 0.3,
     },
   ];
