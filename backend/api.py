@@ -10,12 +10,11 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}})
 app.config["DEBUG"] = True
 
 # importação dos arquivos de rotas
-import routes.experiments
-import routes.directory
-import routes.monitor
 import routes.match
-import routes.data.get
-import routes.data.post
+import routes.monitor
+import routes.training
+import routes.directory
+import routes.experiments
 
 # inicializando api
 port = 3001
