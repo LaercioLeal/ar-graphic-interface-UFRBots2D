@@ -74,7 +74,7 @@ def deleteTraining():
 
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute("DELETE FROM training WHERE id='%d'" % id)
+    cur.execute("DELETE FROM training WHERE id='%s'" % id)
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Ensaio removido")
@@ -88,7 +88,7 @@ def updateTraining():
 
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute("UPDATE training SET done='%s' WHERE id='%d'" % (done, id))
+    cur.execute("UPDATE training SET done='%s' WHERE id='%s'" % (done, id))
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Ensaio atualizado")

@@ -4,7 +4,12 @@ import { useSnackbar } from "notistack";
 import { Container, HeadingPage } from "components";
 
 import experimentsIcon from "assets/icon/experiments.png";
-import { getExperiments, addExperiment, deleteExperiment } from "services";
+import {
+  getExperiments,
+  addExperiment,
+  deleteExperiment,
+  updateExperiment,
+} from "services";
 import { NoExperiments, Table } from "./components";
 
 function Apprenticeship() {
@@ -62,7 +67,7 @@ function Apprenticeship() {
   };
 
   const handleUpdateExperiment = (experiment) => {
-    addExperiment(experiment)
+    updateExperiment(experiment)
       .then((response) => {
         const { isError, message } = response;
         if (!isError) enqueueSnackbar(message, { variant: "success" });

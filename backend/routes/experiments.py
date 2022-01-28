@@ -44,7 +44,7 @@ def deleteExperiment():
 
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute("DELETE FROM experiments WHERE id='%d'" % id)
+    cur.execute("DELETE FROM experiments WHERE id='%s'" % id)
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Experimento removido")
@@ -58,7 +58,7 @@ def updateExperiment():
 
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute("UPDATE experiments SET title='%s' WHERE id='%d'" % (title, id))
+    cur.execute("UPDATE experiments SET title='%s' WHERE id='%s';" % (title, id))
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Experimento atualizado")
