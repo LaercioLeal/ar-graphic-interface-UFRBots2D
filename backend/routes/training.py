@@ -1,8 +1,7 @@
 
 from __main__ import app
 from flask import request
-from codes.methods import formatResponse
-from codes.methods import get_db_connection
+from codes.methods import formatResponse, generateHash, get_db_connection
 
 # retornar todos os ensaios cadastrados
 @app.route('/experiments/data/training', methods=['POST'])
@@ -11,7 +10,7 @@ def getTrainingData():
   experiment_id = data["experiment_id"]
 
   conn = get_db_connection()
-  data = conn.execute("SELECT * FROM training WHERE idExperiment=%d" % int(experiment_id)).fetchall()
+  data = conn.execute("SELECT * FROM training WHERE idExperiment='%d'" % int(experiment_id)).fetchall()
   conn.close()
   response = []
   for d in data:
@@ -38,10 +37,12 @@ def addTraining():
     epsilon = data["epsilon"]
     alpha = data["alpha"]
     gamma = data["gamma"]
+    id = generateHash()
 
     connection = get_db_connection()
     cur = connection.cursor()
     cur.execute('INSERT INTO training ('+
+        'id, '+
         'idExperiment, '+
         'done, '+
         'createdAt, '+
@@ -49,8 +50,9 @@ def addTraining():
         'epsilon,'+
         'alpha,'+
         'gamma'+
-        ') VALUES (?, ?, ?, ?, ?, ?, ?)',
+        ') VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
       (
+        id, 
         idExperiment, 
         False,
         createdAt,
@@ -72,7 +74,7 @@ def deleteTraining():
 
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute("DELETE FROM training WHERE id=%d" % id)
+    cur.execute("DELETE FROM training WHERE id='%d'" % id)
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Ensaio removido")
@@ -86,7 +88,7 @@ def updateTraining():
 
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute("UPDATE training SET done='%s' WHERE id=%d" % (done, id))
+    cur.execute("UPDATE training SET done='%s' WHERE id='%d'" % (done, id))
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Ensaio atualizado")

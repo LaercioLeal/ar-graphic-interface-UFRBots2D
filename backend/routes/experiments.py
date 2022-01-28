@@ -1,7 +1,6 @@
 from __main__ import app
 from flask import request
-from codes.methods import formatResponse
-from codes.methods import get_db_connection
+from codes.methods import formatResponse, generateHash, get_db_connection
 
 # retornar todos os experimentos cadastrados
 @app.route('/experiments', methods=['GET'])
@@ -28,10 +27,11 @@ def addExperiment():
     data = request.get_json()
     title = data["title"]
     createdAt = data["createdAt"]
+    id = generateHash()
 
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute("INSERT INTO experiments (title, createdAt) VALUES (?, ?)",(title, createdAt))
+    cur.execute("INSERT INTO experiments (id, title, createdAt) VALUES (?, ?, ?)",(id, title, createdAt))
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Experimento adicionado")
@@ -44,7 +44,7 @@ def deleteExperiment():
 
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute("DELETE FROM experiments WHERE id=%d" % id)
+    cur.execute("DELETE FROM experiments WHERE id='%d'" % id)
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Experimento removido")
@@ -58,7 +58,7 @@ def updateExperiment():
 
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute("UPDATE experiments SET title='%s' WHERE id=%d" % (title, id))
+    cur.execute("UPDATE experiments SET title='%s' WHERE id='%d'" % (title, id))
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Experimento atualizado")

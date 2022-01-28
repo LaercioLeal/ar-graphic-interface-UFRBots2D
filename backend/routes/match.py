@@ -1,11 +1,9 @@
 from flask import request
 from __main__ import app
-from codes.methods import getUserName
-from codes.methods import formatResponse
+from codes.methods import getUserName, formatResponse, generateHash
 
 import os             
 import subprocess
-from subprocess import Popen as new
 from time import sleep
 import io
 

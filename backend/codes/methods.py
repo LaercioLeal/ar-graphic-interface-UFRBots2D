@@ -1,11 +1,18 @@
 from flask import jsonify
 import subprocess
 import sqlite3
+from hashlib import blake2b
+import time
+
+def generateHash():
+  k = str(time.time()).encode('utf-8')
+  h = blake2b(key=k, digest_size=16)
+  return h.hexdigest()
 
 def get_db_connection():
-    conn = sqlite3.connect('backend/db/database.db')
-    conn.row_factory = sqlite3.Row
-    return conn
+  conn = sqlite3.connect('backend/db/database.db')
+  conn.row_factory = sqlite3.Row
+  return conn
 
 def getUserName():
   input_ = "who"
