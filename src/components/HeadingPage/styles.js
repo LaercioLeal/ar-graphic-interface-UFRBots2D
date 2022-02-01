@@ -18,11 +18,11 @@ export const Container = styled.div`
 `;
 
 export const Image = styled(motion.img)`
-  height: 64px;
+  height: ${({ size }) => (size ? size : 64)}px;
   margin-right: 2px;
 
   ${themes.medias.lessThan("hd")`
-    height: 60px;
+    height: ${({ size }) => (size ? size - 4 : 60)}px;
   `}
 `;
 
@@ -50,4 +50,20 @@ export const Title = styled(motion.h1)`
     font-size: ${rem(18)};
     text-align: left;
   }
+`;
+
+export const Back = styled(motion.div)`
+  @keyframes showUpBackButton {
+    from {
+      margin-left: -100px;
+      opacity: 0;
+    }
+    to {
+      margin-left: 0;
+      opacity: 1;
+    }
+  }
+  animation-name: showUpBackButton;
+  animation-duration: 2s;
+  margin: 0 25px 0 0;
 `;

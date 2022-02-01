@@ -10,7 +10,7 @@ def getTrainingData():
   experiment_id = data["experiment_id"]
 
   conn = get_db_connection()
-  data = conn.execute("SELECT * FROM training WHERE idExperiment='%d'" % int(experiment_id)).fetchall()
+  data = conn.execute("SELECT * FROM training WHERE idExperiment='%s'" % experiment_id).fetchall()
   conn.close()
   response = []
   for d in data:

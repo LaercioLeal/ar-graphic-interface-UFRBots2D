@@ -128,6 +128,7 @@ export default function Details() {
         page="experiments"
         title={`${experiment?.title}<p>Criado em ${experiment?.createdAt}</p>`}
         icon={experimentsIcon}
+        back
       />
       <S.Content>
         <Box>

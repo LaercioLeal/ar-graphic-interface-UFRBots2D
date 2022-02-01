@@ -68,7 +68,6 @@ def startMatch():
       break
     if "Score" in line:
       scores = line.replace(" ","").replace("Score:","").replace("\n","").replace("\t","").split('-')
-      print(scores)
       break
 
   message="Partida finalizada"
