@@ -32,6 +32,7 @@ export default function Details() {
   const query = useQuery();
 
   const [trainingData, setTrainingData] = useState([]);
+  const [selectedToExecute, setSelectedToExecute] = useState();
 
   const havingData = useMemo(() => {
     return trainingData.length > 0;
@@ -122,6 +123,12 @@ export default function Details() {
     }
   }, [value]); // eslint-disable-line
 
+  useEffect(() => {
+    if (!!selectedToExecute) {
+      setValue(2);
+    }
+  }, [selectedToExecute]);
+
   return (
     <Container>
       <HeadingPage
@@ -148,12 +155,14 @@ export default function Details() {
                 {...a11yProps(0)}
               />
               <Tab active={value === 1} label="Ensaios" {...a11yProps(1)} />
-              <Tab
-                active={value === 2}
-                disabled={!havingData}
-                label="Executar"
-                {...a11yProps(2)}
-              />
+              {selectedToExecute && (
+                <Tab
+                  active={value === 2}
+                  disabled={!havingData}
+                  label="Executando"
+                  {...a11yProps(2)}
+                />
+              )}
             </Tabs>
           </AppBar>
           <SwipeableViews
@@ -169,6 +178,7 @@ export default function Details() {
                 data={trainingData}
                 handleAdd={handleAdd}
                 handleRemove={handleRemove}
+                setSelectedToExecute={setSelectedToExecute}
               />
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>

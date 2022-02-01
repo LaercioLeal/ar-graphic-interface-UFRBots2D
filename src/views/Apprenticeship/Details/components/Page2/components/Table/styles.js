@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { rem, rgba, size, transparentize } from "polished";
 import themes from "Provider/themes";
 import { NavLink } from "react-router-dom";
+import { Status as Config } from "./functions";
 
 export const Container = styled.section`
   margin-bottom: 32px;
@@ -85,15 +86,33 @@ export const Status = styled.text`
   font-size: ${rem(14)};
   font-family: ${themes.fonts.bold};
 
-  color: ${({ done }) =>
-    done ? themes.colors.success : themes.colors.primary};
+  color: ${({ status }) => Config[status].color};
 
-  border: 1px solid
-    ${({ done }) => (done ? themes.colors.success : themes.colors.primary)};
-  background-color: ${({ done }) =>
-    transparentize(0.9, done ? themes.colors.success : themes.colors.primary)};
+  border: 1px solid ${({ status }) => Config[status].color};
+  background-color: ${({ status }) =>
+    transparentize(0.9, Config[status].color)};
   text-align: center;
   padding: 5px;
 
   border-radius: 8px;
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+
+  button {
+    :last-child {
+      margin-left: 20px;
+    }
+  }
+`;
+
+export const Legend = styled.h2`
+  font-size: ${rem(14)};
+  font-family: ${themes.fonts.bold};
+
+  color: ${transparentize(0.5, themes.colors.gray)};
+  margin: auto;
 `;

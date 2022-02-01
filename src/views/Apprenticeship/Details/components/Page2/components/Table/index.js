@@ -2,7 +2,7 @@ import React, { useState, useMemo, useLayoutEffect } from "react";
 import ArrowDownwardOutlined from "@material-ui/icons/ArrowDownwardOutlined";
 import DataTable from "react-data-table-component";
 
-import { sortDate } from "./functions";
+import { sortDate, sortStatus, Status } from "./functions";
 import * as S from "./styles";
 import { Empty, Heading } from "./components";
 import { Button } from "components";
@@ -14,19 +14,22 @@ const paginationOptions = {
   selectAllRowsItemText: "Todos",
 };
 
-export default function Table({ data, handleAdd, handleRemove }) {
+export default function Table({
+  data,
+  handleAdd,
+  handleRemove,
+  setSelectedToExecute,
+}) {
   const [tableData, setTableData] = useState([]);
 
   const tableColumns = [
     {
       name: "Status",
-      selector: ({ done }) => done,
+      selector: (a, b) => sortStatus(a, b, "status"),
       sortable: true,
       cell: (row) => {
         return (
-          <S.Status done={row.done}>
-            {row.done ? "Concluído" : "Aguardando"}
-          </S.Status>
+          <S.Status status={row.status}>{Status[row.status].title}</S.Status>
         );
       },
     },
@@ -53,13 +56,23 @@ export default function Table({ data, handleAdd, handleRemove }) {
     },
     {
       cell: (row) => (
-        <Button color="red" onClick={() => handleRemove(row.id)}>
-          Remover
-        </Button>
+        <S.Buttons>
+          {row.status !== "queue" && row.status !== "running" ? (
+            <>
+              <Button color="success" onClick={() => setSelectedToExecute(row)}>
+                Executar
+              </Button>
+              <Button color="red" onClick={() => handleRemove(row.id)}>
+                Remover
+              </Button>
+            </>
+          ) : (
+            <S.Legend>Aguarde</S.Legend>
+          )}
+        </S.Buttons>
       ),
       ignoreRowClick: true,
       allowOverflow: true,
-      button: true,
     },
   ];
 

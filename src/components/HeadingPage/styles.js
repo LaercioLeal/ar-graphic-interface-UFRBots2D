@@ -57,13 +57,15 @@ export const Back = styled(motion.div)`
     from {
       margin-left: -100px;
       opacity: 0;
+      transform: scale(2);
     }
     to {
       margin-left: 0;
       opacity: 1;
+      transform: scale(1);
     }
   }
   animation-name: showUpBackButton;
-  animation-duration: 2s;
+  animation-duration: 1s;
   margin: 0 25px 0 0;
 `;

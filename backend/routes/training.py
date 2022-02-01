@@ -18,7 +18,7 @@ def getTrainingData():
         {
           "id": d["id"], 
           'idExperiment': d["idExperiment"],
-          'done': d["done"],
+          'status': d["status"],
           'createdAt': d["createdAt"],
           'epsilon': d["epsilon"],
           'alpha': d["alpha"],
@@ -44,7 +44,7 @@ def addTraining():
     cur.execute('INSERT INTO training ('+
         'id, '+
         'idExperiment, '+
-        'done, '+
+        'status, '+
         'createdAt, '+
         'episodes,'+
         'epsilon,'+
@@ -54,7 +54,7 @@ def addTraining():
       (
         id, 
         idExperiment, 
-        False,
+        'wait',
         createdAt,
         episodes,
         epsilon,
@@ -84,11 +84,11 @@ def deleteTraining():
 def updateTraining():
     data = request.get_json()
     id = data["id"]
-    done = bool(data["done"])
+    done = data["status"]
 
     connection = get_db_connection()
     cur = connection.cursor()
-    cur.execute("UPDATE training SET done='%s' WHERE id='%s'" % (done, id))
+    cur.execute("UPDATE training SET status='%s' WHERE id='%s'" % (done, id))
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Ensaio atualizado")

@@ -14,10 +14,12 @@ CREATE TABLE IF NOT EXISTS experiments (
 );
 
 -- trainning - ensaios
+-- status: wait / queue / running / done
 CREATE TABLE IF NOT EXISTS training ( 
     id TEXT NOT NULL,
     idExperiment INTEGER NOT NULL,
     done BOOLEAN DEFAULT 'false',
+    status TEXT DEFAULT 'wait',
     createdAt TEXT NOT NULL,
     episodes INTEGER NOT NULL,
     epsilon DECIMAL(1,3) NOT NULL,
