@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useLayoutEffect } from "react";
-import ArrowDownwardOutlined from "@material-ui/icons/ArrowDownwardOutlined";
+import * as Icons from "@material-ui/icons";
 import DataTable from "react-data-table-component";
 
 import { sortDate, sortStatus, Status } from "./functions";
@@ -57,17 +57,30 @@ export default function Table({
     {
       cell: (row) => (
         <S.Buttons>
-          {row.status !== "queue" && row.status !== "running" ? (
+          {(row.status === "wait" || row.status === "done") && (
             <>
-              <Button color="success" onClick={() => setSelectedToExecute(row)}>
-                Executar
-              </Button>
+              {row.status !== "done" && (
+                <Button
+                  color="success"
+                  onClick={() => setSelectedToExecute(row)}
+                >
+                  <Icons.PlayArrowOutlined />
+                </Button>
+              )}
               <Button color="red" onClick={() => handleRemove(row.id)}>
-                Remover
+                <Icons.DeleteForeverOutlined />
               </Button>
             </>
-          ) : (
-            <S.Legend>Aguarde</S.Legend>
+          )}
+          {row.status === "running" && (
+            <Button color="blue" onClick={() => setSelectedToExecute(row)}>
+              <Icons.ArrowRightAltTwoTone />
+            </Button>
+          )}
+          {row.status === "queue" && (
+            <Button isDisabled>
+              <Icons.WatchLaterOutlined />
+            </Button>
           )}
         </S.Buttons>
       ),
@@ -105,7 +118,7 @@ export default function Table({
           />
         }
         noDataComponent={<Empty />}
-        sortIcon={<ArrowDownwardOutlined style={{ marginLeft: 4 }} />}
+        sortIcon={<Icons.ArrowDownwardOutlined style={{ marginLeft: 4 }} />}
       />
     </S.Container>
   );

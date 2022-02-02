@@ -102,10 +102,15 @@ export const Buttons = styled.div`
   flex-direction: row;
   width: 100%;
 
+  align-items: center;
+  justify-content: center;
+
+  button:first-child:nth-last-child(2) ~ button {
+    margin-left: 20px;
+  }
+
   button {
-    :last-child {
-      margin-left: 20px;
-    }
+    padding: 6px 12px 0px 12px !important;
   }
 `;
 

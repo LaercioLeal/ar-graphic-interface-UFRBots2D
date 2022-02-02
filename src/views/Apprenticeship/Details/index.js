@@ -123,11 +123,10 @@ export default function Details() {
     }
   }, [value]); // eslint-disable-line
 
-  useEffect(() => {
-    if (!!selectedToExecute) {
-      setValue(2);
-    }
-  }, [selectedToExecute]);
+  const SelectedToExecute = (value) => {
+    setSelectedToExecute(value);
+    setValue(2);
+  };
 
   return (
     <Container>
@@ -178,7 +177,7 @@ export default function Details() {
                 data={trainingData}
                 handleAdd={handleAdd}
                 handleRemove={handleRemove}
-                setSelectedToExecute={setSelectedToExecute}
+                setSelectedToExecute={SelectedToExecute}
               />
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
