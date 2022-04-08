@@ -3,6 +3,7 @@ export { default as Container } from "./Container";
 export { default as HeadingPage } from "./HeadingPage";
 export { default as OpenMonitor } from "./OpenMonitor";
 export { default as NotSupported } from "./NotSupported";
+export { default as CustomTooltip } from "./CustomTooltip";
 export { default as LinearProgress } from "./LinearProgress";
 
 export { default as Modal } from "./Modal";

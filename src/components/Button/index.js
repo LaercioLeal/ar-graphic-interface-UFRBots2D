@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import * as S from "./styles";
 import ANIMATION from "./animation.config";
+import CustomTooltip from "components/CustomTooltip";
 
 function Button({
   variant,
@@ -11,23 +12,26 @@ function Button({
   children,
   color,
   bold,
+  tooltip,
   ...props
 }) {
   return (
-    <S.Container
-      bold={bold}
-      color={color}
-      isLoading={isLoading}
-      isDisabled={isDisabled}
-      variant={variant || "primary"}
-      initial="hidden"
-      animate="visible"
-      variants={ANIMATION}
-      whileTap={{ scale: isDisabled ? 1 : 0.9 }}
-      {...props}
-    >
-      {children}
-    </S.Container>
+    <CustomTooltip title={tooltip}>
+      <S.Container
+        bold={bold}
+        color={color}
+        isLoading={isLoading}
+        isDisabled={isDisabled}
+        variant={variant || "primary"}
+        initial="hidden"
+        animate="visible"
+        variants={ANIMATION}
+        whileTap={{ scale: isDisabled ? 1 : 0.9 }}
+        {...props}
+      >
+        {children}
+      </S.Container>
+    </CustomTooltip>
   );
 }
 

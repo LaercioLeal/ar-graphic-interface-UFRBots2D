@@ -38,11 +38,13 @@ export default function Details() {
     return trainingData.length > 0;
   }, [trainingData]);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+  const handleChange = (event, index) => {
+    if (index !== 2) setSelectedToExecute(false);
+    setValue(index);
   };
 
   const handleChangeIndex = (index) => {
+    if (index !== 2) setSelectedToExecute(false);
     setValue(index);
   };
 

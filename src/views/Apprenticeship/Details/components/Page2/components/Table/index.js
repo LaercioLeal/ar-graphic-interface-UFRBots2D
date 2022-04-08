@@ -14,6 +14,13 @@ const paginationOptions = {
   selectAllRowsItemText: "Todos",
 };
 
+const infoTooltip = {
+  running: "Ver ensaio",
+  wait: "Executar",
+  done: "Deletar",
+  queue: "Na fila. Aguarde...",
+};
+
 export default function Table({
   data,
   handleAdd,
@@ -62,23 +69,32 @@ export default function Table({
               {row.status !== "done" && (
                 <Button
                   color="success"
+                  tooltip={infoTooltip[row.status]}
                   onClick={() => setSelectedToExecute(row)}
                 >
                   <Icons.PlayArrowOutlined />
                 </Button>
               )}
-              <Button color="red" onClick={() => handleRemove(row.id)}>
+              <Button
+                color="red"
+                tooltip={infoTooltip["done"]}
+                onClick={() => handleRemove(row.id)}
+              >
                 <Icons.DeleteForeverOutlined />
               </Button>
             </>
           )}
           {row.status === "running" && (
-            <Button color="blue" onClick={() => setSelectedToExecute(row)}>
-              <Icons.ArrowRightAltTwoTone />
+            <Button
+              color="blue"
+              tooltip={infoTooltip[row.status]}
+              onClick={() => setSelectedToExecute(row)}
+            >
+              <Icons.VisibilityOutlined />
             </Button>
           )}
           {row.status === "queue" && (
-            <Button isDisabled>
+            <Button tooltip={infoTooltip[row.status]} isDisabled>
               <Icons.WatchLaterOutlined />
             </Button>
           )}

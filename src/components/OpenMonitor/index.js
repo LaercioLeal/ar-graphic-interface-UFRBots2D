@@ -1,18 +1,13 @@
 import React from "react";
-import { Tooltip, Zoom } from "@material-ui/core";
 
 import icon from "assets/icon/power-button.png";
 import * as S from "./styles";
 import { openMonitor } from "services";
+import CustomTooltip from "components/CustomTooltip";
 
 export default function OpenMonitor({ show }) {
   return (
-    <Tooltip
-      arrow
-      TransitionComponent={Zoom}
-      placement="top-start"
-      title="Aqui você pode abrir o monitor para assistir suas partidas ;)"
-    >
+    <CustomTooltip title="Aqui você pode abrir o monitor para assistir suas partidas ;)">
       <S.Container
         initial="hidden"
         animate={show ? "visible" : "hidden"}
@@ -40,6 +35,6 @@ export default function OpenMonitor({ show }) {
       >
         <S.Image src={icon} />
       </S.Container>
-    </Tooltip>
+    </CustomTooltip>
   );
 }
