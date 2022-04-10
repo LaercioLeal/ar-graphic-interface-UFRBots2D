@@ -148,7 +148,7 @@ export default function Details() {
 
   const runAll = async () => {
     for (const training of trainingData) {
-      if (training.status === "wait") await queue.add(training);
+      await queue.add(training);
     }
     enqueueSnackbar("Ensaios preparados para execução", { variant: "info" });
     fetchData();

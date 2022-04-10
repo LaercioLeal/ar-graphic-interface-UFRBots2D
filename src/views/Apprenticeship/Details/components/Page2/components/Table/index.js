@@ -131,7 +131,7 @@ export default function Table({
         subHeaderComponent={
           <Heading
             handleAdd={(values) => handleAdd(values)}
-            hasData={data.length > 0}
+            data={data}
             canRunAll={data.filter((item) => item.status === "wait").length > 0}
             runAll={runAll}
           />

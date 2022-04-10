@@ -64,6 +64,7 @@ def deleteExperiment():
     connection = get_db_connection()
     cur = connection.cursor()
     cur.execute("DELETE FROM experiments WHERE id='%s'" % id)
+    cur.execute("DELETE FROM training WHERE idExperiment='%s'" % id)
     connection.commit()
     connection.close()
     return formatResponse(False, [], "Experimento removido")

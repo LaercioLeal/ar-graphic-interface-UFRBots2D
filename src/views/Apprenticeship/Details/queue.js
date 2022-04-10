@@ -34,19 +34,19 @@ class Queue {
   }
 
   async add(training) {
-    console.log(`[QUEUE] >> added ${training.id}`);
+    if (training.status !== "wait") return training;
     this.queue.push(training);
     await updateTraining({
       ...training,
       status: this.queue.length === 0 ? "running" : "queue",
     }).then((_) => {
-      console.log(`[QUEUE][E] >> finished ${training.id}`);
+      console.log(`[QUEUE]    >> added ${training.id}`);
       return training;
     });
   }
 
   remove(training) {
-    console.log(`[QUEUE] >> removed ${training.id}`);
+    console.log(`[QUEUE]    >> removed ${training.id}`);
     this.queue = this.queue.filter((item) => item.id !== training.id);
     return training;
   }

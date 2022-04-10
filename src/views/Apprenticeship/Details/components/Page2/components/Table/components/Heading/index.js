@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
-import { Button } from "components";
+import { Button, Percentage } from "components";
 
 import * as S from "./styles";
 import Form from "../Form";
 
-function Heading({ handleAdd, canRunAll, runAll, hasData }) {
+function Heading({ handleAdd, canRunAll, runAll, data }) {
   const [showAdd, setShowAdd] = useState(false);
   const [showRunAll, setShowRunAll] = useState(false);
+
+  const percentage = useMemo(() => {
+    const done = data.filter((item) => item.status === "done").length;
+    const total = data.length;
+    return !data.length ? 0 : ((done / total) * 100).toFixed(0);
+  }, [data]);
 
   useEffect(() => {
     setShowRunAll(canRunAll);
@@ -16,19 +22,28 @@ function Heading({ handleAdd, canRunAll, runAll, hasData }) {
   return (
     <S.Container>
       <S.Top>
-        <S.Title>{hasData && "Lista de Ensaios"}</S.Title>
+        <S.Title>{data.length > 0 && "Lista de Ensaios"}</S.Title>
 
-        {hasData && showRunAll && !!!showAdd && (
-          <Button
-            onClick={() => {
-              setShowRunAll(false);
-              runAll();
-            }}
-            variant="secondary"
-            color="success"
-          >
-            Executar todos
-          </Button>
+        {data.length > 0 && (
+          <Percentage
+            id={data[0].idExperiment}
+            percentage={percentage}
+            width={10}
+          />
+        )}
+        {data.length > 0 && showRunAll && (
+          <>
+            <Button
+              onClick={() => {
+                setShowRunAll(false);
+                runAll();
+              }}
+              variant="secondary"
+              color="success"
+            >
+              Executar todos
+            </Button>
+          </>
         )}
 
         <Button

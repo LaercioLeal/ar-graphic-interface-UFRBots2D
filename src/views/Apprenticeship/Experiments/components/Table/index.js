@@ -6,7 +6,7 @@ import { sortDate } from "./functions";
 import * as S from "./styles";
 import NoExperiments from "../NoExperiments";
 import { Form, Heading, Loader } from "./components";
-import { Button } from "components";
+import { Button, Percentage } from "components";
 import routes from "constants/routes";
 
 const paginationOptions = {
@@ -44,19 +44,10 @@ export default function Table({
       selector: ({ done, total }) => `${total < 1 ? 0 : (done / total) * 100}%`,
       sortable: true,
       cell: ({ id, done, total }) => (
-        <S.Legend>
-          {total > 0 && (
-            <>
-              <S.Percentage>{`${((done / total) * 100).toFixed(
-                0
-              )}%`}</S.Percentage>
-              <S.Progress>
-                <S.Bar key={id} width={((done / total) * 100).toFixed(0)} />
-                <S.BarOff key={id} width={((done / total) * 100).toFixed(0)} />
-              </S.Progress>
-            </>
-          )}
-        </S.Legend>
+        <Percentage
+          id={id}
+          percentage={total === 0 ? 0 : ((done / total) * 100).toFixed(0)}
+        />
       ),
     },
     {
