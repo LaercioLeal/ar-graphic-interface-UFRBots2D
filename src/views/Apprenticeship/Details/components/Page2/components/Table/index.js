@@ -16,13 +16,14 @@ const paginationOptions = {
 
 const infoTooltip = {
   running: "Ver ensaio",
-  wait: "Executar",
-  done: "Deletar",
-  queue: "Na fila. Aguarde...",
+  wait: "",
+  done: "",
+  queue: "Aguarde...",
 };
 
 export default function Table({
   data,
+  runAll,
   handleAdd,
   handleRemove,
   setSelectedToExecute,
@@ -90,7 +91,7 @@ export default function Table({
               tooltip={infoTooltip[row.status]}
               onClick={() => setSelectedToExecute(row)}
             >
-              <Icons.VisibilityOutlined />
+              <Icons.SportsSoccerOutlined />
             </Button>
           )}
           {row.status === "queue" && (
@@ -131,6 +132,8 @@ export default function Table({
           <Heading
             handleAdd={(values) => handleAdd(values)}
             hasData={data.length > 0}
+            canRunAll={data.filter((item) => item.status === "wait").length > 0}
+            runAll={runAll}
           />
         }
         noDataComponent={<Empty />}

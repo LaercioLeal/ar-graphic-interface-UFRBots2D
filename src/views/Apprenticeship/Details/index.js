@@ -22,6 +22,7 @@ import routes from "constants/routes";
 import { addTraining, deleteTraining } from "services";
 
 import { getTrainingData } from "services/api/training";
+import Queue from "./queue";
 
 export default function Details() {
   const { enqueueSnackbar } = useSnackbar();
@@ -31,6 +32,8 @@ export default function Details() {
   const [experiment, setExperiment] = useState();
   const query = useQuery();
 
+  const queue = useMemo(() => new Queue(), []);
+
   const [trainingData, setTrainingData] = useState([]);
   const [selectedToExecute, setSelectedToExecute] = useState();
 
@@ -39,12 +42,10 @@ export default function Details() {
   }, [trainingData]);
 
   const handleChange = (event, index) => {
-    if (index !== 2) setSelectedToExecute(false);
     setValue(index);
   };
 
   const handleChangeIndex = (index) => {
-    if (index !== 2) setSelectedToExecute(false);
     setValue(index);
   };
 
@@ -125,9 +126,32 @@ export default function Details() {
     }
   }, [value]); // eslint-disable-line
 
-  const SelectedToExecute = (value) => {
-    setSelectedToExecute(value);
-    setValue(2);
+  useEffect(() => {
+    if (!queue.running && !!queue.queue.length) {
+      queue.updateLast().then((_) => {
+        fetchData();
+        queue.run().then((_) => {
+          fetchData();
+          enqueueSnackbar("Ensaio finalizado", { variant: "success" });
+        });
+      });
+    }
+  }, [queue.queue.length, queue.running]); // eslint-disable-line
+
+  const SelectedToExecute = (training) => {
+    if (!!!training || training !== selectedToExecute) {
+      setSelectedToExecute(training);
+      queue.add(training).then((_) => fetchData());
+      enqueueSnackbar("Ensaio preparado para execução", { variant: "info" });
+    }
+  };
+
+  const runAll = async () => {
+    for (const training of trainingData) {
+      if (training.status === "wait") await queue.add(training);
+    }
+    enqueueSnackbar("Ensaios preparados para execução", { variant: "info" });
+    fetchData();
   };
 
   return (
@@ -176,6 +200,7 @@ export default function Details() {
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
               <Page2
+                runAll={runAll}
                 data={trainingData}
                 handleAdd={handleAdd}
                 handleRemove={handleRemove}
