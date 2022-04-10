@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Button } from "components";
 
@@ -7,14 +7,26 @@ import Form from "../Form";
 
 function Heading({ handleAdd, canRunAll, runAll, hasData }) {
   const [showAdd, setShowAdd] = useState(false);
+  const [showRunAll, setShowRunAll] = useState(false);
+
+  useEffect(() => {
+    setShowRunAll(canRunAll);
+  }, [canRunAll]);
 
   return (
     <S.Container>
       <S.Top>
         <S.Title>{hasData && "Lista de Ensaios"}</S.Title>
 
-        {hasData && canRunAll && !!!showAdd && (
-          <Button onClick={runAll} variant="secondary" color="success">
+        {hasData && showRunAll && !!!showAdd && (
+          <Button
+            onClick={() => {
+              setShowRunAll(false);
+              runAll();
+            }}
+            variant="secondary"
+            color="success"
+          >
             Executar todos
           </Button>
         )}
