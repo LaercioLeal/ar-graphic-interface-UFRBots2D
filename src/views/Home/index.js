@@ -18,7 +18,7 @@ function Home() {
         variants={animate.heading.container}
       >
         <S.Title variants={animate.heading.titles}>
-          <span>Bem-vindo ao LARBot</span>
+          <span>Bem-vindo ao FUTar</span>
         </S.Title>
         <S.Title variants={animate.heading.titles}>
           Interface Gráfica Didática para o Ensino De Aprendizado por Reforço

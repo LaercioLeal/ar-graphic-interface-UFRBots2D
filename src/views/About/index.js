@@ -44,7 +44,7 @@ function About() {
           </div>
           <div>
             <S.Title>
-              <span className="higher">LARBot</span>
+              <span className="higher">FUTar</span>
             </S.Title>
             <S.Title>
               é uma interface, dedicada ao auxílio nos estudos do Aprendizado

@@ -24,7 +24,7 @@ function Default({ children, pageTitle }) {
     <>
       {pageTitle && (
         <Helmet>
-          <title>LARBot | {pageTitle}</title>
+          <title>FUTar | {pageTitle}</title>
         </Helmet>
       )}
 
