@@ -99,7 +99,7 @@ def runTraining():
     data = request.get_json()
     id = data["id"]
     import time
-    time.sleep(10)
+    time.sleep(5)
 
     done = "done"
     connection = get_db_connection()

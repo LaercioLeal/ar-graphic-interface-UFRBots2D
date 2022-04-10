@@ -5,20 +5,39 @@ from codes.methods import formatResponse, generateHash, get_db_connection
 # retornar todos os experimentos cadastrados
 @app.route('/experiments', methods=['GET'])
 def getExperiments():
-  querySelect= 'SELECT * FROM experiments'
+  
+  querySelect= '''
+    SELECT 
+      id, title, createdAt, 
+      ifnull((
+        SELECT 
+          sum(t.status = 'done')
+        FROM training t
+        WHERE t.idExperiment = e.id
+      ),0) as done,
+      (
+        SELECT 
+          count(*)
+        FROM training t
+        WHERE t.idExperiment = e.id
+      ) as total
+    FROM experiments e
+  '''
 
   conn = get_db_connection()
   experiments = conn.execute(querySelect).fetchall()
   conn.close()
   response = []
   for experiment in experiments:
-      response.append(
-          {
-              "id": experiment["id"], 
-              "title": experiment["title"], 
-              "createdAt": experiment["createdAt"]
-          }
-          )
+    response.append(
+        {
+            "id": experiment["id"], 
+            "done": experiment["done"],
+            "total": experiment["total"], 
+            "title": experiment["title"], 
+            "createdAt": experiment["createdAt"]
+        }
+        )
   return formatResponse(False, response)
 
 # cadastrar um experimento

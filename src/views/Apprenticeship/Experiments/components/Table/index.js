@@ -35,11 +35,35 @@ export default function Table({
       grow: 1.5,
     },
     {
+      name: "Ensaios",
+      selector: ({ total }) => total,
+      sortable: true,
+    },
+    {
+      name: "Conclusão",
+      selector: ({ done, total }) => `${total < 1 ? 0 : (done / total) * 100}%`,
+      sortable: true,
+      cell: ({ id, done, total }) => (
+        <S.Legend>
+          {total > 0 && (
+            <>
+              <S.Percentage>{`${((done / total) * 100).toFixed(
+                0
+              )}%`}</S.Percentage>
+              <S.Progress>
+                <S.Bar key={id} width={((done / total) * 100).toFixed(0)} />
+                <S.BarOff key={id} width={((done / total) * 100).toFixed(0)} />
+              </S.Progress>
+            </>
+          )}
+        </S.Legend>
+      ),
+    },
+    {
       name: "Data de Criação",
       selector: ({ createdAt }) => createdAt,
       sortable: true,
       sortFunction: (a, b) => sortDate(a, b, "createdAt"),
-      grow: 0.3,
     },
     {
       cell: (row) => (
