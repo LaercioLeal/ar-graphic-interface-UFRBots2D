@@ -1,12 +1,3 @@
--- teamX - nome do time
-CREATE TABLE IF NOT EXISTS results (
-    id TEXT NOT NULL,
-    resultTeam1 TEXT NOT NULL,
-    resultTeam2 TEXT NOT NULL,
-    team1 TEXT NOT NULL,
-    team2 TEXT NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS experiments (
     id TEXT NOT NULL,
     createdAt TEXT NOT NULL,
@@ -24,7 +15,12 @@ CREATE TABLE IF NOT EXISTS training (
     episodes INTEGER NOT NULL,
     epsilon DECIMAL(1,3) NOT NULL,
     alpha DECIMAL(1,3) NOT NULL,
-    gamma DECIMAL(1,3) NOT NULL
+    gamma DECIMAL(1,3) NOT NULL,
+
+    CONSTRAINT fk_experiments
+    FOREIGN KEY (idExperiment)
+    REFERENCES experiments(id)
+    ON DELETE CASCADE
 );
 
 -- numResult === número da partida
@@ -34,5 +30,15 @@ CREATE TABLE IF NOT EXISTS results (
     numResult INTEGER NOT NULL, 
     gf INTEGER NOT NULL,
     gs INTEGER NOT NULL,
-    sg INTEGER NOT NULL
+    sg INTEGER NOT NULL,
+
+    CONSTRAINT fk_experiments
+    FOREIGN KEY (idExperiment)
+    REFERENCES experiments(id)
+    ON DELETE CASCADE
+
+    CONSTRAINT fk_training
+    FOREIGN KEY (idTraining)
+    REFERENCES training(id)
+    ON DELETE CASCADE
 );
