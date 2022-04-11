@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS experiments (
 CREATE TABLE IF NOT EXISTS training ( 
     id TEXT NOT NULL,
     idExperiment INTEGER NOT NULL,
-    done BOOLEAN DEFAULT 'false',
     status TEXT DEFAULT 'wait',
     createdAt TEXT NOT NULL,
     episodes INTEGER NOT NULL,

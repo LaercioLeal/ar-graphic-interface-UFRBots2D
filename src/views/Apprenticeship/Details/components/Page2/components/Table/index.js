@@ -2,7 +2,7 @@ import React, { useState, useMemo, useLayoutEffect } from "react";
 import * as Icons from "@material-ui/icons";
 import DataTable from "react-data-table-component";
 
-import { sortDate, sortStatus, Status } from "./functions";
+import { sortDate, Status } from "./functions";
 import * as S from "./styles";
 import { Empty, Heading } from "./components";
 import { Button } from "components";
@@ -33,7 +33,7 @@ export default function Table({
   const tableColumns = [
     {
       name: "Status",
-      selector: (a, b) => sortStatus(a, b, "status"),
+      selector: ({ status }) => status,
       sortable: true,
       cell: (row) => {
         return (

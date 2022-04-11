@@ -32,7 +32,6 @@ def getExperiments():
     response.append(
         {
             "id": experiment["id"], 
-            "done": experiment["done"],
             "total": experiment["total"], 
             "title": experiment["title"], 
             "createdAt": experiment["createdAt"]
