@@ -22,7 +22,7 @@ import routes from "constants/routes";
 import { addTraining, deleteTraining } from "services";
 
 import { getTrainingData } from "services/api/training";
-import Queue from "./queue";
+import { useQueue } from "modules/queue";
 
 export default function Details() {
   const { enqueueSnackbar } = useSnackbar();
@@ -32,7 +32,7 @@ export default function Details() {
   const [experiment, setExperiment] = useState();
   const query = useQuery();
 
-  const queue = useMemo(() => new Queue(), []);
+  const { setQueue, queue } = useQueue();
 
   const [trainingData, setTrainingData] = useState([]);
   const [selectedToExecute, setSelectedToExecute] = useState();
@@ -141,7 +141,10 @@ export default function Details() {
   const SelectedToExecute = (training) => {
     if (!!!training || training !== selectedToExecute) {
       setSelectedToExecute(training);
-      queue.add(training).then((_) => fetchData());
+      queue.add(training).then((_) => {
+        setQueue(queue);
+        fetchData();
+      });
       enqueueSnackbar("Ensaio preparado para execução", { variant: "info" });
     }
   };
@@ -150,6 +153,7 @@ export default function Details() {
     for (const training of trainingData) {
       await queue.add(training);
     }
+    setQueue(queue);
     enqueueSnackbar("Ensaios preparados para execução", { variant: "info" });
     fetchData();
   };
