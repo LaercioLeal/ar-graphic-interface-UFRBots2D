@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { rem, transparentize } from "polished";
+import styled, { css } from "styled-components";
+import { lighten, rem, transparentize } from "polished";
 
 import themes from "Provider/themes";
 import { NavLink } from "components";
@@ -29,33 +29,34 @@ export const Container = styled.nav`
 
   ${({ top }) =>
     !!top &&
-    `
-    padding: 16px 7%;
-    margin: 0;  
-    margin-bottom: 20px;
-    width: 100%;
-    border-radius: 0px;
-    box-shadow: rgba(255, 139, 40, 0.3) 0px 0px 0px 1px,
-      rgba(255, 139, 40, 0.4) 0 5px, rgba(255, 139, 40, 0.3) 0 10px,
-      rgba(255, 139, 40, 0.2) 0 15px, rgba(255, 139, 40, 0.1) 0 20px,
-      rgba(255, 139, 40, 0.05) 0 25px;
-  `}
+    css`
+      padding: 16px 7%;
+      margin: 0;
+      margin-bottom: 20px;
+      width: 100%;
+      border-radius: 0px;
+
+      box-shadow: ${lighten(0.23, themes.colors.blue)} 0px 1px 1px,
+        ${lighten(0.13, themes.colors.blue)} 0px 0px 1px 1px;
+    `}
 `;
 
 export const Link = styled(NavLink)`
   display: flex;
   align-items: center;
 
-  transition: 0.3s background-color;
+  transition: background-color 1s;
   padding: 8px 20px;
   border-radius: 16px;
 
   &:hover {
-    background-color: ${transparentize(0.9, themes.colors.primary)};
+    background-color: ${({ top }) =>
+      transparentize(0.9, top ? themes.colors.blue : themes.colors.primary)};
   }
 
   &.active {
-    background-color: ${themes.colors.primary};
+    background-color: ${({ top }) =>
+      top ? themes.colors.blue : themes.colors.primary};
     padding: 8px 40px;
     span {
       line-height: 24px;

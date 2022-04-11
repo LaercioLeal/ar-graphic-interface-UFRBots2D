@@ -23,7 +23,7 @@ function Navigation() {
     <S.Container top={isPageNotOnTop}>
       <S.Logo show={isPageNotOnTop} />
       {items.map((item) => (
-        <S.Link key={item.path} to={item.path} item={item}>
+        <S.Link key={item.path} top={isPageNotOnTop} to={item.path} item={item}>
           <span>{item.label}</span>
         </S.Link>
       ))}
