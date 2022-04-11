@@ -139,13 +139,15 @@ export default function Details() {
   }, [queue.queue.length, queue.running]); // eslint-disable-line
 
   const SelectedToExecute = (training) => {
-    if (!!!training || training !== selectedToExecute) {
+    if (training.status === "wait") {
       setSelectedToExecute(training);
       queue.add(training).then((_) => {
         setQueue(queue);
         fetchData();
       });
       enqueueSnackbar("Ensaio preparado para execução", { variant: "info" });
+    } else {
+      setValue(2);
     }
   };
 

@@ -42,6 +42,11 @@ export default function Table({
       },
     },
     {
+      name: "Episódios",
+      selector: ({ episodes }) => episodes,
+      sortable: true,
+    },
+    {
       name: "Alpha",
       selector: ({ alpha }) => alpha,
       sortable: true,

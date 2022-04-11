@@ -26,11 +26,17 @@ class Queue {
         this.running = false;
         return true;
       })
-      .catch(async (_) => {
-        console.log(`[QUEUE][E][ERROR] >>  finished ${training.id}`);
-        this.running = false;
-        return false;
-      });
+      .catch(
+        async (_) =>
+          await updateTraining({
+            ...training,
+            status: "wait",
+          }).then((_) => {
+            console.log(`[QUEUE][E][ERROR] >>  finished ${training.id}`);
+            this.running = false;
+            return false;
+          })
+      );
   }
 
   async add(training) {
