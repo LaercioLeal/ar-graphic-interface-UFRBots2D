@@ -36,6 +36,7 @@ function Heading({ handleAdd, canRunAll, runAll, data }) {
             <Button
               onClick={() => {
                 setShowRunAll(false);
+                setShowAdd(false);
                 runAll();
               }}
               variant="secondary"

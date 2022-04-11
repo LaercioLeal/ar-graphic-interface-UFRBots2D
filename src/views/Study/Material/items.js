@@ -21,4 +21,28 @@ const movies = [
   },
 ];
 
-export { movies };
+const articles = [
+  {
+    id: "1",
+    title:
+      "Desenvolvimento de uma Interface Gráfica Didática para o Ensino de Aprendizado por Reforço com Futebol de Robôs",
+    doi: "https://doi.org/10.48011/asba.v2i1.1465",
+    link: "https://www.sba.org.br/open_journal_systems/index.php/cba/article/view/1465",
+  },
+  {
+    id: "2",
+    title:
+      "ANÁLISE DO DESEMPENHO DO APRENDIZADO POR REFORÇO NA SOLUÇÃO DO PROBLEMA DO CAIXEIRO VIAJANTE",
+    doi: "",
+    link: "http://swge.inf.br/SBAI2015/anais/017.pdf",
+  },
+  {
+    id: "3",
+    title:
+      "Development of a Pedagogical Graphical Interface for the Reinforcement Learning",
+    doi: "",
+    link: "https://ieeexplore.ieee.org/abstract/document/9049466",
+  },
+];
+
+export { movies, articles };
