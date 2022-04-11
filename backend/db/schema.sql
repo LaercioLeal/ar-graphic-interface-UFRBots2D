@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS training (
 
 -- numResult === número da partida
 CREATE TABLE IF NOT EXISTS results ( 
+    id TEXT NOT NULL,
     idExperiment TEXT NOT NULL,
     idTraining TEXT NOT NULL,
     numResult INTEGER NOT NULL, 

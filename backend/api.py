@@ -13,6 +13,7 @@ app.config["DEBUG"] = True
 import routes.match
 import routes.monitor
 import routes.training
+import routes.results
 import routes.directory
 import routes.experiments
 

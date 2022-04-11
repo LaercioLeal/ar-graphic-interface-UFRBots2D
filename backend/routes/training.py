@@ -1,4 +1,3 @@
-
 from __main__ import app
 from flask import request
 from codes.methods import formatResponse, generateHash, get_db_connection
@@ -20,6 +19,7 @@ def getTrainingData():
           'idExperiment': d["idExperiment"],
           'status': d["status"],
           'createdAt': d["createdAt"],
+          'episodes': d["episodes"],
           'epsilon': d["epsilon"],
           'alpha': d["alpha"],
           'gamma': d["gamma"],
@@ -98,8 +98,55 @@ def updateTraining():
 def runTraining():
     data = request.get_json()
     id = data["id"]
+    episodes = data["episodes"]
+    idExperiment = data["idExperiment"]
+
+    results = []
+    import random
+    for episode in range(episodes):
+      idResult = generateHash()
+      gf = random.randint(1,5)
+      gs = random.randint(1,5)
+      sg = gf - gs
+      results.append({
+        'idResult': idResult,
+        'idExperiment': idExperiment,
+        'idTraining': id,
+        'numResult': episode,
+        'gf': gf,
+        'gs': gs,
+        'sg': sg,
+      })
+
     import time
     time.sleep(5)
+    
+    values = ""
+    for result in results:
+      idResult = result["idResult"]
+      idExperiment = result["idExperiment"]
+      idTraining = result["idTraining"]
+      numResult = result["numResult"]
+      gf = result["gf"]
+      gs = result["gs"]
+      sg = result["sg"]
+      if (values == ""): values = f"('{idResult}','{idExperiment}','{idTraining}',{numResult},{gf},{gs},{sg})"
+      values = f"{values},('{idResult}','{idExperiment}','{idTraining}',{numResult},{gf},{gs},{sg})"
+
+    connection = get_db_connection()
+    cur = connection.cursor()
+    cur.execute('INSERT INTO results ('+
+        'id, '+
+        'idExperiment, '+
+        'idTraining, '+
+        'numResult, '+
+        'gf,'+
+        'gs,'+
+        'sg'+
+        f") VALUES {values}"
+    )
+    connection.commit()
+    connection.close()
 
     status = "done"
     connection = get_db_connection()
