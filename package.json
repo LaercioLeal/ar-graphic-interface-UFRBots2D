@@ -11,6 +11,7 @@
     "formik": "^2.2.9",
     "formik-error-focus": "^1.1.0",
     "framer-motion": "^3.10.2",
+    "json-as-xlsx": "^2.4.0",
     "notistack": "^1.0.10",
     "polished": "3.6.5",
     "qs": "^6.10.3",

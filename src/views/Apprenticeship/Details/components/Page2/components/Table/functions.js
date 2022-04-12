@@ -1,6 +1,8 @@
 import themes from "Provider/themes";
 import { getResults } from "services";
 
+let xlsx = require("json-as-xlsx");
+
 export function parseDateIso(date) {
   const day = Number(date.split("/")[0]);
   const month = Number(date.split("/")[1]);
@@ -11,9 +13,41 @@ export function parseDateIso(date) {
 
 export async function downloadResults(data) {
   return await getResults({ idTraining: data.id })
-    .then((dados) => {
-      downloadResults(dados);
-      return dados;
+    .then((results) => {
+      let content = [],
+        first = true;
+      for (data of results.data) {
+        if (first) {
+          first = false;
+          content.push({
+            experiment: data.experiment.title,
+            gf: data.gf,
+            gs: data.gs,
+            sg: data.sg,
+          });
+        } else {
+          content.push({ gf: data.gf, gs: data.gs, sg: data.sg });
+        }
+      }
+      let dados = [
+        {
+          sheet: `FUTar - Training Results`,
+          columns: [
+            { label: "Experimento", value: "experiment" },
+            { label: "Gols Feitos", value: "gf" },
+            { label: "Gols Sofridos", value: "gs" },
+            { label: "Saldo de Gols", value: "sg" },
+          ],
+          content,
+        },
+      ];
+
+      xlsx(dados, {
+        fileName: `Training-${new Date().toDateString()}`,
+        extraLength: 3,
+        writeOptions: {},
+      });
+      return true;
     })
     .catch((_) => {
       return false;

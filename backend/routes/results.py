@@ -9,13 +9,19 @@ def getResults():
   idTraining = data["idTraining"]
 
   conn = get_db_connection()
-  data = conn.execute("SELECT * FROM results WHERE idTraining='%s'" % idTraining).fetchall()
+  data = conn.execute('''SELECT r.*, (
+        SELECT 
+          title
+        FROM experiments e
+        WHERE e.id = r.idExperiment
+      ) as experimentTitle''' + " FROM results r WHERE idTraining='%s'" % idTraining).fetchall()
   conn.close()
   response = []
   for d in data:
     response.append(
       {
         "id": d["id"], 
+        'experiment': {"title": d["experimentTitle"]},
         'idExperiment': d["idExperiment"],
         'idTraining': d["idTraining"],
         'order': d["numResult"],
