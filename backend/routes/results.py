@@ -31,3 +31,29 @@ def getResults():
       }
     )
   return formatResponse(False, response)
+
+# retorna o resumo de um ensaio
+@app.route('/experiments/training/result/resume', methods=['POST'])
+def getResultsResume():
+  data = request.get_json()
+  idTraining = data["idTraining"]
+
+  conn = get_db_connection()
+  data = conn.execute("SELECT sg FROM results WHERE idTraining='%s'" % idTraining).fetchall()
+  conn.close()
+  response = []
+  victories = 0
+  defeats = 0
+  draws = 0
+  for d in data:
+    victories += 1 if d["sg"] > 0 else 0
+    defeats += 1 if d["sg"] < 0 else 0
+    draws += 1 if d["sg"] == 0 else 0
+  response.append(
+    {
+      "victories": victories, 
+      'defeats': defeats,
+      'draws': draws,
+    }
+  )
+  return formatResponse(False, response)
