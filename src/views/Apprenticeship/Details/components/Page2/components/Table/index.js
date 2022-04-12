@@ -2,10 +2,11 @@ import React, { useState, useMemo, useLayoutEffect } from "react";
 import * as Icons from "@material-ui/icons";
 import DataTable from "react-data-table-component";
 
-import { sortDate, Status } from "./functions";
+import { downloadResults, sortDate, Status } from "./functions";
 import * as S from "./styles";
 import { Empty, Heading } from "./components";
 import { Button } from "components";
+import { useSnackbar } from "notistack";
 
 const paginationOptions = {
   rowsPerPageText: "Linhas por página",
@@ -28,7 +29,19 @@ export default function Table({
   handleRemove,
   setSelectedToExecute,
 }) {
+  const { enqueueSnackbar } = useSnackbar();
   const [tableData, setTableData] = useState([]);
+
+  const getData = async (data) => {
+    const res = await downloadResults(data);
+    if (!res)
+      enqueueSnackbar("Verifique sua conexão com a internet!", {
+        variant: "error",
+      });
+    else {
+      enqueueSnackbar("Dados coletados!", { variant: "success" });
+    }
+  };
 
   const tableColumns = [
     {
@@ -70,15 +83,19 @@ export default function Table({
     {
       cell: (row) => (
         <S.Buttons>
-          {(row.status === "wait" || row.status === "done") && (
+          {["wait", "done"].includes(row.status) && (
             <>
-              {row.status !== "done" && (
+              {row.status !== "done" ? (
                 <Button
                   color="success"
                   tooltip={infoTooltip[row.status]}
                   onClick={() => setSelectedToExecute(row)}
                 >
                   <Icons.PlayArrowOutlined />
+                </Button>
+              ) : (
+                <Button color="blue" onClick={() => getData(row)}>
+                  <Icons.CloudDownloadOutlined />
                 </Button>
               )}
               <Button
@@ -90,7 +107,7 @@ export default function Table({
               </Button>
             </>
           )}
-          {row.status === "running" && (
+          {["running"].includes(row.status) && (
             <Button
               color="blue"
               tooltip={infoTooltip[row.status]}
@@ -99,7 +116,7 @@ export default function Table({
               <Icons.SportsSoccerOutlined />
             </Button>
           )}
-          {row.status === "queue" && (
+          {["queue"].includes(row.status) && (
             <Button tooltip={infoTooltip[row.status]} isDisabled>
               <Icons.WatchLaterOutlined />
             </Button>

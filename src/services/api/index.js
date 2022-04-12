@@ -3,6 +3,7 @@ import axios from "axios";
 export * from "./dir";
 export * from "./match";
 export * from "./monitor";
+export * from "./results";
 export * from "./training";
 export * from "./experiments";
 

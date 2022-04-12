@@ -2,44 +2,26 @@ from __main__ import app
 from flask import request
 from codes.methods import formatResponse, generateHash, get_db_connection
 
-# cadastrar um resultado
-@app.route('/experiments/training/result/add', methods=['POST'])
-def addResult():
-    data = request.get_json()
-    results = data["results"]
+# retornar todos os ensaios cadastrados
+@app.route('/experiments/training/result/data', methods=['POST'])
+def getResults():
+  data = request.get_json()
+  idTraining = data["idTraining"]
 
-    connection = get_db_connection()
-    cur = connection.cursor()
-
-    for result in results:
-      id = generateHash()
-      idExperiment = result.idExperiment
-      idTraining = result.idTraining
-      numResult = result.numResult
-      gf = result.gf
-      gs = result.gs
-      sg = result.sg
-
-      cur.execute('INSERT INTO results ('+
-          'id, '+
-          'idExperiment, '+
-          'idTraining, '+
-          'numResult, '+
-          'gf,'+
-          'gs,'+
-          'sg'+
-          ') VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
-        (
-          id, 
-          idExperiment, 
-          idTraining,
-          numResult,
-          gf,
-          gs,
-          sg,
-        )
-      )
-
-    connection.commit()
-    connection.close()
-    return formatResponse(False, [], "Ensaio adicionado")
+  conn = get_db_connection()
+  data = conn.execute("SELECT * FROM results WHERE idTraining='%s'" % idTraining).fetchall()
+  conn.close()
+  response = []
+  for d in data:
+    response.append(
+      {
+        "id": d["id"], 
+        'idExperiment': d["idExperiment"],
+        'idTraining': d["idTraining"],
+        'order': d["numResult"],
+        'gf': d["gf"],
+        'gs': d["gs"],
+        'sg': d["sg"],
+      }
+    )
+  return formatResponse(False, response)
