@@ -9,6 +9,7 @@ export default function Page2({
   handleAdd,
   handleRemove,
   setSelectedToExecute,
+  setSelectedToDetails,
 }) {
   return (
     <S.Container>
@@ -19,6 +20,7 @@ export default function Page2({
         handleAdd={handleAdd}
         handleRemove={handleRemove}
         setSelectedToExecute={setSelectedToExecute}
+        setSelectedToDetails={setSelectedToDetails}
       />
     </S.Container>
   );

@@ -14,3 +14,18 @@ export async function getResults(values) {
     throw error;
   }
 }
+
+export async function getResultsResume(values) {
+  try {
+    const response = await api.post("/experiments/training/result/resume", {
+      ...values,
+      idTraining: values.id,
+    });
+
+    return response.data;
+  } catch (error) {
+    if (error?.response?.status === 404) return false;
+
+    throw error;
+  }
+}

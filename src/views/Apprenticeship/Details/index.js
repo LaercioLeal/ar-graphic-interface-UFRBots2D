@@ -35,17 +35,19 @@ export default function Details() {
   const { setQueue, queue } = useQueue();
 
   const [trainingData, setTrainingData] = useState([]);
-  const [selectedToExecute, setSelectedToExecute] = useState();
+  const [selectedToDetails, setSelectedToDetails] = useState();
 
   const havingData = useMemo(() => {
     return trainingData.length > 0;
   }, [trainingData]);
 
   const handleChange = (event, index) => {
+    if (index !== 2) setSelectedToDetails(null);
     setValue(index);
   };
 
   const handleChangeIndex = (index) => {
+    if (index === 2) setSelectedToDetails(null);
     setValue(index);
   };
 
@@ -121,7 +123,7 @@ export default function Details() {
         routes.apprenticeship.details +
           `?createdAt=${experiment.createdAt}&id=${experiment.id}&title=${
             experiment.title
-          }&openM=${value === 2 ? "true" : "false"}`
+          }&openM=${value === 1 ? "true" : "false"}`
       );
     }
   }, [value]); // eslint-disable-line
@@ -140,7 +142,6 @@ export default function Details() {
 
   const SelectedToExecute = (training) => {
     if (training.status === "wait") {
-      setSelectedToExecute(training);
       queue.add(training).then((_) => {
         setQueue(queue);
         fetchData();
@@ -182,15 +183,15 @@ export default function Details() {
               <Tab
                 active={value === 0}
                 disabled={!havingData}
-                label="Dados"
+                label="Dados Gerais do Experimento"
                 {...a11yProps(0)}
               />
               <Tab active={value === 1} label="Ensaios" {...a11yProps(1)} />
-              {selectedToExecute && (
+              {!!selectedToDetails && (
                 <Tab
                   active={value === 2}
                   disabled={!havingData}
-                  label="Executando"
+                  label="Detalhes do Ensaio"
                   {...a11yProps(2)}
                 />
               )}
@@ -211,10 +212,14 @@ export default function Details() {
                 handleAdd={handleAdd}
                 handleRemove={handleRemove}
                 setSelectedToExecute={SelectedToExecute}
+                setSelectedToDetails={(training) => {
+                  setSelectedToDetails(training);
+                  setValue(2);
+                }}
               />
             </TabPanel>
             <TabPanel value={value} index={2} dir={theme.direction}>
-              <Page3 data={trainingData} havingData={havingData} />
+              <Page3 training={selectedToDetails} />
             </TabPanel>
           </SwipeableViews>
         </Box>

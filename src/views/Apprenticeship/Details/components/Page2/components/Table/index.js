@@ -2,11 +2,10 @@ import React, { useState, useMemo, useLayoutEffect } from "react";
 import * as Icons from "@material-ui/icons";
 import DataTable from "react-data-table-component";
 
-import { downloadResults, sortDate, Status } from "./functions";
+import { sortDate, Status } from "./functions";
 import * as S from "./styles";
 import { Empty, Heading } from "./components";
 import { Button } from "components";
-import { useSnackbar } from "notistack";
 
 const paginationOptions = {
   rowsPerPageText: "Linhas por página",
@@ -28,19 +27,9 @@ export default function Table({
   handleAdd,
   handleRemove,
   setSelectedToExecute,
+  setSelectedToDetails,
 }) {
-  const { enqueueSnackbar } = useSnackbar();
   const [tableData, setTableData] = useState([]);
-  // const [downloadDate, setDownloadDate] = useState();
-
-  const getData = async (data) => {
-    const res = await downloadResults(data);
-    if (!res)
-      enqueueSnackbar("Verifique sua conexão com a internet!", {
-        variant: "error",
-      });
-    else enqueueSnackbar("Dados coletados!", { variant: "success" });
-  };
 
   const tableColumns = [
     {
@@ -82,19 +71,24 @@ export default function Table({
     {
       cell: (row) => (
         <S.Buttons>
+          {!["wait"].includes(row.status) && (
+            <Button
+              color="blue"
+              isDisabled={["queue", "running"].includes(row.status)}
+              onClick={() => setSelectedToDetails(row)}
+            >
+              <Icons.RemoveRedEyeOutlined />
+            </Button>
+          )}
           {["wait", "done"].includes(row.status) && (
             <>
-              {row.status !== "done" ? (
+              {row.status !== "done" && (
                 <Button
                   color="success"
                   tooltip={infoTooltip[row.status]}
                   onClick={() => setSelectedToExecute(row)}
                 >
                   <Icons.PlayArrowOutlined />
-                </Button>
-              ) : (
-                <Button color="blue" onClick={() => getData(row)}>
-                  <Icons.CloudDownloadOutlined />
                 </Button>
               )}
               <Button
@@ -137,22 +131,6 @@ export default function Table({
 
   return (
     <S.Container>
-      {/* {!!downloadDate ? (
-        <JsonToExcel
-          title="Download as Excel"
-          data={downloadDate}
-          fileName="sample-file"
-          btnClassName="custom-classname"
-        />
-      ) : (
-        <JsonToExcel
-          title="Download as Excel"
-          data={[{ test: "test" }]}
-          fileName="sample-file"
-          btnClassName="custom-classname"
-        />
-      )} */}
-
       <DataTable
         columns={tableColumns}
         data={filteredData}
