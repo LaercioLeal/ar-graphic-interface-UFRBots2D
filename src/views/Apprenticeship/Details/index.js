@@ -42,12 +42,10 @@ export default function Details() {
   }, [trainingData]);
 
   const handleChange = (event, index) => {
-    if (index !== 2) setSelectedToDetails(null);
     setValue(index);
   };
 
   const handleChangeIndex = (index) => {
-    if (index === 2) setSelectedToDetails(null);
     setValue(index);
   };
 

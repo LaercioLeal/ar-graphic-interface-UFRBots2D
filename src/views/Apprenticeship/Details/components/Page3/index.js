@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import * as S from "./styles";
 import { Header } from "./components";
-import { getResultsResume } from "services";
 
 export default function Page3({ training }) {
-  const [resume, setResume] = useState();
-
-  useEffect(() => {
-    getResultsResume(training).then((response) => {
-      setResume(response.data[0]);
-    });
-  }, [training]);
-
   return (
     <S.Container>
       <Header training={training} />
@@ -25,13 +16,6 @@ export default function Page3({ training }) {
           - NÚMERO DE EMPATES
         )
       */}
-      {!!resume && (
-        <div>
-          <p>{`Vitorias: ${resume.victories}`}</p>
-          <p>{`Derrotas: ${resume.defeats}`}</p>
-          <p>{`Empates: ${resume.draws}`}</p>
-        </div>
-      )}
     </S.Container>
   );
 }
