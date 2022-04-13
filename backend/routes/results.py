@@ -24,7 +24,7 @@ def getResults():
         'experiment': {"title": d["experimentTitle"]},
         'idExperiment': d["idExperiment"],
         'idTraining': d["idTraining"],
-        'order': d["numResult"],
+        'orderR': d["orderR"],
         'gf': d["gf"],
         'gs': d["gs"],
         'sg': d["sg"],

@@ -112,7 +112,7 @@ def runTraining():
         'idResult': idResult,
         'idExperiment': idExperiment,
         'idTraining': id,
-        'numResult': episode,
+        'orderR': episode,
         'gf': gf,
         'gs': gs,
         'sg': sg,
@@ -126,12 +126,12 @@ def runTraining():
       idResult = result["idResult"]
       idExperiment = result["idExperiment"]
       idTraining = result["idTraining"]
-      numResult = result["numResult"]
+      orderR = result["orderR"]
       gf = result["gf"]
       gs = result["gs"]
       sg = result["sg"]
-      if (values == ""): values = f"('{idResult}','{idExperiment}','{idTraining}',{numResult},{gf},{gs},{sg})"
-      values = f"{values},('{idResult}','{idExperiment}','{idTraining}',{numResult},{gf},{gs},{sg})"
+      if (values == ""): values = f"('{idResult}','{idExperiment}','{idTraining}',{orderR},{gf},{gs},{sg})"
+      else: values = f"{values},('{idResult}','{idExperiment}','{idTraining}',{orderR},{gf},{gs},{sg})"
 
     connection = get_db_connection()
     cur = connection.cursor()
@@ -139,7 +139,7 @@ def runTraining():
         'id, '+
         'idExperiment, '+
         'idTraining, '+
-        'numResult, '+
+        'orderR, '+
         'gf,'+
         'gs,'+
         'sg'+

@@ -22,12 +22,12 @@ CREATE TABLE IF NOT EXISTS training (
     ON DELETE CASCADE
 );
 
--- numResult === número da partida
+-- order === número da partida
 CREATE TABLE IF NOT EXISTS results ( 
     id TEXT NOT NULL,
     idExperiment TEXT NOT NULL,
     idTraining TEXT NOT NULL,
-    numResult INTEGER NOT NULL, 
+    orderR INTEGER NOT NULL, 
     gf INTEGER NOT NULL,
     gs INTEGER NOT NULL,
     sg INTEGER NOT NULL,
