@@ -1,19 +1,19 @@
 export const fill = [
   {
     match: {
-      id: "victories",
+      id: "VITÓRIAS",
     },
     id: "lines",
   },
   {
     match: {
-      id: "defeats",
+      id: "DERROTAS",
     },
     id: "dots",
   },
   {
     match: {
-      id: "draws",
+      id: "EMPATES",
     },
     id: "lines",
   },

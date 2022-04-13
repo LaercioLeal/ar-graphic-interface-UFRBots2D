@@ -15,11 +15,9 @@ export const Container = styled.div`
   overflow: hidden;
 
   text {
-    line-height: 22px;
-    font-size: ${rem(16)};
-    font-family: ${themes.fonts.bold};
-
-    color: ${themes.colors.gray};
+    line-height: 22px !important;
+    font-size: ${rem(14)} !important;
+    font-family: ${themes.fonts.medium} !important;
   }
 
   * {
@@ -30,10 +28,11 @@ export const Container = styled.div`
 export const Total = styled.text`
   && {
     line-height: 22px;
-    font-size: ${rem(32)};
-    font-family: ${themes.fonts.medium} !important;
+    font-size: ${rem(32)} !important;
+    font-family: ${themes.fonts.bold} !important;
 
     fill: ${themes.colors.gray};
+    text-decoration: dotted !important;
 
     &:before {
       content: "Total";

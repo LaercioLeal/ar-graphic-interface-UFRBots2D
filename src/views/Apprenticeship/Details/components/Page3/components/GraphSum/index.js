@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { ResponsivePie } from "@nivo/pie";
 import { animated } from "@react-spring/web";
 
@@ -27,41 +27,25 @@ function GraphSum({ resume }) {
   const parseResumeData = (resume) => {
     return [
       {
-        id: "victories",
+        id: "VITÓRIAS",
         color: S.COLORS_TAG.victories,
-        label: "victories",
+        label: "VITÓRIAS",
         value: resume.victories,
       },
       {
-        id: "defeats",
+        id: "DERROTAS",
         color: S.COLORS_TAG.defeats,
-        label: "defeats",
+        label: "DERROTAS",
         value: resume.defeats,
       },
       {
-        id: "draws",
+        id: "EMPATES",
         color: S.COLORS_TAG.draws,
-        label: "draws",
+        label: "EMPATES",
         value: resume.draws,
       },
-    ];
+    ].filter((item) => item.value > 0);
   };
-
-  // const CenteredMetric = useCallback(
-  //   ({ centerX, centerY }) => {
-  //     return (
-  //       <S.Total
-  //         x={centerX}
-  //         y={centerY}
-  //         textAnchor="middle"
-  //         dominantBaseline="central"
-  //       >
-  //         {total}
-  //       </S.Total>
-  //     );
-  //   },
-  //   [total]
-  // );
 
   return (
     <S.Container>
@@ -75,27 +59,24 @@ function GraphSum({ resume }) {
         borderWidth={1}
         borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
         arcLinkLabelsSkipAngle={10}
-        arcLinkLabelsTextColor={themes.colors.black}
-        arcLinkLabelsThickness={3}
+        arcLinkLabelsTextColor={{ from: "color", modifiers: [["darker", 1]] }}
+        arcLinkLabelsThickness={2}
         arcLinkLabelsColor={{ from: "color", modifiers: [] }}
         arcLabelsSkipAngle={10}
         arcLabelsTextColor={{ from: "color", modifiers: [] }}
         // custom
         colors={{ datum: "data.color" }}
         startAngle={-100}
+        LabelComponent={({ datum, label, style }) => (
+          <LabelComponent datum={datum} label={label} style={style} />
+        )}
         arcLabelsComponent={({ datum, label, style }) => (
           <LabelComponent datum={datum} label={label} style={style} />
         )}
         // custom
         defs={defs}
         fill={fill}
-        layers={[
-          "arcs",
-          "arcLabels",
-          "arcLinkLabels",
-          "legends",
-          // CenteredMetric,
-        ]}
+        layers={["arcs", "arcLabels", "arcLinkLabels", "legends"]}
       />
     </S.Container>
   );

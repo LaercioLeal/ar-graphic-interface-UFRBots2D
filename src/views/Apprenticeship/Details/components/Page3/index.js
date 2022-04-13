@@ -24,7 +24,7 @@ export default function Page3({ training }) {
     <S.Container>
       {!!resume && !!results && (
         <>
-          <Header training={training} results={results} resume={resume} />
+          <Header training={training} results={results} />
           <S.Graphs>
             <GraphSum resume={resume} />
             <GraphMatch resume={resume} />

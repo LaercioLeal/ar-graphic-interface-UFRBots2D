@@ -44,7 +44,7 @@ function GraphSum({ resume }) {
         label: "draws",
         value: resume.draws,
       },
-    ];
+    ].filter((item) => item.value > 0);
   };
 
   // const CenteredMetric = useCallback(

@@ -6,7 +6,7 @@ import { downloadResults } from "../../functions";
 import * as S from "./styles";
 import { Button } from "components";
 
-export default function Header({ training, results, resume }) {
+export default function Header({ training, results }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const getData = async () => {
@@ -24,13 +24,6 @@ export default function Header({ training, results, resume }) {
 
   return (
     <S.Container>
-      {!!resume && (
-        <S.Resume resume>
-          <p>{`${resume.victories} Vitoria${getPlural(resume.victories)}`}</p>
-          <p>{`${resume.defeats} Derrota${getPlural(resume.defeats)}`}</p>
-          <p>{`${resume.draws} Empate${getPlural(resume.draws)}`}</p>
-        </S.Resume>
-      )}
       <S.Resume>
         <p>{`${training.episodes} Episódio${getPlural(training.episodes)}`}</p>
         <p>{`Alpha ${training.alpha}`}</p>

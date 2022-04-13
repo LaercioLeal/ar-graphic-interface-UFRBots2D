@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const Content = styled.div`
   display: flex;
-  margin-top: -30px;
+  margin-top: -50px;
 
   ${themes.medias.lessThan("hd")`
     margin-top: 0;

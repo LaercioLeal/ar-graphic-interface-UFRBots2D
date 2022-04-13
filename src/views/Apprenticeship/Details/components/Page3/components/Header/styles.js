@@ -25,16 +25,11 @@ export const Resume = styled.div`
   border-radius: 12px;
   padding: 10px;
 
-  width: 30%;
+  width: 40%;
   justify-content: space-evenly;
 
   background-color: ${transparentize(0.9, themes.colors.primaryDark)};
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-  ${themes.medias.lessThan("hd")`
-    width: 37%;
-    padding: 5px;
-  `}
 
   p {
     color: ${themes.colors.blue};
@@ -49,11 +44,6 @@ export const Resume = styled.div`
       background-color: ${transparentize(0.95, themes.colors.blue)};
       box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px,
         rgba(0, 0, 0, 0.24) 0px 1px 2px;
-
-      ${themes.medias.lessThan("hd")`
-        width: 30%;
-      `}
-
       p {
         color: ${themes.colors.danger};
         :first-child {
