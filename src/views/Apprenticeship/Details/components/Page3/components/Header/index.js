@@ -1,24 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import * as Icons from "@material-ui/icons";
 import { useSnackbar } from "notistack";
 import { downloadResults } from "../../functions";
 
 import * as S from "./styles";
 import { Button } from "components";
-import { getResultsResume } from "services";
 
-export default function Header({ training }) {
+export default function Header({ training, results, resume }) {
   const { enqueueSnackbar } = useSnackbar();
-  const [resume, setResume] = useState();
 
-  useEffect(() => {
-    getResultsResume(training).then((response) => {
-      setResume(response.data[0]);
-    });
-  }, [training]);
-
-  const getData = async (data) => {
-    const res = await downloadResults(data);
+  const getData = async () => {
+    const res = await downloadResults(results);
     if (!res)
       enqueueSnackbar("Tente Novamente!", {
         variant: "error",
@@ -32,10 +24,6 @@ export default function Header({ training }) {
 
   return (
     <S.Container>
-      <Button color="blue" onClick={() => getData(training)}>
-        DOWNLOAD DOS RESULTADOS
-        <Icons.CloudDownload />
-      </Button>
       {!!resume && (
         <S.Resume resume>
           <p>{`${resume.victories} Vitoria${getPlural(resume.victories)}`}</p>
@@ -49,6 +37,10 @@ export default function Header({ training }) {
         <p>{`Gamma ${training.gamma}`}</p>
         <p>{`Epsilon ${training.epsilon}`}</p>
       </S.Resume>
+      <Button color="blue" onClick={() => getData()}>
+        DOWNLOAD DOS RESULTADOS
+        <Icons.CloudDownload />
+      </Button>
     </S.Container>
   );
 }

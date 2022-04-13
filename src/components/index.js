@@ -1,4 +1,5 @@
 export { default as NavLink } from "./NavLink";
+export { default as Loading } from "./Loading";
 export { default as Container } from "./Container";
 export { default as Percentage } from "./Percentage";
 export { default as HeadingPage } from "./HeadingPage";

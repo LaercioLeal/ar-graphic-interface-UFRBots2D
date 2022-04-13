@@ -1,21 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import * as S from "./styles";
-import { Header } from "./components";
+import { GraphMatch, GraphSum, Header } from "./components";
+import { getResults, getResultsResume } from "services";
 
 export default function Page3({ training }) {
+  const [results, setResults] = useState();
+  const [resume, setResume] = useState();
+
+  useEffect(() => {
+    getResultsResume(training).then((response) => {
+      setResume(response.data[0]);
+    });
+  }, [training]);
+
+  useEffect(() => {
+    getResults({ idTraining: training.id }).then(({ data }) =>
+      setResults(data)
+    );
+  }, [training]);
+
   return (
     <S.Container>
-      <Header training={training} />
-      {/* 
-        - GRÁFICO DE SOMAS
-        - GRÁFICO COM AS PARTIDAS INDIVIDUAIS
-        - RESUMO (
-          - NÚMERO DE VITÓRIAS
-          - NÚMERO DE DERROTAS
-          - NÚMERO DE EMPATES
-        )
-      */}
+      {!!resume && !!results && (
+        <>
+          <Header training={training} results={results} resume={resume} />
+          <S.Graphs>
+            <GraphSum resume={resume} />
+            <GraphMatch resume={resume} />
+          </S.Graphs>
+        </>
+      )}
     </S.Container>
   );
 }

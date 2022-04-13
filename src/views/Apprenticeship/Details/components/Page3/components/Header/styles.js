@@ -55,12 +55,12 @@ export const Resume = styled.div`
       `}
 
       p {
-        color: ${themes.colors.blue};
+        color: ${themes.colors.danger};
         :first-child {
           color: ${themes.colors.success};
         }
         :last-child {
-          color: ${themes.colors.danger};
+          color: ${themes.colors.blue};
         }
       }
     `}
