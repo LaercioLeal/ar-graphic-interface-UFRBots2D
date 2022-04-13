@@ -4,6 +4,7 @@ import { ResponsiveLine } from "@nivo/line";
 import * as S from "./styles";
 import { parserData } from "./parser";
 import themes from "Provider/themes";
+import { transparentize } from "polished";
 
 function GraphSum({ results }) {
   const [data, setData] = useState([]);
@@ -63,6 +64,8 @@ function GraphSum({ results }) {
           ]}
           xScale={{
             type: "linear",
+            min: "auto",
+            max: "auto",
           }}
           yScale={{
             type: "linear",
@@ -91,6 +94,16 @@ function GraphSum({ results }) {
             legendOffset: -40,
             legendPosition: "middle",
           }}
+          markers={[
+            {
+              axis: "y",
+              value: 0,
+              lineStyle: {
+                stroke: transparentize(0.4, themes.colors.gray),
+                strokeWidth: 1,
+              },
+            },
+          ]}
         />
       )}
     </S.Container>

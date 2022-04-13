@@ -6,15 +6,15 @@ export const parserData = (results) => {
     sg = [];
   for (const item of results) {
     gf.push({
-      x: item.orderR - 1,
+      x: item.orderR,
       y: item.gf,
     });
     gs.push({
-      x: item.orderR - 1,
+      x: item.orderR,
       y: item.gs,
     });
     sg.push({
-      x: item.orderR - 1,
+      x: item.orderR,
       y: item.sg,
     });
   }

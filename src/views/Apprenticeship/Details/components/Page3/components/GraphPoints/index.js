@@ -2,10 +2,16 @@ import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 import { animated } from "@react-spring/web";
 
-import * as S from "./styles";
+import * as S from "../GraphSum/styles";
 import { defs, fill } from "./config";
+import themes from "Provider/themes";
 
-function GraphSum({ resume }) {
+const COLORS_TAG = {
+  gf: themes.colors.green,
+  gs: themes.colors.primary,
+};
+
+function GraphPoints({ resume }) {
   const LabelComponent = ({ datum, label, style }) => (
     <animated.g transform={style.transform} style={{ pointerEvents: "none" }}>
       <circle fill="#ffffff" stroke={datum.color} strokeWidth={2} r={13} />
@@ -26,22 +32,16 @@ function GraphSum({ resume }) {
   const parseResumeData = (resume) => {
     return [
       {
-        id: "VITÓRIAS",
-        color: S.COLORS_TAG.victories,
-        label: "VITÓRIAS",
-        value: resume.victories,
+        id: "GOLS FEITOS",
+        color: COLORS_TAG.gf,
+        label: "GOLS FEITOS",
+        value: resume.gf,
       },
       {
-        id: "DERROTAS",
-        color: S.COLORS_TAG.defeats,
-        label: "DERROTAS",
-        value: resume.defeats,
-      },
-      {
-        id: "EMPATES",
-        color: S.COLORS_TAG.draws,
-        label: "EMPATES",
-        value: resume.draws,
+        id: "GOLS SOFRIDOS",
+        color: COLORS_TAG.gs,
+        label: "GOLS SOFRIDOS",
+        value: resume.gs,
       },
     ].filter((item) => item.value > 0);
   };
@@ -80,4 +80,4 @@ function GraphSum({ resume }) {
   );
 }
 
-export default GraphSum;
+export default GraphPoints;

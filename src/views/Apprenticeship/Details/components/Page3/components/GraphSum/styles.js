@@ -10,13 +10,12 @@ export const COLORS_TAG = {
 
 export const Container = styled.div`
   align-items: center;
-  width: 35%;
-  height: 400px;
+  width: 50%;
+  height: 300px;
   overflow: hidden;
 
-  ${themes.medias.lessThan("hd")`
-    width: 37%;
-  `}
+  margin-top: 10px;
+  margin-bottom: -50px;
 
   text {
     line-height: 22px !important;

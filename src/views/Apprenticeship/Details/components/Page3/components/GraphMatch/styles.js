@@ -14,10 +14,6 @@ export const Container = styled.div`
   height: 400px;
   overflow: hidden;
 
-  ${themes.medias.lessThan("hd")`
-    width: 90%;
-  `}
-
   text {
     line-height: 22px;
     font-size: ${rem(16)};

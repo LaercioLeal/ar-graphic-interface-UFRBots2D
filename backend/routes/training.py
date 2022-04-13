@@ -105,8 +105,8 @@ def runTraining():
     import random
     for episode in range(episodes):
       idResult = generateHash()
-      gf = random.randint(1,5)
-      gs = random.randint(1,5) * random.randint(0,2)
+      gf = random.randint(1,2) + episode + 1
+      gs = random.randint(1,5)
       sg = gf - gs
       results.append({
         'idResult': idResult,

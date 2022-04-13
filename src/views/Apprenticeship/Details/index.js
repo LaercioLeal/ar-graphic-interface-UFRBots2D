@@ -180,7 +180,11 @@ export default function Details() {
             >
               <Tab
                 active={value === 0}
-                disabled={!havingData}
+                disabled={
+                  !havingData ||
+                  trainingData.filter((item) => item.status === "done")
+                    .length === 0
+                }
                 label="Dados Gerais do Experimento"
                 {...a11yProps(0)}
               />
@@ -201,7 +205,7 @@ export default function Details() {
             onChangeIndex={handleChangeIndex}
           >
             <TabPanel value={value} index={0} dir={theme.direction}>
-              <Page1 data={trainingData} havingData={havingData} />
+              <Page1 experiment={experiment} />
             </TabPanel>
             <TabPanel value={value} index={1} dir={theme.direction}>
               <Page2

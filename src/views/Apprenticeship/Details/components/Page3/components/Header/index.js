@@ -6,11 +6,11 @@ import { downloadResults } from "../../functions";
 import * as S from "./styles";
 import { Button } from "components";
 
-export default function Header({ training, results }) {
+export default function Header({ training, results, resume }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const getData = async () => {
-    const res = await downloadResults(results);
+    const res = await downloadResults(results, resume);
     if (!res)
       enqueueSnackbar("Tente Novamente!", {
         variant: "error",

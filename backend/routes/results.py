@@ -39,21 +39,27 @@ def getResultsResume():
   idTraining = data["idTraining"]
 
   conn = get_db_connection()
-  data = conn.execute("SELECT sg FROM results WHERE idTraining='%s'" % idTraining).fetchall()
+  data = conn.execute("SELECT sg, gf, gs FROM results WHERE idTraining='%s'" % idTraining).fetchall()
   conn.close()
   response = []
   victories = 0
   defeats = 0
   draws = 0
+  gs = 0
+  gf = 0
   for d in data:
     victories += 1 if d["sg"] > 0 else 0
     defeats += 1 if d["sg"] < 0 else 0
     draws += 1 if d["sg"] == 0 else 0
+    gf += d["gf"]
+    gs += d["gs"]
   response.append(
     {
       "victories": victories, 
       'defeats': defeats,
       'draws': draws,
+      'gf': gf,
+      'gs': gs,
     }
   )
   return formatResponse(False, response)

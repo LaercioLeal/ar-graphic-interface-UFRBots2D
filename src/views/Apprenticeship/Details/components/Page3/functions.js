@@ -1,6 +1,6 @@
 let xlsx = require("json-as-xlsx");
 
-export async function downloadResults(results) {
+export async function downloadResults(results, resume) {
   let content = [],
     first = true,
     vitorias = 0,
@@ -23,7 +23,15 @@ export async function downloadResults(results) {
     }
   }
   content = content.map((item) => {
-    if (!!item?.experiment) return { ...item, vitorias, derrotas, empates };
+    if (!!item?.experiment)
+      return {
+        ...item,
+        vitorias,
+        derrotas,
+        empates,
+        totalgolsfeitos: resume.gf,
+        totalgolsofridos: resume.gs,
+      };
     return item;
   });
   let dados = [
@@ -37,6 +45,8 @@ export async function downloadResults(results) {
         { label: "Número de Vitórias", value: "vitorias" },
         { label: "Número de Derrotas", value: "derrotas" },
         { label: "Número de Empates", value: "empates" },
+        { label: "Total de Gols Feitos", value: "totalgolsfeitos" },
+        { label: "Total de Gols Sofridos", value: "totalgolsofridos" },
       ],
       content,
     },

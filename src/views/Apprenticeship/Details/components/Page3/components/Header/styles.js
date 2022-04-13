@@ -8,8 +8,6 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 2.5px 0 20px;
-
   button {
     display: flex;
     align-items: center;
@@ -30,7 +28,7 @@ export const Resume = styled.div`
 
   ${themes.medias.lessThan("hd")`
     width: 60%;
-    `}
+  `}
 
   background-color: ${transparentize(0.9, themes.colors.primaryDark)};
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;

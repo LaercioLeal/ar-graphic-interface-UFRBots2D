@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import * as S from "./styles";
-import { GraphMatch, GraphSum, Header } from "./components";
+import { GraphMatch, GraphPoints, GraphSum, Header } from "./components";
 import { getResults, getResultsResume } from "services";
 
 export default function Page3({ training }) {
@@ -24,11 +24,12 @@ export default function Page3({ training }) {
     <S.Container>
       {!!resume && !!results && (
         <>
-          <Header training={training} results={results} />
+          <Header training={training} results={results} resume={resume} />
           <S.Graphs>
-            <GraphMatch results={results} />
+            <GraphPoints resume={resume} />
             <GraphSum resume={resume} />
           </S.Graphs>
+          <GraphMatch results={results} />
         </>
       )}
     </S.Container>
