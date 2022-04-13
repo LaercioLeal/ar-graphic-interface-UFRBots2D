@@ -25,8 +25,12 @@ export const Resume = styled.div`
   border-radius: 12px;
   padding: 10px;
 
-  width: 40%;
-  justify-content: space-evenly;
+  width: 70%;
+  justify-content: space-around;
+
+  ${themes.medias.lessThan("hd")`
+    width: 60%;
+    `}
 
   background-color: ${transparentize(0.9, themes.colors.primaryDark)};
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
@@ -34,7 +38,7 @@ export const Resume = styled.div`
   p {
     color: ${themes.colors.blue};
     :first-child {
-      color: ${themes.colors.success};
+      color: ${themes.colors.danger};
     }
   }
 

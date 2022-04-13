@@ -26,8 +26,8 @@ export default function Page3({ training }) {
         <>
           <Header training={training} results={results} />
           <S.Graphs>
+            <GraphMatch results={results} />
             <GraphSum resume={resume} />
-            <GraphMatch resume={resume} />
           </S.Graphs>
         </>
       )}

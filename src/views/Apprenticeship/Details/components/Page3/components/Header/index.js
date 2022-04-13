@@ -24,16 +24,16 @@ export default function Header({ training, results }) {
 
   return (
     <S.Container>
+      <Button color="blue" onClick={() => getData()}>
+        DOWNLOAD DOS RESULTADOS
+        <Icons.CloudDownload />
+      </Button>
       <S.Resume>
         <p>{`${training.episodes} Episódio${getPlural(training.episodes)}`}</p>
         <p>{`Alpha ${training.alpha}`}</p>
         <p>{`Gamma ${training.gamma}`}</p>
         <p>{`Epsilon ${training.epsilon}`}</p>
       </S.Resume>
-      <Button color="blue" onClick={() => getData()}>
-        DOWNLOAD DOS RESULTADOS
-        <Icons.CloudDownload />
-      </Button>
     </S.Container>
   );
 }

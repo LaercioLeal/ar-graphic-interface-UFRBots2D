@@ -51,8 +51,8 @@ function GraphSum({ resume }) {
     <S.Container>
       <ResponsivePie
         data={parseResumeData(resume)}
-        margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
-        innerRadius={0.5}
+        margin={{ top: 40, right: 100, bottom: 80, left: 100 }}
+        innerRadius={0.3}
         padAngle={2}
         cornerRadius={10}
         activeOuterRadiusOffset={16}
@@ -73,7 +73,6 @@ function GraphSum({ resume }) {
         arcLabelsComponent={({ datum, label, style }) => (
           <LabelComponent datum={datum} label={label} style={style} />
         )}
-        // custom
         defs={defs}
         fill={fill}
         layers={["arcs", "arcLabels", "arcLinkLabels", "legends"]}

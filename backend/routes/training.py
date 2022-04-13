@@ -106,13 +106,13 @@ def runTraining():
     for episode in range(episodes):
       idResult = generateHash()
       gf = random.randint(1,5)
-      gs = random.randint(1,5)
+      gs = random.randint(1,5) * random.randint(0,2)
       sg = gf - gs
       results.append({
         'idResult': idResult,
         'idExperiment': idExperiment,
         'idTraining': id,
-        'orderR': episode,
+        'orderR': episode + 1,
         'gf': gf,
         'gs': gs,
         'sg': sg,
