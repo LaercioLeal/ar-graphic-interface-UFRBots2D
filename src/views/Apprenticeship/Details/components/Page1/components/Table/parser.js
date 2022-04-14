@@ -1,6 +1,11 @@
 export function parserColumns(type, showChangeData) {
   let tableColumns = [
     {
+      name: "Combinação",
+      selector: ({ combinacao }) => combinacao,
+      sortable: true,
+    },
+    {
       name: "Alpha",
       selector: ({ alpha }) => alpha,
       sortable: true,

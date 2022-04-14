@@ -17,8 +17,8 @@ export default function Table({ data }) {
   const [tableData, setTableData] = useState([]);
   const [type, setType] = useState("sum");
 
-  const screenWidth = useMemo(() => {
-    return window.innerWidth;
+  const showChangeData = useMemo(() => {
+    return window.innerWidth < 1600;
   }, []);
 
   const handleRowExpansion = useCallback(
@@ -48,7 +48,7 @@ export default function Table({ data }) {
   return (
     <S.Container>
       <DataTable
-        columns={parserColumns(type, screenWidth < 1500)}
+        columns={parserColumns(type, showChangeData)}
         data={filteredData}
         pagination
         dense
@@ -64,7 +64,7 @@ export default function Table({ data }) {
             data={data}
             setType={setType}
             type={type}
-            showChangeData={screenWidth < 1500}
+            showChangeData={showChangeData}
           />
         }
         expandableRowsComponent={({ data }) => <div />}

@@ -8,11 +8,6 @@ def getDataByExperimentId():
     data = request.get_json()
     id = data["id"]
 
-    # pegar todos os ensaios
-    # para cada ensaio pegar todos os resultados
-    # agrupar por combinação
-    # para cada combinação [SOMA][MÉDIA](gs, gf, sg)
-
     querySelect= f'''
       SELECT
         t.id, t.episodes,
@@ -37,9 +32,12 @@ def getDataByExperimentId():
     conn.close()
     trainings = []
 
+    combinacaoId = 0
     for row in rows:
+      combinacaoId = combinacaoId + 1
       trainings.append({
           "id": row["id"],
+          "combinacao": combinacaoId,
           "episodes": row["episodes"],
           "epsilon": row["epsilon"],
           "gamma": row["gamma"],
