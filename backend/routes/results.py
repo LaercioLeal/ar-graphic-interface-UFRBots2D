@@ -47,12 +47,14 @@ def getResultsResume():
   draws = 0
   gs = 0
   gf = 0
+  sg = 0
   for d in data:
     victories += 1 if d["sg"] > 0 else 0
     defeats += 1 if d["sg"] < 0 else 0
     draws += 1 if d["sg"] == 0 else 0
     gf += d["gf"]
     gs += d["gs"]
+    sg += d["sg"]
   response.append(
     {
       "victories": victories, 
@@ -60,6 +62,7 @@ def getResultsResume():
       'draws': draws,
       'gf': gf,
       'gs': gs,
+      'sg': sg,
     }
   )
   return formatResponse(False, response)

@@ -15,7 +15,7 @@ def getDataByExperimentId():
 
     querySelect= f'''
       SELECT
-        t.id, t.status, t.episodes,
+        t.id, t.episodes,
         t.epsilon, t.gamma, t.alpha,
         SUM(r.gf) as sum_gf,
         SUM(r.gs) as sum_gs,
@@ -38,7 +38,23 @@ def getDataByExperimentId():
     trainings = []
 
     for row in rows:
-      trainings.append([x for x in row]) # or simply data.append(list(row))
+      trainings.append({
+          "id": row["id"],
+          "episodes": row["episodes"],
+          "epsilon": row["epsilon"],
+          "gamma": row["gamma"],
+          "alpha": row["alpha"],
+          "sum": {
+            "gf": row["sum_gf"],
+            "gs": row["sum_gs"],
+            "sg": row["sum_sg"],
+          },
+          "avg": {
+            "gf": row["avg_gf"],
+            "gs": row["avg_gs"],
+            "sg": row["avg_sg"],
+          },
+      })
 
     return formatResponse(False, 
       {
