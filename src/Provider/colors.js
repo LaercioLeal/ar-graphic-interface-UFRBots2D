@@ -23,6 +23,8 @@ const colors = {
   darkyellow: "#F8A021",
   red: "#CB0031",
 
+  purple: "#9367BD",
+
   black: "#000",
   white: "#FFFFFF",
 };

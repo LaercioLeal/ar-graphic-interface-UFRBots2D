@@ -9,6 +9,7 @@ import themes from "Provider/themes";
 const COLORS_TAG = {
   gf: themes.colors.green,
   gs: themes.colors.primary,
+  sg: themes.colors.purple,
 };
 
 function GraphPoints({ resume }) {
@@ -29,21 +30,32 @@ function GraphPoints({ resume }) {
     </animated.g>
   );
 
+  const isNegative = (value, type) => {
+    if (value < 0) return type === "parser" ? -1 * value : true;
+    return type === "parser" ? value : false;
+  };
+
   const parseResumeData = (resume) => {
     return [
       {
-        id: "GOLS FEITOS",
+        id: `GOLS FEITOS`,
         color: COLORS_TAG.gf,
-        label: "GOLS FEITOS",
+        label: `GOLS FEITOS`,
         value: resume.gf,
       },
       {
-        id: "GOLS SOFRIDOS",
+        id: `GOLS SOFRIDOS`,
         color: COLORS_TAG.gs,
-        label: "GOLS SOFRIDOS",
+        label: `GOLS SOFRIDOS`,
         value: resume.gs,
       },
-    ].filter((item) => item.value > 0);
+      {
+        id: `${isNegative(resume.sg) ? "(-)" : ""}SALDO DE GOLS`,
+        color: COLORS_TAG.sg,
+        label: `${isNegative(resume.sg) ? "(-)" : ""}SALDO DE GOLS`,
+        value: isNegative(resume.sg, "parser"),
+      },
+    ];
   };
 
   return (

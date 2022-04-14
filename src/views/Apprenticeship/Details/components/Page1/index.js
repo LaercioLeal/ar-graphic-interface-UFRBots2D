@@ -1,12 +1,26 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { getExperimentAllDataInfo } from "services";
+import { Table } from "./components";
+
+import * as S from "./styles";
 
 export default function Page1({ experiment }) {
+  const [data, setData] = useState();
+
   useEffect(() => {
     getExperimentAllDataInfo({ id: experiment.id }).then(({ data }) => {
-      console.log(data);
+      setData(data);
     });
   }, [experiment]);
 
-  return <div>Page 1</div>;
+  return (
+    <S.Container>
+      {!!data && (
+        <>
+          <Table data={data.trainings} />
+          <S.Graphs></S.Graphs>
+        </>
+      )}
+    </S.Container>
+  );
 }

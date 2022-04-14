@@ -53,6 +53,14 @@ const themeButton = {
 };
 
 const colors = {
+  green: {
+    background: themes.colors.green,
+    text: themes.colors.white,
+  },
+  purple: {
+    background: themes.colors.purple,
+    text: themes.colors.white,
+  },
   blue: {
     background: themes.colors.blue,
     text: themes.colors.white,

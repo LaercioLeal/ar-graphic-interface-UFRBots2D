@@ -11,6 +11,12 @@ export const fill = [
     },
     id: "dots",
   },
+  {
+    match: {
+      id: "SALDO DE GOLS",
+    },
+    id: "lines",
+  },
 ];
 
 export const defs = [

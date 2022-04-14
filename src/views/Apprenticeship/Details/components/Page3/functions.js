@@ -31,6 +31,7 @@ export async function downloadResults(results, resume) {
         empates,
         totalgolsfeitos: resume.gf,
         totalgolsofridos: resume.gs,
+        totalsaldogols: resume.sg,
       };
     return item;
   });
@@ -47,6 +48,7 @@ export async function downloadResults(results, resume) {
         { label: "Número de Empates", value: "empates" },
         { label: "Total de Gols Feitos", value: "totalgolsfeitos" },
         { label: "Total de Gols Sofridos", value: "totalgolsofridos" },
+        { label: "Total de Saldo de Gols", value: "totalsaldogols" },
       ],
       content,
     },
