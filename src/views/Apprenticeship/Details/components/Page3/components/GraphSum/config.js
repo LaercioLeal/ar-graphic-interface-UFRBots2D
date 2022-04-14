@@ -3,7 +3,7 @@ export const fill = [
     match: {
       id: "VITÓRIAS",
     },
-    id: "lines",
+    id: "lines1",
   },
   {
     match: {
@@ -15,7 +15,7 @@ export const fill = [
     match: {
       id: "EMPATES",
     },
-    id: "lines",
+    id: "lines2",
   },
 ];
 
@@ -25,16 +25,25 @@ export const defs = [
     type: "patternDots",
     background: "inherit",
     color: "rgba(255, 255, 255, 0.25)",
-    size: 4,
+    size: 8,
     padding: 1,
     stagger: true,
   },
   {
-    id: "lines",
+    id: "lines1",
     type: "patternLines",
     background: "inherit",
     color: "rgba(255, 255, 255, 0.25)",
-    rotation: -45,
+    rotation: -85,
+    lineWidth: 6,
+    spacing: 10,
+  },
+  {
+    id: "lines2",
+    type: "patternLines",
+    background: "inherit",
+    color: "rgba(255, 255, 255, 0.25)",
+    rotation: 0,
     lineWidth: 6,
     spacing: 10,
   },

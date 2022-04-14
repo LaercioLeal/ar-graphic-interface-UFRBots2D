@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useLayoutEffect, useCallback } from "react";
+import React, { useState, useMemo, useLayoutEffect } from "react";
 import * as Icons from "@material-ui/icons";
 import DataTable from "react-data-table-component";
 
@@ -21,22 +21,6 @@ export default function Table({ data }) {
     return window.innerWidth < 1600;
   }, []);
 
-  const handleRowExpansion = useCallback(
-    (expanded, row) => {
-      const index = data.indexOf(row);
-      const rowElement = document.querySelector(`#row-${index + 1}`);
-
-      if (!rowElement) return;
-
-      if (expanded) {
-        rowElement.classList.add("expanded");
-      } else {
-        rowElement.classList.remove("expanded");
-      }
-    },
-    [data]
-  );
-
   useLayoutEffect(() => {
     setTableData(data);
   }, [data]);
@@ -53,12 +37,11 @@ export default function Table({ data }) {
         pagination
         dense
         paginationComponentOptions={paginationOptions}
+        paginationPerPage={5}
+        paginationRowsPerPageOptions={[5, 10, 15, 20, 25, 30]}
         highlightOnHover
         pointerOnHover
-        subHeader={data.length > 0}
-        expandableRows
-        expandOnRowClicked
-        expandableRowExpanded={(row) => row.defaultExpanded}
+        subHeader
         subHeaderComponent={
           <Heading
             data={data}
@@ -67,9 +50,7 @@ export default function Table({ data }) {
             showChangeData={showChangeData}
           />
         }
-        expandableRowsComponent={({ data }) => <div />}
         sortIcon={<Icons.ArrowDownwardOutlined style={{ marginLeft: 4 }} />}
-        onRowExpandToggled={handleRowExpansion}
       />
     </S.Container>
   );

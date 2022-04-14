@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getExperimentAllDataInfo } from "services";
-import { Table } from "./components";
+import { GraphAvg, Table } from "./components";
+import { parserResumeCombination } from "./functions";
 
 import * as S from "./styles";
 
@@ -10,6 +11,7 @@ export default function Page1({ experiment }) {
   useEffect(() => {
     getExperimentAllDataInfo({ id: experiment.id }).then(({ data }) => {
       setData(data);
+      // console.log(data);
     });
   }, [experiment]);
 
@@ -18,7 +20,9 @@ export default function Page1({ experiment }) {
       {!!data && (
         <>
           <Table data={data.trainings} />
-          <S.Graphs></S.Graphs>
+          <S.Graphs>
+            <GraphAvg dados={parserResumeCombination(data.trainings)} />
+          </S.Graphs>
         </>
       )}
     </S.Container>

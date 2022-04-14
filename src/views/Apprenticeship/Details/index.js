@@ -10,7 +10,7 @@ import { useSnackbar } from "notistack";
 import SwipeableViews from "react-swipeable-views";
 import { useQuery } from "utils";
 
-import { Container, HeadingPage } from "components";
+import { Container, HeadingPage, Loading } from "components";
 import { AppBar, Box, Tab, Tabs, useTheme } from "@material-ui/core";
 import * as S from "./styles";
 
@@ -36,6 +36,7 @@ export default function Details() {
 
   const [trainingData, setTrainingData] = useState([]);
   const [selectedToDetails, setSelectedToDetails] = useState();
+  const [isLoading, setLoading] = useState(true);
 
   const havingData = useMemo(() => {
     return trainingData.length > 0;
@@ -59,7 +60,22 @@ export default function Details() {
       history.replace(routes.apprenticeship.details);
     }
     setTrainingData(data.data);
-  }, [enqueueSnackbar, setTrainingData, setExperiment, history, query]);
+    let hasStatusDone =
+      data.data.filter((item) => item.status === "done").length === 0;
+    if (isLoading) {
+      setTimeout(() => {
+        setLoading(false);
+        setValue(hasStatusDone ? 1 : 0);
+      }, 1000);
+    }
+  }, [
+    enqueueSnackbar,
+    setTrainingData,
+    setExperiment,
+    history,
+    query,
+    isLoading,
+  ]);
 
   const handleAdd = useCallback(
     (values) => {
@@ -199,31 +215,34 @@ export default function Details() {
               )}
             </Tabs>
           </AppBar>
-          <SwipeableViews
-            axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-            index={value}
-            onChangeIndex={handleChangeIndex}
-          >
-            <TabPanel value={value} index={0} dir={theme.direction}>
-              <Page1 experiment={experiment} />
-            </TabPanel>
-            <TabPanel value={value} index={1} dir={theme.direction}>
-              <Page2
-                runAll={runAll}
-                data={trainingData}
-                handleAdd={handleAdd}
-                handleRemove={handleRemove}
-                setSelectedToExecute={SelectedToExecute}
-                setSelectedToDetails={(training) => {
-                  setSelectedToDetails(training);
-                  setValue(2);
-                }}
-              />
-            </TabPanel>
-            <TabPanel value={value} index={2} dir={theme.direction}>
-              <Page3 training={selectedToDetails} />
-            </TabPanel>
-          </SwipeableViews>
+          {isLoading && <Loading />}
+          {!isLoading && (
+            <SwipeableViews
+              axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+              index={value}
+              onChangeIndex={handleChangeIndex}
+            >
+              <TabPanel value={value} index={0} dir={theme.direction}>
+                <Page1 experiment={experiment} />
+              </TabPanel>
+              <TabPanel value={value} index={1} dir={theme.direction}>
+                <Page2
+                  runAll={runAll}
+                  data={trainingData}
+                  handleAdd={handleAdd}
+                  handleRemove={handleRemove}
+                  setSelectedToExecute={SelectedToExecute}
+                  setSelectedToDetails={(training) => {
+                    setSelectedToDetails(training);
+                    setValue(2);
+                  }}
+                />
+              </TabPanel>
+              <TabPanel value={value} index={2} dir={theme.direction}>
+                <Page3 training={selectedToDetails} />
+              </TabPanel>
+            </SwipeableViews>
+          )}
         </Box>
       </S.Content>
     </Container>
