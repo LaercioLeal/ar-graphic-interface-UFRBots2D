@@ -1,9 +1,16 @@
+import { getKey } from "../../functions";
+import * as S from "./styles";
+
 export function parserColumns(type, showChangeData) {
   let tableColumns = [
     {
-      name: "Comb",
+      name: "",
       selector: ({ combinacao }) => combinacao,
       sortable: true,
+      cell: ({ combinacao }) => {
+        return <S.Status>{getKey(combinacao)}</S.Status>;
+      },
+      button: true,
     },
     {
       name: "Alpha",

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { getExperimentAllDataInfo } from "services";
-import { GraphRadar, Table } from "./components";
-import GraphBar from "./components/GraphBar";
+import { GraphBar, GraphRadar, Resume, Table } from "./components";
 import { parserResumeBar, parserResumeCombination } from "./functions";
 
 import * as S from "./styles";
@@ -20,6 +19,7 @@ export default function Page1({ experiment }) {
       {!!data && (
         <>
           <Table data={data.trainings} />
+          <Resume data={data.trainings} />
           <S.Graphs>
             <GraphRadar dados={parserResumeCombination(data.trainings)} />
             <GraphBar dados={parserResumeBar(data.trainings)} />

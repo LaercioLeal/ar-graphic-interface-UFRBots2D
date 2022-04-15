@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { rem, rgba, size } from "polished";
+import { rem, rgba, size, transparentize } from "polished";
 import themes from "Provider/themes";
 
 export const Container = styled.section`
@@ -76,4 +76,18 @@ export const Container = styled.section`
     font-size: ${rem(14)};
     font-family: ${themes.fonts.medium};
   }
+`;
+
+export const Status = styled.text`
+  font-size: ${rem(14)};
+  font-family: ${themes.fonts.bold};
+
+  color: ${themes.colors.blue};
+
+  border: 1px solid ${themes.colors.blue};
+  background-color: ${transparentize(0.9, themes.colors.blue)};
+  text-align: center;
+  padding: 5px;
+
+  border-radius: 8px;
 `;

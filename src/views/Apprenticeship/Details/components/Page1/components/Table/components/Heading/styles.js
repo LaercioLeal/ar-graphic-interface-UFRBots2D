@@ -12,8 +12,6 @@ export const Section = styled.section`
   align-items: center;
   justify-content: space-between;
 
-  margin-bottom: 10px 0;
-
   button {
     display: flex;
     align-items: center;
@@ -25,6 +23,20 @@ export const Section = styled.section`
 
   .MuiInputBase-root {
     height: 39px !important;
+  }
+
+  :nth-child(2) {
+    margin-top: -10px;
+    margin-bottom: 10px;
+    justify-content: flex-start;
+    text {
+      margin: 0 5px 0 0;
+
+      font-size: ${rem(9.2)};
+      font-family: ${themes.fonts.medium};
+
+      color: ${themes.colors.darkblue};
+    }
   }
 `;
 

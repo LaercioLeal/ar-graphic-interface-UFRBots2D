@@ -36,11 +36,11 @@ function Heading({ data, setType, type, showChangeData }) {
           <Icons.CloudDownload />
         </Button>
       </S.Section>
-      {/* <S.Section>
-        <h1>-</h1>
-        <h1>Média</h1>
-        <h1>Soma</h1>
-      </S.Section> */}
+      <S.Section>
+        <text>GS: Gols Feitos</text>
+        <text>GS: Gols Sofridos</text>
+        <text>GS: Saldo de Gols</text>
+      </S.Section>
     </S.Container>
   );
 }
