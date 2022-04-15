@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { getExperimentAllDataInfo } from "services";
-import { GraphAvg, Table } from "./components";
-import { parserResumeCombination } from "./functions";
+import { GraphRadar, Table } from "./components";
+import GraphBar from "./components/GraphBar";
+import { parserResumeBar, parserResumeCombination } from "./functions";
 
 import * as S from "./styles";
 
@@ -11,7 +12,6 @@ export default function Page1({ experiment }) {
   useEffect(() => {
     getExperimentAllDataInfo({ id: experiment.id }).then(({ data }) => {
       setData(data);
-      // console.log(data);
     });
   }, [experiment]);
 
@@ -21,7 +21,8 @@ export default function Page1({ experiment }) {
         <>
           <Table data={data.trainings} />
           <S.Graphs>
-            <GraphAvg dados={parserResumeCombination(data.trainings)} />
+            <GraphRadar dados={parserResumeCombination(data.trainings)} />
+            <GraphBar dados={parserResumeBar(data.trainings)} />
           </S.Graphs>
         </>
       )}

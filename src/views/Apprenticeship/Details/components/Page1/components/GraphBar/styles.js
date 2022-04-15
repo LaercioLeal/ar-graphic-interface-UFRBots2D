@@ -10,7 +10,7 @@ export const COLORS_TAG = {
 
 export const Container = styled.div`
   align-items: center;
-  width: 100%;
+  width: 50%;
   height: 500px;
   overflow: hidden;
 

@@ -3,7 +3,7 @@ import { ResponsiveRadar } from "@nivo/radar";
 
 import * as S from "./styles";
 
-function GraphAvg({ dados }) {
+function GraphRadar({ dados }) {
   return (
     <S.Container>
       <ResponsiveRadar
@@ -46,4 +46,4 @@ function GraphAvg({ dados }) {
   );
 }
 
-export default GraphAvg;
+export default GraphRadar;
