@@ -6,11 +6,11 @@ import { downloadResults } from "../../../../functions";
 
 import * as S from "./styles";
 
-function Heading({ data, setType, type, showChangeData }) {
+function Heading({ data, experiment, setType, type, showChangeData }) {
   const { enqueueSnackbar } = useSnackbar();
 
   const getData = async () => {
-    const res = await downloadResults(data);
+    const res = await downloadResults(experiment, data);
     if (!res)
       enqueueSnackbar("Tente Novamente!", {
         variant: "error",

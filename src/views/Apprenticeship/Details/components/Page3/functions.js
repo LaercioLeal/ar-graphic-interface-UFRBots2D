@@ -39,7 +39,7 @@ export async function downloadResults(results, resume) {
     {
       sheet: `ARbot - Training Results`,
       columns: [
-        { label: "Experimento", value: "experiment" },
+        { label: "Nome do Experimento", value: "experiment" },
         { label: "Gols Feitos", value: "gf" },
         { label: "Gols Sofridos", value: "gs" },
         { label: "Saldo de Gols", value: "sg" },
@@ -55,7 +55,9 @@ export async function downloadResults(results, resume) {
   ];
 
   xlsx(dados, {
-    fileName: `Training-${new Date().toDateString()}`,
+    fileName: `${
+      content[0].experiment
+    } - Training - at ${new Date().toDateString()}`,
     extraLength: 3,
     writeOptions: {},
   });

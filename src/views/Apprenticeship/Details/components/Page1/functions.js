@@ -1,8 +1,68 @@
+let xlsx = require("json-as-xlsx");
+
 export function getKey(combinacao) {
   return `Comb ${combinacao}`;
 }
 
-export async function downloadResults() {
+export async function downloadResults(experiment, dados) {
+  let content = [],
+    first = true;
+  for (const data of dados) {
+    if (first) {
+      first = false;
+      content.push({
+        experiment: experiment.title,
+        combinacao: data.combinacao,
+        alpha: data.alpha,
+        gamma: data.gamma,
+        epsilon: data.epsilon,
+        sumgf: data.sum.gf,
+        sumgs: data.sum.gs,
+        sumsg: data.sum.sg,
+        avggf: data.avg.gf,
+        avggs: data.avg.gs,
+        avgsg: data.avg.sg,
+      });
+    } else {
+      content.push({
+        combinacao: data.combinacao,
+        alpha: data.alpha,
+        gamma: data.gamma,
+        epsilon: data.epsilon,
+        sumgf: data.sum.gf,
+        sumgs: data.sum.gs,
+        sumsg: data.sum.sg,
+        avggf: data.avg.gf,
+        avggs: data.avg.gs,
+        avgsg: data.avg.sg,
+      });
+    }
+  }
+  let doc = [
+    {
+      sheet: `ARbot - Experiment Resume`,
+      columns: [
+        { label: "Nome do Experimento", value: "experiment" },
+        { label: "Combinação", value: "combinacao" },
+        { label: "Alpha", value: "alpha" },
+        { label: "Gamma", value: "gamma" },
+        { label: "Epsilon", value: "epsilon" },
+        { label: "Soma GF", value: "sumgf" },
+        { label: "Soma GS", value: "sumgs" },
+        { label: "Soma SG", value: "sumsg" },
+        { label: "Média GF", value: "avggf" },
+        { label: "Média GS", value: "avggs" },
+        { label: "Média SG", value: "avgsg" },
+      ],
+      content,
+    },
+  ];
+
+  xlsx(doc, {
+    fileName: `${experiment.title} - Resume - at ${new Date().toDateString()}`,
+    extraLength: 3,
+    writeOptions: {},
+  });
   return true;
 }
 

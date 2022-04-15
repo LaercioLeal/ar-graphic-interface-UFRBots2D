@@ -18,7 +18,7 @@ export default function Page1({ experiment }) {
     <S.Container>
       {!!data && (
         <>
-          <Table data={data.trainings} />
+          <Table data={data.trainings} experiment={experiment} />
           <Resume data={data.trainings} />
           <S.Graphs>
             <GraphRadar dados={parserResumeCombination(data.trainings)} />

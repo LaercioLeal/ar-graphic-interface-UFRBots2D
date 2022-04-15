@@ -13,7 +13,7 @@ const paginationOptions = {
   selectAllRowsItemText: "Todos",
 };
 
-export default function Table({ data }) {
+export default function Table({ data, experiment }) {
   const [tableData, setTableData] = useState([]);
   const [type, setType] = useState("sum");
 
@@ -45,6 +45,7 @@ export default function Table({ data }) {
         subHeaderComponent={
           <Heading
             data={data}
+            experiment={experiment}
             setType={setType}
             type={type}
             showChangeData={showChangeData}
