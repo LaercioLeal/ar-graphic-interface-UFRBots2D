@@ -1,6 +1,6 @@
 from __main__ import app
 from flask import request
-from codes.methods import formatResponse, userName
+from codes.methods import formatResponse, getUserName, userName
 
 import os, glob
 
@@ -46,5 +46,6 @@ def getLogs():
 def startLogPlayer():
   data = request.get_json()
   path = data["path"]
+  path = path.replace(f"/home/{getUserName()}","")
   os.system(f"cd && rcssmonitor {path}")
   return formatResponse(False, { "message": "Sucesso" })
