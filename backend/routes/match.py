@@ -30,10 +30,10 @@ def startMatch():
   path2 = request.args.get('path2', default=1).replace("\"","").replace(" ","\ ")
 
   # modo normal
-  input_ = "cd && cd /home/" + getUserName() + "/log/current && rcssserver server::auto_mode = true"
+  input_ = "cd && cd /home/" + getUserName() + "/log && rcssserver server::auto_mode = true"
 
   if (int(mode) == 2):
-    input_ = "cd && cd /home/" + getUserName() + "/log/current && rcssserver server::auto_mode = true server::nr_extra_halfs = 0 server::penalty_shoot_outs = false  server::synch_mode=true"
+    input_ = "cd && cd /home/" + getUserName() + "/log && rcssserver server::auto_mode = true server::nr_extra_halfs = 0 server::penalty_shoot_outs = false  server::synch_mode=true"
 
 
   #  iniciando servidor

@@ -4,6 +4,12 @@ import sqlite3
 from hashlib import blake2b
 import time
 
+def userName():
+  input_ = "who"
+  var = subprocess.getoutput(input_)
+  var = var.split()
+  return var[0]
+
 def generateHash():
   k = str(time.time()).encode('utf-8')
   h = blake2b(key=k, digest_size=16)

@@ -2,7 +2,7 @@ import sqlite3
 import os
 
 def init():
-  os.system('cd && mkdir -p log && mkdir -p log/current && mkdir -p log/all && mkdir -p TIMES')
+  os.system('cd && mkdir -p log && mkdir -p log && mkdir -p log/all && mkdir -p TIMES')
   myPath = 'backend/db/database.db'
   connection = sqlite3.connect(myPath)
 
