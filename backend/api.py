@@ -17,6 +17,7 @@ import routes.training
 import routes.results
 import routes.directory
 import routes.experiments
+import routes.logPlayer
 
 # inicializando api
 port = 3001

@@ -37,9 +37,9 @@ function Heading({ data, experiment, setType, type, showChangeData }) {
         </Button>
       </S.Section>
       <S.Section>
-        <text>GS: Gols Feitos</text>
+        <text>GF: Gols Feitos</text>
         <text>GS: Gols Sofridos</text>
-        <text>GS: Saldo de Gols</text>
+        <text>SG: Saldo de Gols</text>
       </S.Section>
     </S.Container>
   );
