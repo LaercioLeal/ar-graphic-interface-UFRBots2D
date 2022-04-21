@@ -9,6 +9,7 @@ export { default as Container } from "./Container";
 export { default as Percentage } from "./Percentage";
 export { default as HeadingPage } from "./HeadingPage";
 export { default as OpenMonitor } from "./OpenMonitor";
+export { default as SectionTitle } from "./SectionTitle";
 export { default as NotSupported } from "./NotSupported";
 export { default as CustomTooltip } from "./CustomTooltip";
 export { default as LinearProgress } from "./LinearProgress";
