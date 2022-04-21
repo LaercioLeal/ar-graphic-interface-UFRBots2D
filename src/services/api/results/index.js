@@ -2,10 +2,11 @@ import api from "../index";
 
 export async function getResults(values) {
   try {
-    const response = await api.post(
-      "/experiments/training/result/data",
-      values
-    );
+    const response = await api.get("/experiments/training/result/data", {
+      params: {
+        ...values,
+      },
+    });
 
     return response.data;
   } catch (error) {

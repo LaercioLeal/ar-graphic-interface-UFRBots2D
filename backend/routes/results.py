@@ -3,10 +3,9 @@ from flask import request
 from codes.methods import formatResponse, generateHash, get_db_connection
 
 # retornar todos os ensaios cadastrados
-@app.route('/experiments/training/result/data', methods=['POST'])
+@app.route('/experiments/training/result/data', methods=['GET'])
 def getResults():
-  data = request.get_json()
-  idTraining = data["idTraining"]
+  idTraining = request.args.get('idTraining', default=1)
 
   conn = get_db_connection()
   data = conn.execute('''SELECT r.*, (

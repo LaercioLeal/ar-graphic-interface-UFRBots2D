@@ -3,10 +3,9 @@ from flask import request
 from codes.methods import formatResponse, generateHash, get_db_connection
 
 # retornar todos os experimentos cadastrados
-@app.route('/experiments/general/data', methods=['POST'])
+@app.route('/experiments/general/data', methods=['GET'])
 def getDataByExperimentId():
-    data = request.get_json()
-    id = data["id"]
+    id = request.args.get('id', default=1)
 
     querySelect= f'''
       SELECT

@@ -43,6 +43,7 @@ export default function Table({ data, runLog }) {
       sortable: true,
     },
     {
+      name: "Reproduzir",
       cell: ({ path, file }) => (
         <S.Buttons>
           <Button color="blue" onClick={() => runLog(`.${path}/${file}`)}>

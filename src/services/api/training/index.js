@@ -14,8 +14,10 @@ export async function runTraining(training) {
 
 export async function getTrainingData(experiment_id) {
   try {
-    const response = await api.post("/experiments/training/data", {
-      experiment_id,
+    const response = await api.get("/experiments/training/data", {
+      params: {
+        experiment_id,
+      },
     });
 
     return response.data;
