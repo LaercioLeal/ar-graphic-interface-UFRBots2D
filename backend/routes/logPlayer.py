@@ -9,17 +9,16 @@ import os, glob
 def getLogs():
   dir = request.args.get('dir', default=1)
   logs = []
-  print(dir)
   if (dir == 'default'): 
     dir = f"/home/{userName()}/log"
 
   try:
     os.chdir(dir)
-    for item in glob.glob("*.rcg"):
-      parts = item.replace(".rcg","").split('-')
+    for file in glob.glob("*.rcg"):
+      parts = file.replace(".rcg","").split('-')
 
       createdAt = f"{parts[0][0:4]}/{parts[0][4:6]}/{parts[0][6:8]}"
-      
+
       placar1 = parts[1].split('_')
       time1 = placar1[0]
 
@@ -30,7 +29,8 @@ def getLogs():
       placar2 = placar2[len(placar2)-1]
 
       logs.append({
-        "item": item,
+        "file": file,
+        "path": dir,
         "placar1": placar1,
         "placar2": placar2,
         "time1": time1,
