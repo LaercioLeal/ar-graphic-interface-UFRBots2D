@@ -12,7 +12,7 @@ export const Movies = styled.section`
 export const Articles = styled.section`
   margin: 50px 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   row-gap: 50px;
   column-gap: 20px;
 `;

@@ -11,7 +11,7 @@ export default function Percentage({
     <S.Legend
       width={width}
       layoutId={`percentage-${id}`}
-      transition={{ duration: 1, delay: 0.3 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
       initial="hidden"
       animate="visible"
       variants={ANIMATION}

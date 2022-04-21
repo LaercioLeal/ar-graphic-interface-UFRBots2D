@@ -23,6 +23,12 @@ const movies = [
 
 const articles = [
   {
+    id: "0",
+    title: "Apostila - Material Didático",
+    doi: "",
+    link: "https://bit.ly/2Lmz5x4",
+  },
+  {
     id: "1",
     title:
       "Desenvolvimento de uma Interface Gráfica Didática para o Ensino de Aprendizado por Reforço com Futebol de Robôs",
