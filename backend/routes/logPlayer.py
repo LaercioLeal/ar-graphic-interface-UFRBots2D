@@ -18,9 +18,8 @@ def getLogs():
     for item in glob.glob("*.rcg"):
       parts = item.replace(".rcg","").split('-')
 
-      time1 = ''
-      time2 = ''
-
+      createdAt = f"{parts[0][0:4]}/{parts[0][4:6]}/{parts[0][6:8]}"
+      
       placar1 = parts[1].split('_')
       time1 = placar1[0]
 
@@ -36,6 +35,7 @@ def getLogs():
         "placar2": placar2,
         "time1": time1,
         "time2": time2,
+        "createdAt": createdAt
       })
     return formatResponse(False, { "logs": logs })
   except:
