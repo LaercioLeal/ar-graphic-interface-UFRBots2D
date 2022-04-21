@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { Container, HeadingPage } from "components";
 
@@ -11,13 +11,20 @@ function Watch() {
   const { enqueueSnackbar } = useSnackbar();
   const [logs, setLogs] = useState();
 
+  const fetchLogs = useCallback(
+    (path) => {
+      getLogs(path || "default").then(({ data }) => {
+        const { logs, message } = data;
+        if (!!message) enqueueSnackbar(message, { variant: "info" });
+        setLogs(logs);
+      });
+    },
+    [enqueueSnackbar]
+  );
+
   useEffect(() => {
-    getLogs("/home/higor/log").then(({ data }) => {
-      const { logs, message } = data;
-      if (!!message) enqueueSnackbar(message, { variant: "info" });
-      setLogs(logs);
-    });
-  }, [enqueueSnackbar]);
+    fetchLogs();
+  }, [fetchLogs]);
 
   return (
     <Container>

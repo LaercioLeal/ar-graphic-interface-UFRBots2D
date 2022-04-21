@@ -17,7 +17,7 @@ def getLogs():
     for file in glob.glob("*.rcg"):
       parts = file.replace(".rcg","").split('-')
 
-      createdAt = f"{parts[0][0:4]}/{parts[0][4:6]}/{parts[0][6:8]}"
+      createdAt = f"{parts[0][6:8]}/{parts[0][4:6]}/{parts[0][0:4]}"
 
       placar1 = parts[1].split('_')
       time1 = placar1[0]
