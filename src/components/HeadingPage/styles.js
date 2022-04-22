@@ -17,6 +17,10 @@ export const Container = styled.div`
   `}
 `;
 
+export const ChildrenContainer = styled.div`
+  margin-left: 50px;
+`;
+
 export const Image = styled(motion.img)`
   height: ${({ size }) => (size ? size : 64)}px;
   margin-right: 2px;

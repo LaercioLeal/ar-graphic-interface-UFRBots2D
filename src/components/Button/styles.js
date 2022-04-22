@@ -14,6 +14,9 @@ const commonStyles = css`
   ${textStyle}
   transition: background-color 0.3s, border-radius 0.3s;
 
+  display: flex;
+  align-items: center;
+
   border: none;
   padding: 10px 20px 8px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);

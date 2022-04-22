@@ -4,7 +4,7 @@ import * as S from "./styles";
 import backIcon from "assets/icon/back.png";
 import { useHistory } from "react-router-dom";
 
-export default function Heading({ page, title, icon, back }) {
+export default function Heading({ page, title, icon, back, children }) {
   const history = useHistory();
   return (
     <S.Container>
@@ -30,6 +30,7 @@ export default function Heading({ page, title, icon, back }) {
         transition={{ type: "spring", stiffness: 50, delay: 1 }}
         dangerouslySetInnerHTML={{ __html: title }}
       />
+      <S.ChildrenContainer>{children}</S.ChildrenContainer>
     </S.Container>
   );
 }

@@ -7,6 +7,7 @@ const routes = {
   study: {
     material: "/study/material",
     quiz: "/study/quiz",
+    code: "/study/code",
   },
   apprenticeship: {
     run: "/apprenticeship/run",

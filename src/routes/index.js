@@ -6,6 +6,7 @@ import Experiments from "views/Apprenticeship/Experiments";
 import Details from "views/Apprenticeship/Details";
 import Material from "views/Study/Material";
 import Quiz from "views/Study/Quiz";
+import Code from "views/Study/Code";
 import Tutorial from "views/Tutorial";
 import Watch from "views/Watch";
 import About from "views/About";
@@ -17,6 +18,7 @@ const views = {
   Details,
   Material,
   Quiz,
+  Code,
   Tutorial,
   Watch,
   About,
@@ -52,6 +54,11 @@ const routes = [
     path: routesPath.study.quiz,
     component: views.Quiz,
     pageTitle: "Quiz",
+  },
+  {
+    path: routesPath.study.code,
+    component: views.Code,
+    pageTitle: "Code",
   },
   {
     path: routesPath.tutorial,
