@@ -49,17 +49,17 @@ export function parserColumns(type, showChangeData) {
     ...tableColumns,
     {
       name: "Média GF",
-      selector: ({ avg }) => avg.gf,
+      selector: ({ avg }) => avg.gf.toFixed(2),
       sortable: true,
     },
     {
       name: "Média GS",
-      selector: ({ avg }) => avg.gs,
+      selector: ({ avg }) => avg.gs.toFixed(2),
       sortable: true,
     },
     {
       name: "Média SG",
-      selector: ({ avg }) => avg.sg,
+      selector: ({ avg }) => avg.sg.toFixed(2),
       sortable: true,
     },
   ];

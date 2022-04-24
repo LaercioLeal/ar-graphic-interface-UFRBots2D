@@ -1,5 +1,5 @@
 const duration = 1;
-const delay = 1;
+const delay = 0.5;
 
 const ANIMATION = {
   hidden: { y: -100, opacity: 0 },

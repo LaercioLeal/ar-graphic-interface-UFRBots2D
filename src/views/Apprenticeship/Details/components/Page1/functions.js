@@ -1,7 +1,7 @@
 let xlsx = require("json-as-xlsx");
 
-export function getKey(combinacao) {
-  return `Comb ${combinacao}`;
+export function getKey(combinacao, s = "Comb ") {
+  return `${s}${combinacao}`;
 }
 
 export async function downloadResults(experiment, dados) {
@@ -97,6 +97,51 @@ export function parserResumeBar(trainings) {
     keys.push(key);
   }
   let data = [{ ...gf }, { ...gs }, { ...sg }];
+  return { data, keys };
+}
+
+export function parserResumeGF(trainings) {
+  let data = [],
+    key,
+    keys = [],
+    aux;
+  for (const training of trainings) {
+    key = getKey(training.combinacao, "C");
+    keys.push(key);
+    aux = { index: key };
+    aux[key] = training.sum.gf;
+    data.push(aux);
+  }
+  return { data, keys };
+}
+
+export function parserResumeGS(trainings) {
+  let data = [],
+    key,
+    keys = [],
+    aux;
+  for (const training of trainings) {
+    key = getKey(training.combinacao, "C");
+    keys.push(key);
+    aux = { index: key };
+    aux[key] = training.sum.gs;
+    data.push(aux);
+  }
+  return { data, keys };
+}
+
+export function parserResumeSG(trainings) {
+  let data = [],
+    key,
+    keys = [],
+    aux;
+  for (const training of trainings) {
+    key = getKey(training.combinacao, "C");
+    keys.push(key);
+    aux = { index: key };
+    aux[key] = training.sum.sg;
+    data.push(aux);
+  }
   return { data, keys };
 }
 

@@ -1,9 +1,14 @@
+import { transparentize } from "polished";
+import themes from "Provider/themes";
+
+const color = transparentize(0.8, themes.colors.white);
+
 const defs = [
   {
     id: "dots",
     type: "patternDots",
     background: "inherit",
-    color: "#38bcb2",
+    color,
     size: 4,
     padding: 1,
     stagger: true,
@@ -12,7 +17,7 @@ const defs = [
     id: "lines",
     type: "patternLines",
     background: "inherit",
-    color: "#eed312",
+    color,
     rotation: -45,
     lineWidth: 6,
     spacing: 10,
