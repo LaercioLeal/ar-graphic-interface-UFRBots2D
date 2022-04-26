@@ -56,6 +56,17 @@ export const Title = styled(motion.h1)`
   }
 `;
 
+export const Subtitle = styled(motion.p)`
+  ${Title}
+  font-size: ${rem(18)};
+  color: ${themes.colors.blue};
+`;
+
+export const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const Back = styled(motion.div)`
   @keyframes showUpBackButton {
     from {
