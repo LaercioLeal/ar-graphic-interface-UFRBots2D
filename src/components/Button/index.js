@@ -13,6 +13,7 @@ function Button({
   color,
   bold,
   tooltip,
+  onClick,
   ...props
 }) {
   return (
@@ -27,6 +28,7 @@ function Button({
         animate="visible"
         variants={ANIMATION}
         whileTap={{ scale: isDisabled ? 1 : 0.9 }}
+        onClick={() => (isDisabled ? () => {} : onClick())}
         {...props}
       >
         {children}
