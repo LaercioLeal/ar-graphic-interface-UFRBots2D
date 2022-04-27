@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { rem, size } from "polished";
+import { rem, size, transparentize } from "polished";
 import themes from "Provider/themes";
 import { motion } from "framer-motion";
 
@@ -19,7 +19,7 @@ export const Image = styled(motion.img)`
 export const Section = styled.section`
   display: flex;
   padding: 20px 0;
-  column-gap: 5%;
+  column-gap: 3%;
 `;
 
 export const PopupVoice = styled.div`
@@ -44,5 +44,41 @@ export const PopupVoice = styled.div`
 
     top: 25%;
     bottom: 50%;
+  }
+`;
+
+export const Pagination = styled.section`
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 30px 10px 20px;
+
+  > div {
+    display: flex;
+    flex-direction: row;
+
+    /* justify-content: center; */
+    align-items: center;
+
+    max-width: 80%;
+    column-gap: 15px;
+  }
+`;
+
+export const Dot = styled.div`
+  transition: all 0.5s;
+  ${({ active }) => size(active ? 50 : 10)}
+  border-radius: 10px;
+  background-color: ${({ active }) =>
+    active ? themes.colors.blue : transparentize(0.8, themes.colors.blue)};
+
+  cursor: pointer;
+
+  p {
+    margin-top: 20px;
+    font-size: ${rem(12)};
+    font-family: ${themes.fonts.bold};
+    color: ${themes.colors.primary};
+    text-align: center;
   }
 `;

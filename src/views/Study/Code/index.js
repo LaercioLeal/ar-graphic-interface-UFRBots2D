@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import * as S from "./styles";
-import { Container, HeadingPage, SectionTitle } from "components";
+import * as Icons from "@material-ui/icons";
+import { Button, Container, HeadingPage, SectionTitle } from "components";
 
 import codingIcon from "assets/icon/coding.png";
 import studentIcon from "assets/icon/student.png";
 import { CodeBlock } from "./components";
-import { codes } from "./codes";
+import pages from "./pages";
 
 function Code() {
+  const [currentPage, setPage] = useState(pages[0]);
+
   return (
     <Container>
       <HeadingPage
@@ -17,19 +20,20 @@ function Code() {
         icon={codingIcon}
       />
       <S.Section>
-        <S.Image
-          src={studentIcon}
-          layoutId={`icon-page-material`}
-          transition={{ duration: 1 }}
-        />
-        <S.PopupVoice>
-          <S.Description>
-            Excelente ideia! Agora vamos conhecer um pouco da lógica por traz de
-            um código de Aprendizado por Reforço.
-          </S.Description>
-        </S.PopupVoice>
+        {!!currentPage?.message && (
+          <>
+            <S.Image
+              src={studentIcon}
+              layoutId={`icon-page-material`}
+              transition={{ duration: 1 }}
+            />
+            <S.PopupVoice>
+              <S.Description>{currentPage.message}</S.Description>
+            </S.PopupVoice>
+          </>
+        )}
       </S.Section>
-      {codes.map(({ title, description, code, language }) => {
+      {currentPage.codes.map(({ title, description, code, language }) => {
         return (
           <>
             {!!title && <SectionTitle title={title} />}
@@ -38,6 +42,32 @@ function Code() {
           </>
         );
       })}
+      <S.Pagination>
+        <Button
+          color="blue"
+          isDisabled={currentPage.page === 0}
+          onClick={() => setPage(pages[currentPage.page - 1])}
+        >
+          <Icons.ArrowLeft />
+        </Button>
+        <div>
+          {pages.map(({ page }) => (
+            <S.Dot
+              active={page === currentPage.page}
+              onClick={() => setPage(pages[page])}
+            >
+              <p>{page + 1}</p>
+            </S.Dot>
+          ))}
+        </div>
+        <Button
+          color="blue"
+          isDisabled={currentPage.page === pages.length - 1}
+          onClick={() => setPage(pages[currentPage.page + 1])}
+        >
+          <Icons.ArrowRight />
+        </Button>
+      </S.Pagination>
     </Container>
   );
 }
