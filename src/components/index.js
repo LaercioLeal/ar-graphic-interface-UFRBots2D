@@ -7,6 +7,7 @@ export { default as Loading } from "./Loading";
 export { default as Dropzone } from "./Dropzone";
 export { default as Container } from "./Container";
 export { default as Percentage } from "./Percentage";
+export { default as Pagination } from "./Pagination";
 export { default as HeadingPage } from "./HeadingPage";
 export { default as OpenMonitor } from "./OpenMonitor";
 export { default as SectionTitle } from "./SectionTitle";

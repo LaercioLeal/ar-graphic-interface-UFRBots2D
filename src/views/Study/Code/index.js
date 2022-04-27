@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import * as S from "./styles";
-import * as Icons from "@material-ui/icons";
-import { Button, Container, HeadingPage, SectionTitle } from "components";
+import { Container, HeadingPage, Pagination, SectionTitle } from "components";
 
 import codingIcon from "assets/icon/coding.png";
 import studentIcon from "assets/icon/student.png";
@@ -20,38 +19,11 @@ function Code() {
         icon={codingIcon}
       />
       <S.Container>
-        <S.FullHeight>
-          <S.Pagination>
-            <Button
-              color="blue"
-              isDisabled={currentPage.page === 0}
-              onClick={() => setPage(pages[currentPage.page - 1])}
-            >
-              <Icons.ArrowDropUp />
-            </Button>
-            <div>
-              {pages.map(({ page }) => (
-                <S.Dot
-                  active={page === currentPage.page}
-                  onClick={() => setPage(pages[page])}
-                  less={
-                    page > currentPage.page + 2 || page < currentPage.page - 2
-                  }
-                  hidden={
-                    page > currentPage.page + 10 || page < currentPage.page - 10
-                  }
-                />
-              ))}
-            </div>
-            <Button
-              color="blue"
-              isDisabled={currentPage.page === pages.length - 1}
-              onClick={() => setPage(pages[currentPage.page + 1])}
-            >
-              <Icons.ArrowDropDown />
-            </Button>
-          </S.Pagination>
-        </S.FullHeight>
+        <Pagination
+          currentPage={currentPage.page}
+          pages={pages}
+          setPage={setPage}
+        />
         <S.Content>
           <S.Section>
             {!!currentPage?.message && (
