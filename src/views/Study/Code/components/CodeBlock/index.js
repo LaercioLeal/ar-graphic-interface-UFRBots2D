@@ -10,6 +10,10 @@ export default function CodeBlock({ code, language, showLineNumbers = false }) {
       theme={dracula}
       customStyle={{
         borderRadius: "8px",
+        marginTop: "20px",
+        marginBottom: "20px",
+        maxWidth: "80%",
+        marginRight: "auto",
       }}
     />
   );
