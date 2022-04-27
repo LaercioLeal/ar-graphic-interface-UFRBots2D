@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { rem, size } from "polished";
 import themes from "Provider/themes";
 import { motion } from "framer-motion";
@@ -26,6 +26,14 @@ export const Description = styled.h3`
 
 export const Image = styled(motion.img)`
   ${size(64)}
+  ${({ content, _size }) =>
+    content &&
+    size &&
+    css`
+      ${size(_size || 100)}
+      display: flex;
+      margin: 20px auto;
+    `}
 `;
 
 export const Section = styled.section`

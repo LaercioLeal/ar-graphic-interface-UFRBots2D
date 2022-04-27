@@ -13,6 +13,7 @@ export default function CodeBlock({ code, language, showLineNumbers = false }) {
         marginTop: "20px",
         marginBottom: "20px",
         maxWidth: "80%",
+        marginLeft: "auto",
         marginRight: "auto",
       }}
     />

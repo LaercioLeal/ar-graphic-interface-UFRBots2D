@@ -40,15 +40,19 @@ function Code() {
             )}
           </S.Section>
           {currentPage?.codes?.length > 0 &&
-            currentPage.codes.map(({ title, description, code, language }) => {
-              return (
-                <>
-                  {!!title && <SectionTitle title={title} />}
-                  <S.Description>{description}</S.Description>
-                  <CodeBlock code={code} language={language} />
-                </>
-              );
-            })}
+            currentPage.codes.map(
+              ({ title, description, code, language, image, size }) => {
+                if (!!image)
+                  return <S.Image src={image} _size={size} content />;
+                return (
+                  <>
+                    {!!title && <SectionTitle title={title} />}
+                    <S.Description>{description}</S.Description>
+                    <CodeBlock code={code} language={language} />
+                  </>
+                );
+              }
+            )}
         </S.Content>
       </S.Container>
     </Container>

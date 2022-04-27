@@ -1,4 +1,5 @@
 import { snippets } from "./snippets";
+import studentIcon from "assets/icon/student.png";
 
 const pages = [
   {
@@ -6,6 +7,58 @@ const pages = [
     message:
       "Excelente ideia! Agora vamos conhecer um pouco da lógica por traz de um código de Aprendizado por Reforço.",
     codes: [
+      {
+        title: "Título Principal",
+        description: "Esse código é responsável por ..",
+        code: snippets["code1"],
+        language: "c",
+      },
+      {
+        image: studentIcon,
+        size: 200,
+      },
+      {
+        title: "Título Principal",
+        description: "Esse código é responsável por ..",
+        code: snippets["code1"],
+        language: "c",
+      },
+      {
+        title: "Título Principal",
+        description: "Esse código é responsável por ..",
+        code: snippets["code1"],
+        language: "c",
+      },
+      {
+        title: "Título Principal",
+        description: "Esse código é responsável por ..",
+        code: snippets["code1"],
+        language: "c",
+      },
+      {
+        title: "Título Principal",
+        description: "Esse código é responsável por ..",
+        code: snippets["code1"],
+        language: "c",
+      },
+      {
+        title: "Título Principal",
+        description: "Esse código é responsável por ..",
+        code: snippets["code1"],
+        language: "c",
+      },
+      {
+        title: "Título Principal",
+        description: "Esse código é responsável por ..",
+        code: snippets["code1"],
+        language: "c",
+      },
+      {
+        title: "Título Principal",
+        description: "Esse código é responsável por ..",
+        code: snippets["code1"],
+        language: "c",
+      },
       {
         title: "Título Principal",
         description: "Esse código é responsável por ..",
@@ -37,6 +90,11 @@ const pages = [
         language: "c",
       },
     ],
+  },
+  {
+    page: 3,
+    message: "Você está na página 3",
+    codes: [],
   },
 ];
 
