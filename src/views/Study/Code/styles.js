@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { rem, size } from "polished";
+import { lighten, rem, size } from "polished";
 import themes from "Provider/themes";
 import { motion } from "framer-motion";
 
@@ -15,24 +15,28 @@ export const Content = styled.div`
   margin-left: 10%;
 `;
 
-export const Description = styled.h3`
+export const Description = styled.p`
   line-height: 24px;
   font-size: ${rem(16)};
-  font-family: ${themes.fonts.medium};
+  font-family: ${themes.fonts.bold};
 
-  color: ${themes.colors.gray};
+  color: ${themes.colors.white};
   margin: 20px 0;
+
+  span,
+  p {
+    color: ${lighten(0.1, themes.colors.gray)};
+    text-align: justify;
+  }
 `;
 
 export const Image = styled(motion.img)`
-  ${size(64)}
-  ${({ content, _size }) =>
+  ${({ content }) => !content && size(64)}
+  ${({ content }) =>
     content &&
-    size &&
     css`
-      ${size(_size || 100)}
       display: flex;
-      margin: 20px auto;
+      margin: 20px auto 0 100px;
     `}
 `;
 

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { lighten, rem, size, transparentize } from "polished";
+import { darken, lighten, rem, size, transparentize } from "polished";
 import themes from "Provider/themes";
 
 export const Container = styled.div`
@@ -18,7 +18,9 @@ export const Container = styled.div`
 
   padding: 20px;
   border-radius: 99px;
-  background-color: ${transparentize(0.9, themes.colors.gray)};
+  background-color: ${lighten(0.6, themes.colors.gray)};
+
+  box-shadow: rgb(204, 219, 232) 3px 3px 6px 3px inset;
 
   > div {
     display: flex;
@@ -69,9 +71,28 @@ export const Dot = styled.div`
   }
 
   :hover {
-    ${size(15)}
+    ${size(40)}
     background-color: ${transparentize(0.6, themes.colors.blue)};
-    width: 20px;
+
+    ${({ active }) =>
+      !active &&
+      css`
+        p {
+          visibility: visible;
+          color: ${themes.colors.white};
+        }
+
+        ::after {
+          content: "";
+          position: absolute;
+
+          box-shadow: ${lighten(0.1, themes.colors.blue)} 0px 3px 8px;
+          background-color: ${darken(0.04, themes.colors.primary)};
+          margin-left: -100px;
+          height: 20px;
+          width: 200px;
+        }
+      `}
   }
 
   ${({ active }) =>
@@ -94,7 +115,7 @@ export const Dot = styled.div`
         position: absolute;
 
         box-shadow: ${lighten(0.1, themes.colors.blue)} 0px 3px 8px;
-        background-color: ${lighten(0.6, themes.colors.gray)};
+        background-color: ${darken(0.04, themes.colors.white)};
         margin-left: -100px;
         height: 20px;
         width: 200px;

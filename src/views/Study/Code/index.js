@@ -39,16 +39,19 @@ function Code() {
               </>
             )}
           </S.Section>
-          {currentPage?.codes?.length > 0 &&
-            currentPage.codes.map(
+          {currentPage?.infos?.length > 0 &&
+            currentPage?.infos.map(
               ({ title, description, code, language, image, size }) => {
-                if (!!image)
-                  return <S.Image src={image} _size={size} content />;
+                if (!!image) return <S.Image src={image} content />;
                 return (
                   <>
                     {!!title && <SectionTitle title={title} />}
-                    <S.Description>{description}</S.Description>
-                    <CodeBlock code={code} language={language} />
+                    {!!description && (
+                      <S.Description
+                        dangerouslySetInnerHTML={{ __html: description }}
+                      />
+                    )}
+                    {!!code && <CodeBlock code={code} language={language} />}
                   </>
                 );
               }
