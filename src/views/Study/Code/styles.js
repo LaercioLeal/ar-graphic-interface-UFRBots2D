@@ -59,6 +59,7 @@ export const Image = styled(motion.img)`
     css`
       display: flex;
       margin: 20px auto;
+      max-width: 100%;
     `}
 `;
 

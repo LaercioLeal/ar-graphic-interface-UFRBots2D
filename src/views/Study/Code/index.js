@@ -25,20 +25,18 @@ function Code() {
           setPage={setPage}
         />
         <S.Content>
-          <S.Section>
-            {!!currentPage?.message && (
-              <>
-                <S.Image
-                  src={studentIcon}
-                  layoutId={`icon-page-material`}
-                  transition={{ duration: 1 }}
-                />
-                <S.PopupVoice>
-                  <S.Description>{currentPage.message}</S.Description>
-                </S.PopupVoice>
-              </>
-            )}
-          </S.Section>
+          {!!currentPage?.message && (
+            <S.Section>
+              <S.Image
+                src={studentIcon}
+                layoutId={`icon-page-material`}
+                transition={{ duration: 1 }}
+              />
+              <S.PopupVoice>
+                <S.Description>{currentPage.message}</S.Description>
+              </S.PopupVoice>
+            </S.Section>
+          )}
           {currentPage?.infos?.length > 0 &&
             currentPage?.infos.map(
               ({ title, description, code, language, image, size }) => {

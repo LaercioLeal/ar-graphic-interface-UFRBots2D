@@ -1,10 +1,14 @@
 import { snippets } from "./snippets";
 
-import p01 from "./images/p-0-1.png";
-import p02 from "./images/p-0-2.png";
-import p03 from "./images/p-0-3.png";
-
 import p11 from "./images/p-1-1.png";
+import p12 from "./images/p-1-2.png";
+import p13 from "./images/p-1-3.png";
+
+import p21 from "./images/p-2-1.png";
+
+import p31 from "./images/p-3-1.png";
+
+import p41 from "./images/p-4-1.png";
 
 const pages = [
   {
@@ -27,7 +31,7 @@ const pages = [
         e o seu próximo estado.</p>`,
       },
       {
-        image: p01,
+        image: p11,
       },
       {
         description: `<p>Esse estado nada mais é do que uma configuração especifica na qual o agente se encontra, e isso 
@@ -40,7 +44,7 @@ const pages = [
         número de estados e ações do ambinente, um exemplo pode ser observado na imagem abaixo.</p>`,
       },
       {
-        image: p02,
+        image: p12,
       },
       {
         description: `<p>Dessa maneira, cada robô saberá qual melhor ação a ser executada para cada estado, basta verificar
@@ -48,7 +52,7 @@ const pages = [
         Para esse exemplo, é possível então mapear as melhoras ações para cada estado:</p>`,
       },
       {
-        image: p03,
+        image: p13,
       },
       {
         description: `<p>obs: vale ressaltar que essa tabela de aprendizado pode iniciar com todos os valores iguais a zero 
@@ -62,17 +66,66 @@ const pages = [
       "Após entender o fluxo principal do que deve ser feito, vamos agora começar a implementar as funcionalidades básicas",
     infos: [
       {
+        title: "Mapeando os estados do ambiente",
+        description: `<p>A configuração de estados de um ambiente, pode levar em consideração diversos detalhes, muitas das 
+        vezes alinhados com o objetivo geral do aprendizado. Podemos mapear os estados em que os agentes (jogadores) vão 
+        estar em campo, com base no posicionamento, distância entre jogadores do mesmo time ou do time adversário, 
+        proximidade do gol, grande área e outros, além da possibilidade de combinar essas informações.</p></br>
+        
+        <p>Para este cenário, vamos considerar apenas as posições em campo, dividindo toda a área em seções e subáreas.</p>`,
+      },
+      {
+        image: p21,
+      },
+      {
+        description: `<p>Com essa divisão, temos então 15 estados. As seções são essas divididas em direção ao gol 
+        adversaŕio (A, B, C, D e E) e as linhas na horizontal definem as subáreas do 01 ao 15.</p></br>`,
+      },
+    ],
+  },
+  {
+    page: 2,
+    message: "E agora? Como cada estado retorna uma recompensa?",
+    infos: [
+      {
+        title: "Mapeando os Reforços (Recompensa)",
+        description: `<p>De acordo com fluxo geral de funcionamento do AR, precisamos agora definir a recompensa do ambiente 
+        para cada ação executada. Essa etapa também pode ser modelada de diversas maneiras, contudo iremos realizar uma 
+        abordagem alinhada com a nossa divisão do campo em seções.</p></br>
+
+        <p>Vamos então definir para cada seção um valor de recompensa positivo e outro negativo. Uma recompensa positiva nesse 
+        cenário, será quando o time manter a posse de bola ou realizar um gol e consequentemente a negativa quando perder 
+        a posse de bola. Então segue a tabela abaixo com os valores definidos para cada seção.</p>`,
+      },
+      {
+        image: p31,
+      },
+      {
+        description: `<p>Dessa maneira, cada subárea correspondente a sua seção, será um estado que retorna seus respectivos 
+        valores de recompensa.</p>`,
+      },
+      {
+        description: `<p>O próximo passso agora será definir as nossas ações :D</p>`,
+      },
+    ],
+  },
+  {
+    page: 3,
+    message:
+      "Como nosso jogador vai saber qual ação ele deve executar em campo? Tem alguma ideia ai?",
+    infos: [
+      {
         title: "Definindo nossas ações",
         description: `<p>Uma ação é o que o agente executa no ambiente, sendo assim podemos elencar o que nosso agente pode 
         realizar:</p></br>
 
         <ul>
-          <li>Ação 1: Chute - o agente executa um chute em direção ao gol adversário;</li>
-          <li>Ação 2: Lançamento - é feito um lançamento de bola em direção a área de ataque;</li>
-          <li>Ação 3: Passe 1 - é realizado um passe do tipo 1 para outro agente do mesmo time;</li>
-          <li>Ação 4: Passe 2 - é realizado um passe do tipo 2 para outro agente do mesmo time;</li>
-          <li>Ação 5: Drible 1 - o agente executa um drible do tipo 1;</li>
-          <li>Ação 6: Drible 2 - o agente executa um drible do tipo 2.</li>
+          <li>Ação 1 > Chute - o agente executa um chute em direção ao gol adversário;</li>
+          <li>Ação 2 > Lançamento - é feito um lançamento de bola em direção a área de ataque;</li>
+          <li>Ação 3 > Passe 1 - é realizado um passe do tipo 1 para outro agente do mesmo time;</li>
+          <li>Ação 4 > Passe 2 - é realizado um passe do tipo 2 para outro agente do mesmo time;</li>
+          <li>Ação 5 > Drible 1 - o agente executa um drible do tipo 1;</li>
+          <li>Ação 6 > Drible 2 - o agente executa um drible do tipo 2.</li>
         </ul></br>
 
         <p>Assim, totalizamos 6 ações que o nosso agente pode executar e vamos considerar também que nosso ambiente possue
@@ -86,6 +139,7 @@ const pages = [
         language: "c",
       },
       {
+        title: "Ações aleatórias",
         description: `<p>Contudo, precisamos pensar no seguinte cenário:</p></br>
 
         <ul>
@@ -111,26 +165,9 @@ const pages = [
         `,
       },
       {
-        image: p11,
+        image: p41,
       },
     ],
-  },
-  {
-    page: 2,
-    message: "Você está na página 2",
-    infos: [
-      {
-        title: "Título Principal",
-        description: "Esse código é responsável por ..",
-        code: snippets["code1"],
-        language: "c",
-      },
-    ],
-  },
-  {
-    page: 3,
-    message: "Você está na página 3",
-    infos: [],
   },
 ];
 
