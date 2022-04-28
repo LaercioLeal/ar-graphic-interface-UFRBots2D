@@ -10,6 +10,10 @@ import p31 from "./images/p-3-1.png";
 
 import p41 from "./images/p-4-1.png";
 
+import p51 from "./images/p-5-1.png";
+
+import p61 from "./images/p-6-1.png";
+
 const pages = [
   {
     page: 0,
@@ -166,6 +170,42 @@ const pages = [
       },
       {
         image: p41,
+      },
+    ],
+  },
+  {
+    page: 4,
+    message: "Essa parte agora é muito importante! Fica ligado.",
+    infos: [
+      {
+        title: "Atualizando a Tabela de Aprendizado",
+        description: `<p>Já vimos que a tabela Q é responsável por armazenar os valores, que representam uma espécie de 
+        pontuação para cada ação dentro dos estados. Mas você já se perguntou como que esses valores são atualizados?</p></br>
+        
+        <p>Como também vimos anteriormente, após realizar cada ação o agente vai receber de retorno uma recompensa e existem 
+        diversas maneiras de utilizar esse valor para atualizar a nossa tabela. Aqui vamos utilizar a equação do algoritmo 
+        Q_Learning:</p></br>`,
+      },
+      {
+        image: p51,
+      },
+      {
+        description: `<p>Em posse dessa equação podemos montar o método responsável por essa ação:</p></br>`,
+      },
+      {
+        code: snippets["q_learning"],
+        language: "c",
+      },
+    ],
+  },
+  {
+    page: 5,
+    message: `Isso é tudo pessoal haha. Até aqui já vimos todas as rotinas individuais, então agora é só juntar todos esses passos e executá-los na 
+    ordem certa durante um episódio, até que o aprendizado aconteça. Esse resumo final deixa bem claro o fluxo de implementação 
+    que devemos sempre seguir. Até mais galera!!`,
+    infos: [
+      {
+        image: p61,
       },
     ],
   },

@@ -6,7 +6,7 @@ const snippets = {
     `int main() { 
       return 0;
     }`,
-  definir_acao_1: `int Player::definir_acao( int estadoAtual, float q[15][6])
+  definir_acao_1: `int definir_acao( int estadoAtual, float q[15][6])
       {
       int acao = 1;
       float maiorValor = q[estadoAtual][0];
@@ -20,7 +20,7 @@ const snippets = {
       }
       return acao;
     }`,
-  definir_acao_2: `int Player::definir_acao( int estadoAtual, float q[15][6])
+  definir_acao_2: `int definir_acao( int estadoAtual, float q[15][6])
     {
       int acao = 1, e_greedy = 0.1;
 
@@ -41,6 +41,27 @@ const snippets = {
       }
       return acao;
     }`,
+  q_learning: `void q_learning(
+      int acao,
+      int estado,
+      float q[15][6],
+      float r[2][5],
+      float alpha,
+      float gamma
+  )
+  {
+
+    float max = getMax(estado); // pega maior valor dentro do estado
+
+    float valor_atual = q[estado][acao];
+    int reforco = valorRecompensa(estado);
+
+    // Equação do Q_learning
+    float novo_valor = valor_atual + alpha * (reforco + gamma * max - valor_atual);
+
+    // atualização do valor de aprendizado na tabela
+    q[estado][acao] = novo_valor;
+  }`,
 };
 
 export { snippets };
