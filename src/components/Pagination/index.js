@@ -14,16 +14,19 @@ export default function Pagination({ currentPage, pages, setPage }) {
         <Icons.ArrowDropUp />
       </Button>
       <div>
-        {pages.map(({ page }) => (
-          <S.Dot
-            active={page === currentPage}
-            onClick={() => setPage(pages[page])}
-            less={page > currentPage + 2 || page < currentPage - 2}
-            hidden={page > currentPage + 10 || page < currentPage - 10}
-          >
-            <p>{page + 1}</p>
-          </S.Dot>
-        ))}
+        {pages.map(({ page }) => {
+          if (page > currentPage + 4 || page < currentPage - 4) return <></>;
+          return (
+            <S.Dot
+              active={page === currentPage}
+              onClick={() => setPage(pages[page])}
+              less={page > currentPage + 2 || page < currentPage - 2}
+              hidden={page > currentPage + 4 || page < currentPage - 4}
+            >
+              <p>{page + 1}</p>
+            </S.Dot>
+          );
+        })}
       </div>
       <Button
         color="blue"
