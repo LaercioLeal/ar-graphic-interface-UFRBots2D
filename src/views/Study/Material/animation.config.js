@@ -8,7 +8,6 @@ const ANIMATION = {
     transition: {
       ease: "easeInOut",
       duration,
-      delay: 1.5,
     },
   },
 };

@@ -24,9 +24,31 @@ export const Description = styled.p`
   margin: 20px 0;
 
   span,
+  li,
   p {
     color: ${lighten(0.1, themes.colors.gray)};
     text-align: justify;
+  }
+
+  ul {
+    list-style-type: "*";
+    li {
+      list-style: none;
+      position: relative;
+      padding: 3px 0 2px 25px;
+
+      :before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 10px;
+        height: 5px;
+        width: 5px;
+        border: 1px solid ${themes.colors.primary};
+        border-width: 2px 2px 0 0;
+        transform: rotate(45deg);
+      }
+    }
   }
 `;
 
@@ -36,7 +58,7 @@ export const Image = styled(motion.img)`
     content &&
     css`
       display: flex;
-      margin: 20px auto 0 100px;
+      margin: 20px auto;
     `}
 `;
 

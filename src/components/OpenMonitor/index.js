@@ -13,7 +13,7 @@ export default function OpenMonitor({ show }) {
         animate={show ? "visible" : "hidden"}
         variants={{
           hidden: {
-            x: -50,
+            x: -100,
             opacity: 0,
             transition: {
               ease: "easeInOut",

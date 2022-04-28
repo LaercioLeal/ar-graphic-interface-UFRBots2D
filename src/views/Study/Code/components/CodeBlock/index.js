@@ -12,7 +12,8 @@ export default function CodeBlock({ code, language, showLineNumbers = false }) {
         borderRadius: "8px",
         marginTop: "20px",
         marginBottom: "20px",
-        maxWidth: "80%",
+        padding: "20px",
+        maxWidth: "70%",
         marginLeft: "auto",
         marginRight: "auto",
       }}
