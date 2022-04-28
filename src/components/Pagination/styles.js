@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { size, transparentize } from "polished";
+import { lighten, rem, size, transparentize } from "polished";
 import themes from "Provider/themes";
 
 export const Container = styled.div`
@@ -49,18 +49,27 @@ export const Container = styled.div`
 `;
 
 export const Dot = styled.div`
-  transition: all 0.3s;
+  transition: all 0.5s;
   ${size(10)}
   background-color: ${transparentize(0.8, themes.colors.gray)};
-  border-radius: 8px;
+  border-radius: 99px;
 
   display: flex;
   align-items: center;
 
   cursor: pointer;
+  p {
+    visibility: collapse;
+    z-index: 10;
+    font-size: ${rem(18)};
+    font-family: ${themes.fonts.bold};
+    color: ${themes.colors.blue};
+    text-align: center;
+    margin: auto;
+  }
 
   :hover {
-    ${size(10)}
+    ${size(15)}
     background-color: ${transparentize(0.6, themes.colors.blue)};
     width: 20px;
   }
@@ -68,12 +77,27 @@ export const Dot = styled.div`
   ${({ active }) =>
     active &&
     css`
-      width: 25px;
+      ${size(40)}
       background-color: ${themes.colors.blue};
-      box-shadow: ${transparentize(0.3, themes.colors.blue)} 0px 3px 8px;
+      box-shadow: ${transparentize(0.3, themes.colors.blue)} 0px 3px 30px;
+      p {
+        visibility: visible;
+      }
 
       :hover {
+        ${size(40)}
         background-color: ${transparentize(0.2, themes.colors.blue)};
+      }
+
+      ::after {
+        content: "";
+        position: absolute;
+
+        box-shadow: ${lighten(0.1, themes.colors.blue)} 0px 3px 8px;
+        background-color: ${lighten(0.6, themes.colors.gray)};
+        margin-left: -100px;
+        height: 20px;
+        width: 200px;
       }
     `}
 

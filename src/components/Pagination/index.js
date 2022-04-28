@@ -20,7 +20,9 @@ export default function Pagination({ currentPage, pages, setPage }) {
             onClick={() => setPage(pages[page])}
             less={page > currentPage + 2 || page < currentPage - 2}
             hidden={page > currentPage + 10 || page < currentPage - 10}
-          />
+          >
+            <p>{page + 1}</p>
+          </S.Dot>
         ))}
       </div>
       <Button
