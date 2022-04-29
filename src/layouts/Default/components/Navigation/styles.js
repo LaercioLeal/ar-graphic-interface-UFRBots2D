@@ -27,7 +27,7 @@ const styles = {
     border-radius: 0px;
 
     box-shadow: ${lighten(0.23, themes.colors.blue)} 0px 1px 1px,
-      ${lighten(0.13, themes.colors.blue)} 0px 0px 1px 1px;
+      ${lighten(0.13, themes.colors.blue)} 0px 0px 0px 2px;
 
     ${({ top }) =>
       top &&
@@ -99,8 +99,6 @@ const styles = {
           height: 60px;
           background: transparent;
           background-color: ${darken(0.04, themes.colors.white)};
-          border-bottom-left-radius: none;
-          border-bottom-right-radius: none;
 
           box-shadow: -2px -2px 3px rgba(255, 255, 255, 0.5),
             10px 10px 15px rgba(70, 70, 70, 0.12);

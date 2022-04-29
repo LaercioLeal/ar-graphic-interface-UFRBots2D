@@ -1,5 +1,7 @@
 import { NavLink } from "components";
 import { motion } from "framer-motion";
+import { darken } from "polished";
+import themes from "Provider/themes";
 import styled from "styled-components";
 
 export const Content = styled.div``;
@@ -20,18 +22,37 @@ export const Articles = styled.section`
   column-gap: 20px;
 `;
 
-export const HeaderOption = styled(motion.div)`
-  display: flex;
+export const Link = styled(NavLink)``;
 
-  button {
-    :first-child {
-      margin-right: 20px;
-    }
-
-    svg {
-      margin-left: 20px;
-    }
-  }
+export const Cards = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 50px;
+  margin-bottom: 20px;
 `;
 
-export const Link = styled(NavLink)``;
+export const Card = styled.div`
+  transition: all 0.3s;
+  display: flex;
+  padding: 20px;
+  border-radius: 12px;
+  background: ${themes.colors.blue};
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+
+  color: white;
+
+  align-items: center;
+  justify-content: center;
+
+  :hover {
+    background: ${darken(0.2, themes.colors.blue)};
+  }
+
+  cursor: pointer;
+
+  svg {
+    fill: white;
+    margin-right: 20px;
+  }
+`;
