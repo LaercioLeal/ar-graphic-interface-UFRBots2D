@@ -154,7 +154,7 @@ export default function Details() {
     }
   }, [queue.queue.length, queue.running]); // eslint-disable-line
 
-  const SelectedToExecute = (training) => {
+  const SelectedToSee = (training) => {
     if (training.status === "wait") {
       queue.add(training).then((_) => {
         setQueue(queue);
@@ -201,7 +201,7 @@ export default function Details() {
                   trainingData.filter((item) => item.status === "done")
                     .length === 0
                 }
-                label="Dados Gerais do Experimento"
+                label="Dados e Gráficos"
                 {...a11yProps(0)}
               />
               <Tab active={value === 1} label="Ensaios" {...a11yProps(1)} />
@@ -231,7 +231,7 @@ export default function Details() {
                   data={trainingData}
                   handleAdd={handleAdd}
                   handleRemove={handleRemove}
-                  setSelectedToExecute={SelectedToExecute}
+                  setSelectedToSee={SelectedToSee}
                   setSelectedToDetails={(training) => {
                     setSelectedToDetails(training);
                     setValue(2);

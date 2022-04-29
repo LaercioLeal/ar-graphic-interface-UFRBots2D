@@ -16,6 +16,7 @@ const commonStyles = css`
 
   display: flex;
   align-items: center;
+  justify-content: center;
 
   border: none;
   padding: 10px 20px 8px;

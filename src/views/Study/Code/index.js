@@ -15,7 +15,7 @@ function Code() {
       <HeadingPage
         page="code"
         title="Código"
-        subtitle="Exemplo de lógica de programação para um código de Aprendizado por Reforço (AR)"
+        subtitle="Exemplo da lógica de programação para um código de Aprendizado por Reforço (AR)"
         icon={codingIcon}
       />
       <S.Container>

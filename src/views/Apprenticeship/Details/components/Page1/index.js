@@ -35,7 +35,7 @@ export default function Page1({ experiment }) {
         <>
           <Table data={data.trainings} experiment={experiment} />
           <Resume data={data.trainings} />
-          <SectionTitle title="Gráficos de Comparativos das Combinações" />
+          <SectionTitle title="Gráficos de Comparativo das Combinações" />
           <S.Graphs>
             <GraphRadar dados={parserResumeCombination(data.trainings)} />
             <GraphBar dados={parserResumeBar(data.trainings)} />

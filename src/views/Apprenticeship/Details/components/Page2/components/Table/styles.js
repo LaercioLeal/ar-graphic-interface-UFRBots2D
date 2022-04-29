@@ -110,7 +110,7 @@ export const Buttons = styled.div`
   }
 
   button {
-    padding: 6px 12px 0px 12px !important;
+    padding: 10px 15px;
   }
 `;
 

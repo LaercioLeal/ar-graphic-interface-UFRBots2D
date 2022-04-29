@@ -8,7 +8,7 @@ export default function Page2({
   runAll,
   handleAdd,
   handleRemove,
-  setSelectedToExecute,
+  setSelectedToSee,
   setSelectedToDetails,
 }) {
   return (
@@ -19,7 +19,7 @@ export default function Page2({
         isLoading={false}
         handleAdd={handleAdd}
         handleRemove={handleRemove}
-        setSelectedToExecute={setSelectedToExecute}
+        setSelectedToSee={setSelectedToSee}
         setSelectedToDetails={setSelectedToDetails}
       />
     </S.Container>

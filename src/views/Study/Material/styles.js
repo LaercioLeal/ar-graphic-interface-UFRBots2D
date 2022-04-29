@@ -1,5 +1,4 @@
 import { NavLink } from "components";
-import { motion } from "framer-motion";
 import { darken } from "polished";
 import themes from "Provider/themes";
 import styled from "styled-components";

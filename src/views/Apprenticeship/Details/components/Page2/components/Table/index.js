@@ -14,19 +14,12 @@ const paginationOptions = {
   selectAllRowsItemText: "Todos",
 };
 
-const infoTooltip = {
-  running: "Ver ensaio",
-  wait: "",
-  done: "",
-  queue: "Aguarde...",
-};
-
 export default function Table({
   data,
   runAll,
   handleAdd,
   handleRemove,
-  setSelectedToExecute,
+  setSelectedToSee,
   setSelectedToDetails,
 }) {
   const [tableData, setTableData] = useState([]);
@@ -83,34 +76,22 @@ export default function Table({
           {["wait", "done"].includes(row.status) && (
             <>
               {row.status !== "done" && (
-                <Button
-                  color="success"
-                  tooltip={infoTooltip[row.status]}
-                  onClick={() => setSelectedToExecute(row)}
-                >
+                <Button color="success" onClick={() => setSelectedToSee(row)}>
                   <Icons.PlayArrowOutlined />
                 </Button>
               )}
-              <Button
-                color="red"
-                tooltip={infoTooltip["done"]}
-                onClick={() => handleRemove(row.id)}
-              >
+              <Button color="red" onClick={() => handleRemove(row.id)}>
                 <Icons.DeleteForeverOutlined />
               </Button>
             </>
           )}
           {["running"].includes(row.status) && (
-            <Button
-              color="blue"
-              tooltip={infoTooltip[row.status]}
-              onClick={() => setSelectedToExecute(row)}
-            >
+            <Button color="blue" onClick={() => {}}>
               <Icons.SportsSoccerOutlined />
             </Button>
           )}
           {["queue"].includes(row.status) && (
-            <Button tooltip={infoTooltip[row.status]} isDisabled>
+            <Button isDisabled>
               <Icons.WatchLaterOutlined />
             </Button>
           )}

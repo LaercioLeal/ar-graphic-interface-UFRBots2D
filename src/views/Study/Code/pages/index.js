@@ -18,7 +18,7 @@ const pages = [
   {
     page: 0,
     message:
-      "Excelente ideia! Agora vamos conhecer um pouco da lógica por traz de um código de Aprendizado por Reforço.",
+      "Excelente ideia! Agora vamos conhecer um pouco da lógica por trás de um código de Aprendizado por Reforço.",
     infos: [
       {
         title: "Ideia base",
@@ -26,8 +26,8 @@ const pages = [
         conseguir aprender a jogar em campo vamos ter que considerar a interação direta dele com o ambiente.</p></br>
           
         <p>Esse ambiente é representado pelo campo de futebol, mas devemos considerar que ele é composto de posições que os 
-        robôs podem asssumir, robôs adversários e do mesmo time, áreas de ataque, defesa e meio de campo, a bola e tudo mais 
-        que compõe esse ambiente em familiar.</p></br>
+        robôs podem assumir, robôs adversários e do mesmo time, áreas de ataque, defesa e meio de campo, a bola e tudo mais 
+        que compõem esse ambiente.</p></br>
           
         <p>Na figura abaixo é possível observar, a relação de interação de cada robô (vamos chamar ele de agente a partir de 
         agora) do nosso time com o ambiente. Primeiro o agente, em um estado do ambiente, executa uma ação (que nesse caso 
@@ -38,22 +38,22 @@ const pages = [
         image: p11,
       },
       {
-        description: `<p>Esse estado nada mais é do que uma configuração especifica na qual o agente se encontra, e isso 
+        description: `<p>Esse estado nada mais é do que uma configuração específica na qual o agente se encontra, e isso 
         pode ser relacionado de diversas maneiras, como por exemplo: a proximidade de um adversário, uma posição específica 
         dentro do campo ou a distância em relação ao gol.</p></br>
         
         <p>E essa recompensa recebida é muito importante, pois é com ela que o agente vai começar a entender se ele deve ou 
         não executar essa ação quando estiver nesse estado. Esse é o processo principal do aprendizado, cada retorno será
-        responsável por atualizar a table de aprendizado, chamada de 'Q'. Essa tabela possui as dimensões definidas pelo
-        número de estados e ações do ambinente, um exemplo pode ser observado na imagem abaixo.</p>`,
+        responsável por atualizar a tabela de aprendizado, chamada de 'Q'. Essa tabela possui as dimensões definidas pelo
+        número de estados e ações do ambiente, um exemplo pode ser observado na imagem abaixo.</p>`,
       },
       {
         image: p12,
       },
       {
-        description: `<p>Dessa maneira, cada robô saberá qual melhor ação a ser executada para cada estado, basta verificar
-        qual possui o maior valor estimado, como ha imagem nos indica os maiores valores para cada estado (destacados de azul). 
-        Para esse exemplo, é possível então mapear as melhoras ações para cada estado:</p>`,
+        description: `<p>Dessa maneira, cada robô saberá qual melhor ação a ser executada para cada estado, basta verificar 
+        qual possui o maior valor estimado, como a imagem nos indica os maiores valores para cada estado (destacados de azul). 
+        Para esse exemplo, é possível então mapear as melhores ações para cada estado:</p>`,
       },
       {
         image: p13,
@@ -93,7 +93,7 @@ const pages = [
     infos: [
       {
         title: "Mapeando os Reforços (Recompensa)",
-        description: `<p>De acordo com fluxo geral de funcionamento do AR, precisamos agora definir a recompensa do ambiente 
+        description: `<p>De acordo com o fluxo geral de funcionamento do AR, precisamos agora definir a recompensa do ambiente 
         para cada ação executada. Essa etapa também pode ser modelada de diversas maneiras, contudo iremos realizar uma 
         abordagem alinhada com a nossa divisão do campo em seções.</p></br>
 
@@ -109,7 +109,7 @@ const pages = [
         valores de recompensa.</p>`,
       },
       {
-        description: `<p>O próximo passso agora será definir as nossas ações :D</p>`,
+        description: `<p>O próximo passo agora será definir as nossas ações :D</p>`,
       },
     ],
   },
@@ -132,12 +132,11 @@ const pages = [
           <li>Ação 6 > Drible 2 - o agente executa um drible do tipo 2.</li>
         </ul></br>
 
-        <p>Assim, totalizamos 6 ações que o nosso agente pode executar e vamos considerar também que nosso ambiente possue
-        15 estados. Dessa maneira, podemos construir uma função que 
-        vai escolher uma ação para ser executada em cada estado do ambiente, consultado a tabela de aprendizado Q, 
-        conforme discutido anteriormente.</p></br>
+        <p>Assim, totalizam 6 ações que o nosso agente pode executar e vamos considerar também que nosso ambiente possui 15 estados. 
+        Dessa maneira, podemos construir uma função que vai escolher uma ação para ser executada em cada estado do ambiente, 
+        consultado a tabela de aprendizado Q, conforme discutido anteriormente.</p></br>
         
-        <p>Dessa maneira, podemos então construir uma rotina que vai retornar a melhor ação a ser realizada para um estado:</p></br>
+        <p>Dessa maneira, podemos então construir uma rotina que vai retornar a melhor ação a ser realizada para um estado:</p>
         `,
         code: snippets["definir_acao_1"],
         language: "c",
@@ -148,7 +147,7 @@ const pages = [
 
         <ul>
           <li>1: Suponha que a ação 1 seja a melhor a ser executada no estado 14;</li>
-          <li>2: Mas na primeira execução dela, o ambiente retorne uma recompensa com valor menor com relação as demais ações;</li>
+          <li>2: Mas na primeira execução dela, o ambiente retorne uma recompensa com valor menor com relação às demais ações;</li>
           <li>3: Então, a ação 1 não seria mais escolhida, para esse estado;</li>
           <li>4: Podemos concluir que somente escolher uma ação pelo maior valor de uma linha da tabela durante o aprendizado, pode 
           ser um processo muito tendencioso.</li>
@@ -159,7 +158,8 @@ const pages = [
         de aprendizado definir qual ação realmente se demonstrou mais alinhada com o objetivo geral.</p></br>
 
         <p>Sendo assim, podemos incluir o parâmetro 'e_greedy' em nosso código, ele vai ser responsável em decidir quando uma ação 
-        deve ser escolhida aleatoriamente ou com base na tabela Q. Se o seu valor for 0.1, por exmplo, significa que a cada 100 jogadas, 10 serão aleatórias.</p></br>
+        deve ser escolhida aleatoriamente ou com base na tabela Q. Se o seu valor for 0.1, por exemplo, significa que a cada 100 jogadas, 
+        10 serão aleatórias.</p></br>
         `,
         code: snippets["definir_acao_2"],
         language: "c",
@@ -180,7 +180,7 @@ const pages = [
       {
         title: "Atualizando a Tabela de Aprendizado",
         description: `<p>Já vimos que a tabela Q é responsável por armazenar os valores, que representam uma espécie de 
-        pontuação para cada ação dentro dos estados. Mas você já se perguntou como que esses valores são atualizados?</p></br>
+        pontuação para cada ação dentro dos estados. Mas você já se perguntou como esses valores são atualizados?</p></br>
         
         <p>Como também vimos anteriormente, após realizar cada ação o agente vai receber de retorno uma recompensa e existem 
         diversas maneiras de utilizar esse valor para atualizar a nossa tabela. Aqui vamos utilizar a equação do algoritmo 
