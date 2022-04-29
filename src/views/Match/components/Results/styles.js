@@ -12,19 +12,19 @@ export const Container = styled(motion.section)`
 
   width: 100%;
 
-  transition: box-shadow 0.3s, background-color 1s;
-  box-shadow: blue 0px 0px 0px 2px inset, rgb(255, 255, 255) 10px -10px 0px -3px,
-    rgb(31, 193, 27) 10px -10px, rgb(255, 255, 255) 20px -20px 0px -3px,
-    rgb(255, 217, 19) 20px -20px, rgb(255, 255, 255) 30px -30px 0px -3px,
-    rgb(255, 156, 85) 30px -30px, rgb(255, 255, 255) 40px -40px 0px -3px,
-    rgb(255, 85, 85) 40px -40px;
+  transition: all 0.3s;
+
+  box-shadow: 0px 1px 2px 0px rgba(255, 156, 85, 9),
+    1px 2px 4px 0px rgba(255, 156, 85, 9), 2px 4px 8px 0px rgba(255, 156, 85, 9),
+    2px 4px 16px 0px rgba(255, 156, 85, 9);
 
   :hover {
-    background-color: ${transparentize(0.9, "rgb(255, 85, 85)")};
-    box-shadow: rgb(255, 85, 85) 0px 0px 0px 2px inset,
-      rgb(255, 255, 255) 10px -10px 0px -3px, rgb(31, 193, 27) 10px -10px,
-      rgb(255, 255, 255) 20px -20px 0px -3px, rgb(255, 217, 19) 20px -20px,
-      rgb(255, 255, 255) 30px -30px 0px -3px, rgb(255, 156, 85) 30px -30px;
+    background-color: ${transparentize(0.9, "rgba(255, 85, 85, 1)")};
+
+    box-shadow: 0px 1px 2px 0px rgba(255, 156, 85, 7),
+      1px 2px 4px 0px rgba(255, 156, 85, 7),
+      2px 4px 8px 0px rgba(255, 156, 85, 7),
+      2px 4px 16px 0px rgba(255, 156, 85, 7);
   }
   margin-bottom: 50px;
 

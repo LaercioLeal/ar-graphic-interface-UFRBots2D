@@ -1,4 +1,4 @@
-import { darken, rem } from "polished";
+import { darken, rem, transparentize } from "polished";
 import themes from "Provider/themes";
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
@@ -48,9 +48,12 @@ const themeButton = {
   },
   outlined: () => {
     return css`
+      color: ${themes.colors.blue};
+      border: 1px solid ${themes.colors.blue};
+      background-color: ${darken(0, themes.colors.white)};
       box-shadow: none;
       :hover {
-        background-color: ${darken(0.1, themes.colors.lightGray)};
+        background-color: ${transparentize(0.8, themes.colors.blue)};
       }
     `;
   },
@@ -105,6 +108,8 @@ export const Container = styled(motion.button)`
     css`
       cursor: ${isDisabled ? "not-allowed" : "wait"};
       pointer-events: unset;
+      border: none;
+      color: ${themes.colors.white};
 
       background-color: ${themes.colors.lightGray};
       &:hover {
