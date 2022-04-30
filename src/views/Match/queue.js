@@ -50,12 +50,16 @@ class Queue {
   }
 
   async add(match) {
+    if (match.status !== "wait") console.log("not added");
     if (match.status !== "wait") return match;
     this.queue.push({
       ...match,
       status: "queue",
     });
-    return match;
+    return {
+      ...match,
+      status: "queue",
+    };
   }
 
   remove(match) {

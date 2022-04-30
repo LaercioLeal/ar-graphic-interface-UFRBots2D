@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useCallback } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useSnackbar } from "notistack";
 import { Container, HeadingPage } from "components";
 
@@ -38,14 +38,9 @@ function Match() {
     setData(data.filter((item) => item.id !== match.id));
   };
 
-  const run = async (match) => {
-    console.log(match);
-    await queue.add(match);
-  };
-
-  const runAll = async () => {
+  const runAll = () => {
     for (const item of data) {
-      await run(item);
+      queue.add(item);
     }
     fetchData();
     enqueueSnackbar("Partidas preparadas para execução", { variant: "info" });
@@ -80,17 +75,17 @@ function Match() {
 
   useEffect(() => {
     if (!queue.running && !!queue.queue.length) {
-      setData(
-        data.map((item) => {
-          if (item.id === queue.queue[0].id)
-            return { ...item, status: "running" };
-          return item;
-        })
-      );
+      if (!data.find((item) => item.status === "running"))
+        setData(
+          data.map((item) => {
+            if (item.id === queue.queue[0].id)
+              return { ...item, status: "running" };
+            return item;
+          })
+        );
       queue.run().then(async (match) => {
-        console.log("[MATCH] :: ", match);
         setResults(match);
-        enqueueSnackbar(`Partida finalizada ${match.id}`, {
+        enqueueSnackbar(`Partida finalizada`, {
           variant: "success",
         });
       });
@@ -104,6 +99,8 @@ function Match() {
           if (item.id === results.id) {
             return results;
           }
+          if (item.id === queue?.queue[0]?.id)
+            return { ...item, status: "running" };
           return item;
         })
       );
@@ -118,7 +115,16 @@ function Match() {
         <Table
           data={data}
           runAll={runAll}
-          run={run}
+          run={(match) => {
+            queue.add(match).then((n) => {
+              setData(
+                data.map((item) => {
+                  if (item.id === n.id) return n;
+                  return item;
+                })
+              );
+            });
+          }}
           handleAdd={handleAdd}
           handleRemove={handleRemove}
         />

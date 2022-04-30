@@ -61,12 +61,8 @@ function Form({ handleAdd, show }) {
   const isRunning = false;
   const { enqueueSnackbar } = useSnackbar();
   const [teams, setTeams] = useState({
-    first: { path: "/home/higor/TIMES/BotsMD", name: "BotsMD", score: "" },
-    second: {
-      path: "/home/higor/TIMES/C_UFRBots",
-      name: "C_UFRBots",
-      score: "",
-    },
+    first: null,
+    second: null,
   });
   const [isChecked, setChecked] = useState(true);
 
@@ -173,7 +169,7 @@ function Form({ handleAdd, show }) {
                     Aqui você pode trocar a velocidade da partida
                     <br />
                     <p className="info">Modo Normal - média de 10 minutos </p>
-                    <p className="info">Modo Rápido - média de 3 minutos </p>
+                    <p className="info">Modo Rápido - média de 2 minutos </p>
                   </p>
                 </T.Title>
 
