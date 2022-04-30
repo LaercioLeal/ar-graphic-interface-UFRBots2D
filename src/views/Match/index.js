@@ -1,86 +1,22 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import { useSnackbar } from "notistack";
-
-import Lottie from "react-lottie";
-import animationData from "./soccer.json";
-
 import { Container, HeadingPage } from "components";
 
 import * as S from "./styles";
 import goalIcon from "assets/icon/goal.png";
-import { Results, Table, Teammate } from "./components";
-import { getDirectory, startMatch } from "services";
-import themes from "Provider/themes";
-import { motion } from "framer-motion";
+import { Results, Table } from "./components";
+import Queue from "./queue";
 
-const defaultOptions = {
-  loop: true,
-  autoplay: true,
-  animationData: animationData,
-  rendererSettings: {
-    preserveAspectRatio: "xMidYMid slice",
-  },
-};
-
-const variants = {
-  hidden: {
-    y: -20,
-    x: 20,
-    opacity: 0,
-    transition: {
-      ease: "easeInOut",
-      duration: 0.5,
-    },
-  },
-  visible: {
-    y: 0,
-    x: 0,
-    opacity: 1,
-    transition: {
-      ease: "easeInOut",
-      duration: 0.5,
-    },
-  },
-};
+import { v4 } from "uuid";
 
 function Match() {
   const { enqueueSnackbar } = useSnackbar();
   const [data, setData] = useState([]);
+  const [results, setResults] = useState(null);
 
-  // const handleSelect = useCallback(
-  //   async (position) => {
-  //     if (!teams[position]) {
-  //       let { data, isError, message } = await getDirectory();
-  //       if (!isError) {
-  //         if (
-  //           teams["first"]?.name === data.teamName ||
-  //           teams["second"]?.name === data.teamName
-  //         ) {
-  //           enqueueSnackbar(
-  //             "Você deve escolher um time diferente como adversário",
-  //             { variant: "error" }
-  //           );
-  //         } else {
-  //           setTeams({
-  //             ...teams,
-  //             [position]: {
-  //               path: data.path,
-  //               name: data.teamName,
-  //             },
-  //           });
-  //         }
-  //       } else {
-  //         enqueueSnackbar(message, { variant: "error" });
-  //       }
-  //     } else {
-  //       setTeams({
-  //         ...teams,
-  //         [position]: null,
-  //       });
-  //     }
-  //   },
-  //   [teams, enqueueSnackbar]
-  // );
+  const queue = useMemo(() => {
+    return new Queue();
+  }, []);
 
   const handleAdd = (values) => {
     const { mode, teams } = values;
@@ -90,66 +26,102 @@ function Match() {
       {
         mode,
         status: "wait",
-        team1: { ...first, result: "" },
-        team2: { ...second, result: "" },
+        team1: { ...first, score: "" },
+        team2: { ...second, score: "" },
+        id: v4(),
       },
     ]);
   };
 
-  const handleStart = async () => {
-    // setResults(null);
-    // setRunning(true);
-    // let { data, isError, message } = await startMatch(
-    //   isChecked ? 1 : 2,
-    //   teams["first"].path,
-    //   teams["second"].path
-    // );
-    // enqueueSnackbar(message, { variant: "success" });
-    // if (!isError) {
-    //   let { scores } = data;
-    //   setResults({
-    //     team1: {
-    //       score: scores.team1,
-    //       name: teams["first"].name,
-    //       winner: scores.team1 > scores.team2,
-    //     },
-    //     team2: {
-    //       score: scores.team2,
-    //       name: teams["second"].name,
-    //       winner: scores.team2 > scores.team1,
-    //     },
-    //     empate: scores.team2 === scores.team1,
-    //   });
-    // }
-    handleFinish();
-    return true;
+  const handleRemove = (match) => {
+    queue.remove(match);
+    setData(data.filter((item) => item.id !== match.id));
   };
 
-  const handleFinish = () => {
-    // setRunning(false);
+  const run = async (match) => {
+    console.log(match);
+    await queue.add(match);
   };
 
-  const isRunning = useMemo(() => {
-    return data.filter((item) => item.status === "running").length > 0;
-  }, [data]);
+  const runAll = async () => {
+    for (const item of data) {
+      await run(item);
+    }
+    fetchData();
+    enqueueSnackbar("Partidas preparadas para execução", { variant: "info" });
+  };
+
+  const fetchData = (match = null) => {
+    if (queue.queue.length === 0) return;
+    let itemFinish, data_;
+    data_ = data.map((item) => {
+      if (!!match && item.id === match.id) console.log("aqui", match);
+      if (!!match && item.id === match.id) return match;
+
+      itemFinish = queue.results.find((q) => q.id === item.id);
+      if (!itemFinish) itemFinish = queue.queue.find((q) => q.id === item.id);
+      if (!itemFinish) {
+        if (item.status !== "wait") {
+          return {
+            ...item,
+            status: "done",
+          };
+        }
+        return item;
+      }
+      return {
+        ...item,
+        status: itemFinish.status,
+      };
+    });
+    setData(data_);
+    return data_;
+  };
+
+  useEffect(() => {
+    if (!queue.running && !!queue.queue.length) {
+      setData(
+        data.map((item) => {
+          if (item.id === queue.queue[0].id)
+            return { ...item, status: "running" };
+          return item;
+        })
+      );
+      queue.run().then(async (match) => {
+        console.log("[MATCH] :: ", match);
+        setResults(match);
+        enqueueSnackbar(`Partida finalizada ${match.id}`, {
+          variant: "success",
+        });
+      });
+    }
+  }, [queue.queue.length, queue.running]); // eslint-disable-line
+
+  useEffect(() => {
+    if (!!results) {
+      setData(
+        data.map((item) => {
+          if (item.id === results.id) {
+            return results;
+          }
+          return item;
+        })
+      );
+    }
+  }, [results]); // eslint-disable-line
 
   return (
     <Container>
       <HeadingPage page="match" title="Partida" icon={goalIcon} />
-      {/* <Results results={results} /> */}
+      <Results results={results} />
       <S.Content>
-        <motion.div
-          initial="hidden"
-          animate={isRunning ? "visible" : "hidden"}
-          variantes={variants}
-        >
-          <Lottie
-            options={defaultOptions}
-            width={isRunning ? 512 / 2 : 0}
-            height={isRunning ? 390 / 2 : 0}
-          />
-        </motion.div>
-        <Table data={data} runAll={() => {}} handleAdd={handleAdd} />
+        <Table
+          data={data}
+          runAll={runAll}
+          run={run}
+          handleAdd={handleAdd}
+          handleRemove={handleRemove}
+        />
       </S.Content>
     </Container>
   );

@@ -43,7 +43,7 @@ export default function Results({ results }) {
     >
       {results && (
         <>
-          <S.Title>Resumo da partida anterior:</S.Title>
+          <S.Title>Resumo da última partida</S.Title>
           <S.Placar>
             <S.Title empate={results.empate}>
               <p className="resume">{whoWon}</p>

@@ -120,5 +120,17 @@ export const Legend = styled.h2`
   font-family: ${themes.fonts.bold};
 
   color: ${transparentize(0.5, themes.colors.gray)};
-  margin: auto;
+  margin-left: 30px;
+
+  :before {
+    content: "";
+    height: 5px;
+    width: 30px;
+    position: absolute;
+    left: 0;
+    bottom: 15px;
+    background-color: ${({ mode }) =>
+      mode === 2 ? themes.colors.blue : themes.colors.success};
+    border-radius: 99px;
+  }
 `;

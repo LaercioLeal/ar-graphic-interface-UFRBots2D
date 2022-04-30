@@ -14,7 +14,7 @@ const paginationOptions = {
   selectAllRowsItemText: "Todos",
 };
 
-export default function Table({ data, runAll, handleAdd }) {
+export default function Table({ data, runAll, run, handleAdd, handleRemove }) {
   const [tableData, setTableData] = useState([]);
 
   const tableColumns = [
@@ -35,7 +35,7 @@ export default function Table({ data, runAll, handleAdd }) {
     },
     {
       name: "Placar Time 1",
-      cell: ({ team1 }) => <h1>{team1.result}</h1>,
+      cell: ({ team1 }) => <h1>{team1.score}</h1>,
     },
     {
       name: "Time 2",
@@ -44,33 +44,39 @@ export default function Table({ data, runAll, handleAdd }) {
     },
     {
       name: "Placar Time 1",
-      cell: ({ team2 }) => <h1>{team2.result}</h1>,
+      cell: ({ team2 }) => <h1>{team2.score}</h1>,
     },
     {
       name: "Modo",
       selector: ({ mode }) => mode,
       cell: ({ mode }) => (
-        <S.Status status={mode === 0 ? "running" : "done"}>
-          {mode === 0 ? "Rápido" : "Normal"}
-        </S.Status>
+        <S.Legend mode={mode}>{mode === 2 ? "Rápido" : "Normal"}</S.Legend>
       ),
       sortable: true,
     },
     {
-      cell: (row) => (
-        <S.Buttons>
-          <Button
-            color="blue"
-            isDisabled={["queue", "running"].includes(row.status)}
-            onClick={() => {}}
-          >
-            <Icons.PlayArrowOutlined />
-          </Button>
-          <Button color="red" onClick={() => {}}>
-            <Icons.DeleteForeverOutlined />
-          </Button>
-        </S.Buttons>
-      ),
+      cell: (row) => {
+        const { status } = row;
+        if (status === "done")
+          return (
+            <S.Buttons>
+              <Button color="red" onClick={() => handleRemove(row)}>
+                <Icons.DeleteForeverOutlined />
+              </Button>
+            </S.Buttons>
+          );
+        if (!["running", "queue"].includes(status))
+          return (
+            <S.Buttons>
+              <Button color="blue" onClick={() => run(row)}>
+                <Icons.PlayArrowOutlined />
+              </Button>
+              <Button color="red" onClick={() => handleRemove(row)}>
+                <Icons.DeleteForeverOutlined />
+              </Button>
+            </S.Buttons>
+          );
+      },
       ignoreRowClick: true,
       allowOverflow: true,
     },

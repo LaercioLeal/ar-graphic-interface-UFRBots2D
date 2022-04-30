@@ -7,26 +7,21 @@ export const Container = styled(motion.section)`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 20px 30px;
-  border-radius: 10px;
+  padding: 5px 30px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 
   width: 100%;
 
   transition: all 0.3s;
 
-  box-shadow: 0px 1px 2px 0px rgba(255, 156, 85, 9),
-    1px 2px 4px 0px rgba(255, 156, 85, 9), 2px 4px 8px 0px rgba(255, 156, 85, 9),
-    2px 4px 16px 0px rgba(255, 156, 85, 9);
+  box-shadow: 0px 1px 0px 1px ${themes.colors.primary};
 
   :hover {
     background-color: ${transparentize(0.9, "rgba(255, 85, 85, 1)")};
-
-    box-shadow: 0px 1px 2px 0px rgba(255, 156, 85, 7),
-      1px 2px 4px 0px rgba(255, 156, 85, 7),
-      2px 4px 8px 0px rgba(255, 156, 85, 7),
-      2px 4px 16px 0px rgba(255, 156, 85, 7);
   }
-  margin-bottom: 50px;
+  margin-bottom: 10px;
+  margin-top: -50px;
 
   ${({ absolute }) =>
     absolute &&

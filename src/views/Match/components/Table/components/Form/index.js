@@ -60,8 +60,15 @@ function Form({ handleAdd, show }) {
 
   const isRunning = false;
   const { enqueueSnackbar } = useSnackbar();
-  const [teams, setTeams] = useState({ first: null, second: null });
-  const [isChecked, setChecked] = useState(false);
+  const [teams, setTeams] = useState({
+    first: { path: "/home/higor/TIMES/BotsMD", name: "BotsMD", score: "" },
+    second: {
+      path: "/home/higor/TIMES/C_UFRBots",
+      name: "C_UFRBots",
+      score: "",
+    },
+  });
+  const [isChecked, setChecked] = useState(true);
 
   const atLeastOne = useMemo(() => {
     return teams["first"]?.name || teams["second"]?.name;
@@ -78,7 +85,7 @@ function Form({ handleAdd, show }) {
   const form = useMemo(() => {
     return {
       values: {
-        mode: isChecked ? 1 : 0,
+        mode: isChecked ? 1 : 2,
         teams: teams,
       },
       isValid: isTeam1 && isTeam2,

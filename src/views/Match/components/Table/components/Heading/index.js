@@ -6,7 +6,7 @@ import * as S from "./styles";
 import Form from "../Form";
 
 function Heading({ handleAdd, canRunAll, runAll, data }) {
-  const [showAdd, setShowAdd] = useState(false);
+  const [showAdd, setShowAdd] = useState(true);
   const [showRunAll, setShowRunAll] = useState(false);
 
   const percentage = useMemo(() => {
