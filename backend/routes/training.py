@@ -1,6 +1,7 @@
 from __main__ import app
 from flask import request
-from codes.methods import formatResponse, generateHash, get_db_connection
+from routes.match import startMatch
+from codes.methods import formatResponse, generateHash, get_db_connection, userName
 
 # retornar todos os ensaios cadastrados
 @app.route('/experiments/training/data', methods=['GET'])
@@ -101,11 +102,16 @@ def runTraining():
     idExperiment = data["idExperiment"]
 
     results = []
-    import random
     for episode in range(episodes):
       idResult = generateHash()
-      gf = random.randint(1,2) + episode + 1
-      gs = random.randint(1,5)
+
+      [gf,gs] = startMatch(
+        local=True, 
+        mode=2, 
+        path1=f"/home/{userName()}/TIMES/AR_System", 
+        path2=f"/home/{userName()}/TIMES/AR_System_Reserva"
+      )
+
       sg = gf - gs
       results.append({
         'idResult': idResult,

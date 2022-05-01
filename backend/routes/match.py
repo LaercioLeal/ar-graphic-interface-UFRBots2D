@@ -21,13 +21,14 @@ def command( cmd, type=2 ):
 
 # retornar todos os experimentos cadastrados
 @app.route('/match/run', methods=['GET'])
-def startMatch():
+def startMatch(local=False, mode=2, path1='',path2=''):
   global RESULT_COMAND_SERVER
   # mode: 1 - normal
   # mode: 2 - rápido
-  mode = request.args.get('mode', default=1)
-  path1 = request.args.get('path1', default=1).replace("\"","").replace(" ","\ ")
-  path2 = request.args.get('path2', default=1).replace("\"","").replace(" ","\ ")
+  if (not local):
+    mode = request.args.get('mode', default=1)
+    path1 = request.args.get('path1', default=1).replace("\"","").replace(" ","\ ")
+    path2 = request.args.get('path2', default=1).replace("\"","").replace(" ","\ ")
 
   # modo normal
   input_ = "cd && cd /home/" + getUserName() + "/log && rcssserver server::auto_mode = true"
@@ -38,6 +39,7 @@ def startMatch():
 
   #  iniciando servidor
   t1 = threading.Thread( target=command, args=(input_,1) )
+  sleep(3)
 
   # adicionando time 1
   input_ = 'cd && cd ' + str(path1) + ' && ./start.sh'
@@ -71,4 +73,6 @@ def startMatch():
       break
 
   message="Partida finalizada"
+  if (local):
+    return tuple([int(scores[0]),int(scores[1])])
   return formatResponse(False, {'scores': {'team1': scores[0], 'team2': scores[1]}}, message=message)
