@@ -94,35 +94,12 @@ def updateTraining():
     return formatResponse(False, [], "Ensaio atualizado")
 
 # executar um ensaio
-@app.route('/experiments/training/run', methods=['POST'])
+@app.route('/experiments/training', methods=['POST'])
 def runTraining():
     data = request.get_json()
     id = data["id"]
-    episodes = data["episodes"]
-    idExperiment = data["idExperiment"]
+    results = data["results"]
 
-    results = []
-    for episode in range(episodes):
-      idResult = generateHash()
-
-      [gf,gs] = startMatch(
-        local=True, 
-        mode=2, 
-        path1=f"/home/{userName()}/TIMES/AR_System", 
-        path2=f"/home/{userName()}/TIMES/AR_System_Reserva"
-      )
-
-      sg = gf - gs
-      results.append({
-        'idResult': idResult,
-        'idExperiment': idExperiment,
-        'idTraining': id,
-        'orderR': episode + 1,
-        'gf': gf,
-        'gs': gs,
-        'sg': sg,
-      })
-    
     values = ""
     for result in results:
       idResult = result["idResult"]

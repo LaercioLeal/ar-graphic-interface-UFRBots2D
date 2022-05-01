@@ -1,10 +1,38 @@
 import api from "../index";
+import { v4 } from "uuid";
+
+async function runMatchsForTraining(training) {
+  const results = [];
+  for (let index = 1; index <= training.episodes; index++) {
+    const { data } = await api.get(`/match/run`, {
+      params: {
+        mode: 2,
+        training: "training",
+      },
+    });
+    results.push({
+      idResult: v4(),
+      idExperiment: training.idExperiment,
+      idTraining: training.id,
+      orderR: index,
+      gf: data.data.scores.team1,
+      gs: data.data.scores.team2,
+      sg: data.data.scores.team1 - data.data.scores.team2,
+    });
+  }
+  return results;
+}
 
 export async function runTraining(training) {
   try {
-    const response = await api.post("/experiments/training/run", training);
+    await runMatchsForTraining(training).then(async (results) => {
+      const response = await api.post("/experiments/training", {
+        id: training.id,
+        results,
+      });
 
-    return response.data;
+      return response.data;
+    });
   } catch (error) {
     if (error?.response?.status === 404) return false;
 

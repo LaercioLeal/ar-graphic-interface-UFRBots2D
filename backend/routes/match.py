@@ -1,6 +1,6 @@
 from flask import request
 from __main__ import app
-from codes.methods import getUserName, formatResponse, generateHash
+from codes.methods import getUserName, formatResponse, generateHash, userName
 
 import os             
 import subprocess
@@ -27,8 +27,12 @@ def startMatch(local=False, mode=2, path1='',path2=''):
   # mode: 2 - rápido
   if (not local):
     mode = request.args.get('mode', default=1)
-    path1 = request.args.get('path1', default=1).replace("\"","").replace(" ","\ ")
-    path2 = request.args.get('path2', default=1).replace("\"","").replace(" ","\ ")
+    training = request.args.get('training', default=1).replace("\"","").replace(" ","\ ")
+    path1 = request.args.get('path1', default='1').replace("\"","").replace(" ","\ ")
+    path2 = request.args.get('path2', default='1').replace("\"","").replace(" ","\ ")
+  if (training == "training"):
+    path1=f"/home/{userName()}/TIMES/AR_System"
+    path2=f"/home/{userName()}/TIMES/AR_System_Reserva"
 
   # modo normal
   input_ = "cd && cd /home/" + getUserName() + "/log && rcssserver server::auto_mode = true"
@@ -39,7 +43,6 @@ def startMatch(local=False, mode=2, path1='',path2=''):
 
   #  iniciando servidor
   t1 = threading.Thread( target=command, args=(input_,1) )
-  sleep(1)
 
   # adicionando time 1
   input_ = 'cd && cd ' + str(path1) + ' && ./start.sh'
@@ -50,8 +53,9 @@ def startMatch(local=False, mode=2, path1='',path2=''):
   t3 = threading.Thread( target=command, args=(input_,2) )
 
   t1.start()
-  sleep(2)
+  sleep(3)
   t2.start()
+  sleep(1)
   t3.start()
 
   # All threads running in parallel, now we wait
@@ -75,4 +79,7 @@ def startMatch(local=False, mode=2, path1='',path2=''):
   message="Partida finalizada"
   if (local):
     return tuple([int(scores[0]),int(scores[1])])
+  if (training == "training"):
+    import time
+    time.sleep(5)
   return formatResponse(False, {'scores': {'team1': scores[0], 'team2': scores[1]}}, message=message)
