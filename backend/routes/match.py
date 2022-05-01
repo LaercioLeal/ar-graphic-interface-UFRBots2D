@@ -39,7 +39,7 @@ def startMatch(local=False, mode=2, path1='',path2=''):
 
   #  iniciando servidor
   t1 = threading.Thread( target=command, args=(input_,1) )
-  sleep(3)
+  sleep(1)
 
   # adicionando time 1
   input_ = 'cd && cd ' + str(path1) + ' && ./start.sh'
