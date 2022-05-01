@@ -1,7 +1,7 @@
 import api from "../index";
 import { v4 } from "uuid";
 
-async function runMatchsForTraining(training) {
+export async function runMatchsForTraining(training) {
   const results = [];
   for (let index = 1; index <= training.episodes; index++) {
     const { data } = await api.get(`/match/run`, {
@@ -23,8 +23,28 @@ async function runMatchsForTraining(training) {
   return results;
 }
 
+export async function setTrainingParams(params) {
+  try {
+    const response = await api.post(
+      "/experiments/training/data/params",
+      params
+    );
+
+    return response.data;
+  } catch (error) {
+    if (error?.response?.status === 404) return false;
+
+    throw error;
+  }
+}
+
 export async function runTraining(training) {
   try {
+    await setTrainingParams({
+      alpha: training.alpha,
+      gamma: training.gamma,
+      epsilon: training.epsilon,
+    });
     await runMatchsForTraining(training).then(async (results) => {
       const response = await api.post("/experiments/training", {
         id: training.id,

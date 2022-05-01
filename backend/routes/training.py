@@ -1,7 +1,51 @@
 from __main__ import app
 from flask import request
-from routes.match import startMatch
 from codes.methods import formatResponse, generateHash, get_db_connection, userName
+
+# cadastrar um ensaio
+@app.route('/experiments/training/data/params', methods=['POST'])
+def setTrainingParams():
+    data = request.get_json()
+    epsilon = data["epsilon"]
+    alpha = data["alpha"]
+    gamma = data["gamma"]
+
+    # !inserir parâmetros (alpha, gamma, epsilon)
+    path = f"/home/{userName()}/TIMES/AR_System/src/PlayerTeams.cpp"
+    file = open(path, 'r')
+
+    new = ''
+    for line in file:
+      l = line
+      if "#define e_greedy" in l:
+        l = "#define e_greedy " + str(epsilon) + "\n"
+      elif "#define alpha" in l:
+        l = "#define alpha " + str(alpha) + "\n"
+      elif "#define gamma" in l:
+        l = "#define gamma " + str(gamma) + "\n"
+      new += l
+
+    file.close()
+
+    f = open(path, 'w')
+    f.write(new)
+    f.close()
+
+    # !zerar tabela
+    pathQ = f"/home/{userName()}/TIMES/AR_System/q.bin"
+    f_ = open(pathQ, 'wb')
+    matriz = []
+    num_states = 15
+    num_actions = 6
+    for i in range(0,num_states):
+      matriz.append( [bytes(0)] * num_actions )
+    # adicionando matriz em arquivo binário
+    for linha in matriz:
+        for elemento in linha:
+            f_.write(elemento)
+    f_.close()
+    
+    return formatResponse(False, [], "Parâmetros adicionados")
 
 # retornar todos os ensaios cadastrados
 @app.route('/experiments/training/data', methods=['GET'])
