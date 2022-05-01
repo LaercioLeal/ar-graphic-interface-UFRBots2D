@@ -92,8 +92,4 @@ export const Buttons = styled.div`
   button:first-child:nth-last-child(2) ~ button {
     margin-left: 20px;
   }
-
-  button {
-    padding: 6px 12px 0px 12px !important;
-  }
 `;

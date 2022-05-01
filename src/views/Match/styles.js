@@ -24,6 +24,7 @@ export const Section = styled.section`
   button {
     margin-left: auto;
   }
+  margin-bottom: 20px;
 `;
 
 export const Wrapper = styled.div`
@@ -67,7 +68,7 @@ export const Teammate = styled.div`
   flex-direction: column;
 
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 
   transition: border-right 1s linear, border-color 1s linear;
   border-right: ${({ divisor }) => (divisor ? "1" : "0")}px solid;

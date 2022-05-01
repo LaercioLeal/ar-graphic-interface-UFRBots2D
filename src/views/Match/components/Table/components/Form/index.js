@@ -133,11 +133,6 @@ function Form({ handleAdd, show }) {
       <S.Content>
         <S.Fieldset>
           <Grid container spacing={3}>
-            <Grid item xs={12}>
-              <S.Title>Insira os dados da partida</S.Title>
-            </Grid>
-          </Grid>
-          <Grid container spacing={3}>
             <Grid item xs={6}>
               <T.Teammate divisor={atLeastOne && !isRunning}>
                 <Teammate
@@ -190,7 +185,7 @@ function Form({ handleAdd, show }) {
             <Grid item xs={4}>
               <Button
                 type="submit"
-                variant="outlined"
+                variant="secondary"
                 onClick={() => handleSubmit(form.values)}
                 isDisabled={!form.isValid}
               >

@@ -48,9 +48,8 @@ function Heading({ handleAdd, canRunAll, runAll, data }) {
         )}
 
         <Button
-          variant="secondary"
           onClick={() => setShowAdd(!showAdd)}
-          color={showAdd ? "red" : "blue"}
+          variant={showAdd ? "outlined" : "secondary"}
         >
           {showAdd ? "Cancelar" : "+ Adicionar"}
         </Button>
