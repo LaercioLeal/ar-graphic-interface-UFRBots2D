@@ -27,7 +27,7 @@ def startMatch(local=False, mode=2, path1='',path2=''):
   # mode: 2 - rápido
   if (not local):
     mode = request.args.get('mode', default=1)
-    training = request.args.get('training', default=1).replace("\"","").replace(" ","\ ")
+    training = request.args.get('training', default='1').replace("\"","").replace(" ","\ ")
     path1 = request.args.get('path1', default='1').replace("\"","").replace(" ","\ ")
     path2 = request.args.get('path2', default='1').replace("\"","").replace(" ","\ ")
   if (training == "training"):
