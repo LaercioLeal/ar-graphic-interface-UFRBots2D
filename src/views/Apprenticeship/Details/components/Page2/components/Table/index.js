@@ -126,7 +126,7 @@ export default function Table({
         expandableRowExpanded={(row) => row.defaultExpanded}
         subHeaderComponent={
           <Heading
-            handleAdd={(values) => handleAdd(values)}
+            handleAdd={handleAdd}
             data={data}
             canRunAll={data.filter((item) => item.status === "wait").length > 0}
             runAll={runAll}
