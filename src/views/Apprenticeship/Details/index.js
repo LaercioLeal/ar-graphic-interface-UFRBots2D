@@ -50,42 +50,45 @@ export default function Details() {
     setValue(index);
   };
 
-  const fetchData = useCallback(async () => {
-    const { createdAt, title, id } = query;
-    setExperiment({ createdAt, title, id });
+  const fetchData = useCallback(
+    async (first = false) => {
+      const { createdAt, title, id } = query;
+      setExperiment({ createdAt, title, id });
 
-    const data = await getTrainingData(id);
-    if (data.isError) {
-      enqueueSnackbar(data.message, { variant: "error" });
-      history.replace(routes.apprenticeship.details);
-    }
-    if (queue.queue.length === 0) {
-      for (const item of data.data) {
-        if (["queue", "running"].includes(item.status)) {
-          await queue.add({ ...item, status: "wait" });
-          setQueue(queue);
+      const data = await getTrainingData(id);
+      if (data.isError) {
+        enqueueSnackbar(data.message, { variant: "error" });
+        history.replace(routes.apprenticeship.details);
+      }
+      if (queue.queue.length === 0 && first) {
+        for (const item of data.data) {
+          if (["queue", "running"].includes(item.status)) {
+            await queue.add({ ...item, status: "wait" });
+            setQueue(queue);
+          }
         }
       }
-    }
-    setTrainingData(data.data);
-    let hasStatusDone =
-      data.data.filter((item) => item.status === "done").length === 0;
-    if (isLoading) {
-      setTimeout(() => {
-        setLoading(false);
-        setValue(hasStatusDone ? 1 : 0);
-      }, 1000);
-    }
-  }, [
-    enqueueSnackbar,
-    setTrainingData,
-    setExperiment,
-    setQueue,
-    history,
-    query,
-    queue,
-    isLoading,
-  ]);
+      setTrainingData(data.data);
+      let hasStatusDone =
+        data.data.filter((item) => item.status === "done").length === 0;
+      if (isLoading) {
+        setTimeout(() => {
+          setLoading(false);
+          setValue(hasStatusDone ? 1 : 0);
+        }, 1000);
+      }
+    },
+    [
+      enqueueSnackbar,
+      setTrainingData,
+      setExperiment,
+      setQueue,
+      history,
+      query,
+      queue,
+      isLoading,
+    ]
+  );
 
   const handleAdd = useCallback(
     (values) => {
@@ -138,7 +141,7 @@ export default function Details() {
   );
 
   useLayoutEffect(() => {
-    fetchData();
+    fetchData(true);
   }, []); // eslint-disable-line
 
   useEffect(() => {
