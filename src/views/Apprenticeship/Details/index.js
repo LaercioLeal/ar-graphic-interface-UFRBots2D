@@ -59,6 +59,14 @@ export default function Details() {
       enqueueSnackbar(data.message, { variant: "error" });
       history.replace(routes.apprenticeship.details);
     }
+    if (queue.queue.length === 0) {
+      for (const item of data.data) {
+        if (["queue", "running"].includes(item.status)) {
+          await queue.add({ ...item, status: "wait" });
+          setQueue(queue);
+        }
+      }
+    }
     setTrainingData(data.data);
     let hasStatusDone =
       data.data.filter((item) => item.status === "done").length === 0;
@@ -72,8 +80,10 @@ export default function Details() {
     enqueueSnackbar,
     setTrainingData,
     setExperiment,
+    setQueue,
     history,
     query,
+    queue,
     isLoading,
   ]);
 
@@ -148,6 +158,7 @@ export default function Details() {
         fetchData();
         queue.run().then((_) => {
           fetchData();
+          setQueue(queue);
           enqueueSnackbar("Ensaio finalizado", { variant: "success" });
         });
       });
