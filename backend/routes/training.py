@@ -122,9 +122,6 @@ def runTraining():
         'gs': gs,
         'sg': sg,
       })
-
-    import time
-    time.sleep(5)
     
     values = ""
     for result in results:
