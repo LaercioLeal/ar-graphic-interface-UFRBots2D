@@ -22,6 +22,12 @@ function Heading({ handleAdd, canRunAll, getDocument, runAll, data }) {
 
   return (
     <S.Container>
+      {percentage > 0 && (
+        <S.Obs>
+          *as partidas não ficam salvas, faça do download dos resultados antes
+          de sair dessa tela!
+        </S.Obs>
+      )}
       <S.Top>
         <S.Title>{data.length > 0 && "Lista de Partidas"}</S.Title>
 
@@ -47,18 +53,18 @@ function Heading({ handleAdd, canRunAll, getDocument, runAll, data }) {
             </Button>
           </>
         )}
-        {percentage > 0 && (
-          <Button color="blue" onClick={getDocument}>
-            DOWNLOAD DOS RESULTADOS
-            <Icons.CloudDownload />
-          </Button>
-        )}
         <Button
           onClick={() => setShowAdd(!showAdd)}
           variant={showAdd ? "outlined" : "secondary"}
         >
           {showAdd ? "Cancelar" : "+ Adicionar"}
         </Button>
+        {percentage > 0 && (
+          <Button color="blue" onClick={getDocument}>
+            DOWNLOAD DOS RESULTADOS
+            <Icons.CloudDownload />
+          </Button>
+        )}
       </S.Top>
       <Form show={showAdd} handleAdd={handleAdd} />
     </S.Container>

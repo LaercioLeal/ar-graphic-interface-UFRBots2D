@@ -30,6 +30,5 @@ export async function downloadResults(dados) {
     extraLength: 3,
     writeOptions: {},
   });
-  console.log(dados);
   return true;
 }
