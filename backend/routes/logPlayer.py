@@ -15,6 +15,7 @@ def getLogs():
   try:
     os.chdir(dir)
     for file in glob.glob("*.rcg"):
+      if (file == "incomplete.rcg"): continue
       parts = file.replace(".rcg","").split('-')
 
       createdAt = f"{parts[0][6:8]}/{parts[0][4:6]}/{parts[0][0:4]}"
