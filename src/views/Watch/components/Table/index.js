@@ -3,7 +3,7 @@ import * as Icons from "@material-ui/icons";
 import DataTable from "react-data-table-component";
 
 import * as S from "./styles";
-import { Heading } from "./components";
+import { Empty, Heading } from "./components";
 import { Button } from "components";
 
 const paginationOptions = {
@@ -79,8 +79,13 @@ export default function Table({ data, runLog }) {
         expandableRows={false}
         expandOnRowClicked={false}
         expandableRowExpanded={(row) => row.defaultExpanded}
-        subHeaderComponent={<Heading />}
+        subHeaderComponent={
+          <Heading
+            title={data.length > 0 ? "Arquivos de Registro das Partidas" : ""}
+          />
+        }
         sortIcon={<Icons.ArrowDownwardOutlined style={{ marginLeft: 4 }} />}
+        noDataComponent={<Empty />}
       />
     </S.Container>
   );

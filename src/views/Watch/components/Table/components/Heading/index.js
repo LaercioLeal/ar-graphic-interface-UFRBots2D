@@ -2,11 +2,11 @@ import React from "react";
 
 import * as S from "./styles";
 
-function Heading() {
+function Heading({ title }) {
   return (
     <S.Container>
       <S.Top>
-        <S.Title>{"Logs das partidas"}</S.Title>
+        <S.Title>{title}</S.Title>
       </S.Top>
     </S.Container>
   );

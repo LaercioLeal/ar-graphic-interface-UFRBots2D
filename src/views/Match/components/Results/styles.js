@@ -23,6 +23,10 @@ export const Container = styled(motion.section)`
   margin-bottom: 10px;
   margin-top: -50px;
 
+  ${themes.medias.lessThan("hd")`
+    margin-top: -20px;
+  `}
+
   ${({ absolute }) =>
     absolute &&
     css`

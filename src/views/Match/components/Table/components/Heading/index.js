@@ -22,7 +22,7 @@ function Heading({ handleAdd, canRunAll, getDocument, runAll, data }) {
 
   return (
     <S.Container>
-      {percentage > 0 && (
+      {data.length > 0 && (
         <S.Obs>
           *as partidas não ficam salvas, faça do download dos resultados antes
           de sair dessa tela!

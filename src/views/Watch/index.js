@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 
-import { Container, HeadingPage } from "components";
+import { Container, HeadingPage, Loading } from "components";
 
 import watchIcon from "assets/icon/watch.png";
 import { getLogs, runLog } from "services";
@@ -9,14 +9,19 @@ import { Table } from "./components";
 
 function Watch() {
   const { enqueueSnackbar } = useSnackbar();
-  const [logs, setLogs] = useState();
+  const [isLoading, setLoading] = useState(true);
+  const [logs, setLogs] = useState([]);
 
   const fetchLogs = useCallback(
     (path) => {
       getLogs(path || "default").then(({ data }) => {
         const { logs, message } = data;
         if (!!message) enqueueSnackbar(message, { variant: "info" });
-        setLogs(logs);
+
+        setTimeout(() => {
+          setLoading(false);
+          setLogs(logs || []);
+        }, 1000);
       });
     },
     [enqueueSnackbar]
@@ -29,9 +34,8 @@ function Watch() {
   return (
     <Container>
       <HeadingPage page="watch" title="Watch" icon={watchIcon} />
-      {!!logs && logs?.length > 0 && (
-        <Table data={logs} runLog={(log) => runLog(log)} />
-      )}
+      {isLoading && <Loading />}
+      {!isLoading && <Table data={logs} runLog={(log) => runLog(log)} />}
     </Container>
   );
 }
