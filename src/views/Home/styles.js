@@ -12,14 +12,23 @@ export const Title = styled(motion.h1)`
   font-family: ${themes.fonts.bold};
 
   color: ${themes.colors.gray};
+  cursor: none;
 
   ${themes.medias.lessThan("hd")`
     font-size: ${rem(20)};
   `}
 
+  :hover {
+    color: ${themes.colors.primary};
+    span {
+      color: ${themes.colors.primary};
+    }
+  }
+
   span {
     margin-bottom: 20px;
     line-height: 50px;
+    font-size: ${rem(30)};
     text-decoration-line: underline;
     text-decoration-style: double;
   }

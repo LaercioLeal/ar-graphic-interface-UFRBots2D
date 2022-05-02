@@ -10,7 +10,7 @@ import watchdIcon from "assets/icon/watch.png";
 const items = [
   {
     id: "1",
-    title: "Jogue uma partida ;)",
+    title: "Jogue algumas partidas ;)",
     icon: goalIcon,
     link: routes.match,
     page: "match",
@@ -24,22 +24,21 @@ const items = [
   },
   {
     id: "3",
-    title: "Venha conhecer um pouco da teoria. Consulte alguns materiais aqui",
+    title: "Consulte alguns materiais aqui",
     icon: studentIcon,
     link: routes.study.material,
     page: "material",
   },
   {
     id: "4",
-    title:
-      "Quer aprender melhor como usar a interface? aqui temos alguns tutoriais",
+    title: "Dúvida de como usar? aqui temos alguns tutoriais",
     icon: tutorialIcon,
     link: routes.tutorial,
     page: "tutorial",
   },
   {
     id: "5",
-    title: "Venha rever os grandes momentos dos jogos já realizados por aqui",
+    title: "Reveja jogos já realizados por aqui",
     icon: watchdIcon,
     link: routes.watch,
     page: "watch",

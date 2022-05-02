@@ -47,16 +47,16 @@ function About() {
               <span className="higher">ARbot</span>
             </S.Title>
             <S.Title>
-              é uma interface, dedicada ao auxílio nos estudos do Aprendizado
-              por Reforço (AR), uma técnica de Inteligência Artificial bastante
-              conhecida e útil. O futebol de robôs aqui abordado dispõe de um
+              é um sistema, dedicada ao auxílio nos estudos do Aprendizado por
+              Reforço (AR), uma técnica de Inteligência Artificial bastante
+              conhecida e útil. O futebol de robôs aqui abordado, dispõe de um
               execelente ambiente para execução de experimentos.
             </S.Title>
             <br />
             <S.Title>
               Seu fomento ocorreu dentro da UFRBots, a equipe de futebol de
               robôs da UFRB (Universidade Federal do Recôncavo da Bahia), como
-              um dos processos de Trabalho de Conclusão de Curso, do bacharelado
+              uma das etapas de Trabalho de Conclusão de Curso, do Bacharelado
               em Engenharia de Computação.
             </S.Title>
           </div>

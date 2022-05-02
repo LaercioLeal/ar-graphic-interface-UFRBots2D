@@ -18,10 +18,10 @@ function Home() {
         variants={animate.heading.container}
       >
         <S.Title variants={animate.heading.titles}>
-          <span>Bem-vindo ao ARbot</span>
+          <span>ARbot</span>
         </S.Title>
         <S.Title variants={animate.heading.titles}>
-          Interface Gráfica Didática para o Ensino De Aprendizado por Reforço
+          Aprendizado por Reforço com Futebol de Robôs
         </S.Title>
       </motion.div>
       <S.WrapperItems
