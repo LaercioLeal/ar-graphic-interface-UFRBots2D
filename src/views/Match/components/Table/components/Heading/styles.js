@@ -15,7 +15,15 @@ export const Top = styled.div`
   margin-bottom: 20px;
 
   button {
-    width: 31%;
+    width: 20%;
+
+    :first-child {
+      width: 30%;
+    }
+  }
+
+  svg {
+    margin-left: 10px;
   }
 
   .MuiInputBase-root {

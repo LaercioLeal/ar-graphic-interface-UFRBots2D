@@ -8,6 +8,7 @@ import { Results, Table } from "./components";
 import Queue from "./queue";
 
 import { v4 } from "uuid";
+import { downloadResults } from "./funtcions";
 
 function Match() {
   const { enqueueSnackbar } = useSnackbar();
@@ -17,6 +18,17 @@ function Match() {
   const queue = useMemo(() => {
     return new Queue();
   }, []);
+
+  const getDocument = async () => {
+    const res = await downloadResults(
+      data.filter((item) => item.status === "done")
+    );
+    if (!res)
+      enqueueSnackbar("Tente Novamente!", {
+        variant: "error",
+      });
+    else enqueueSnackbar("Download realizado!", { variant: "success" });
+  };
 
   const handleAdd = (values) => {
     const { mode, teams } = values;
@@ -114,6 +126,7 @@ function Match() {
       <S.Content>
         <Table
           data={data}
+          getDocument={getDocument}
           runAll={runAll}
           run={(match) => {
             queue.add(match).then((n) => {

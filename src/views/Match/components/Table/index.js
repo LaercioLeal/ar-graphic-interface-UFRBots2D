@@ -14,7 +14,14 @@ const paginationOptions = {
   selectAllRowsItemText: "Todos",
 };
 
-export default function Table({ data, runAll, run, handleAdd, handleRemove }) {
+export default function Table({
+  data,
+  runAll,
+  run,
+  getDocument,
+  handleAdd,
+  handleRemove,
+}) {
   const [tableData, setTableData] = useState([]);
 
   const tableColumns = [
@@ -107,6 +114,7 @@ export default function Table({ data, runAll, run, handleAdd, handleRemove }) {
         subHeaderComponent={
           <Heading
             handleAdd={handleAdd}
+            getDocument={getDocument}
             data={data}
             canRunAll={data.filter((item) => item.status === "wait").length > 0}
             runAll={runAll}

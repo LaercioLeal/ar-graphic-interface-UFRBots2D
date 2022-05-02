@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 
 import { Button, Percentage } from "components";
+import * as Icons from "@material-ui/icons";
 
 import * as S from "./styles";
 import Form from "../Form";
 
-function Heading({ handleAdd, canRunAll, runAll, data }) {
+function Heading({ handleAdd, canRunAll, getDocument, runAll, data }) {
   const [showAdd, setShowAdd] = useState(true);
   const [showRunAll, setShowRunAll] = useState(false);
 
@@ -46,7 +47,12 @@ function Heading({ handleAdd, canRunAll, runAll, data }) {
             </Button>
           </>
         )}
-
+        {percentage > 0 && (
+          <Button color="blue" onClick={getDocument}>
+            DOWNLOAD DOS RESULTADOS
+            <Icons.CloudDownload />
+          </Button>
+        )}
         <Button
           onClick={() => setShowAdd(!showAdd)}
           variant={showAdd ? "outlined" : "secondary"}
