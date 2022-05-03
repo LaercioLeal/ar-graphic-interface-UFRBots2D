@@ -3,6 +3,7 @@ from flask import request
 from codes.methods import formatResponse, getUserName, userName
 
 import os, glob
+import subprocess
 
 # retornar arquivos .rcg para listagem
 @app.route('/logplayer/logs', methods=['GET'])
@@ -29,6 +30,10 @@ def getLogs():
       time2 = placar2[0]
       placar2 = placar2[len(placar2)-1]
 
+      filercl = file.replace(".rcg",".rcl")
+      sizeRCG = int(subprocess.getoutput(f"du {dir}/{file}").split()[0]) / 1000
+      sizeRCL = int(subprocess.getoutput(f"du {dir}/{filercl}").split()[0]) / 1000
+
       logs.append({
         "file": file,
         "path": dir,
@@ -36,7 +41,8 @@ def getLogs():
         "placar2": placar2,
         "time1": time1,
         "time2": time2,
-        "createdAt": createdAt
+        "createdAt": createdAt,
+        "size": round(sizeRCG + sizeRCL, 2)
       })
     return formatResponse(False, { "logs": logs })
   except:

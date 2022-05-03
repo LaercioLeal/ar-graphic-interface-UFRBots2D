@@ -43,6 +43,11 @@ export default function Table({ data, runLog }) {
       sortable: true,
     },
     {
+      name: "Tamanho",
+      cell: ({ size }) => <div>{size} MB</div>,
+      sortable: true,
+    },
+    {
       name: "Reproduzir",
       cell: ({ path, file }) => (
         <S.Buttons>
@@ -82,6 +87,7 @@ export default function Table({ data, runLog }) {
         subHeaderComponent={
           <Heading
             title={data.length > 0 ? "Arquivos de Registro das Partidas" : ""}
+            sizeMB={data.map((item) => item.size).reduce((a, b) => a + b, 0)}
           />
         }
         sortIcon={<Icons.ArrowDownwardOutlined style={{ marginLeft: 4 }} />}

@@ -7,12 +7,18 @@ export const Container = styled.div`
   margin-top: 16px;
 `;
 
+export const Obs = styled.p`
+  font-size: ${rem(10)};
+  color: ${themes.colors.blue};
+  font-weight: ${themes.fonts.text};
+  margin-top: 10px;
+  margin-bottom: 20px;
+`;
+
 export const Top = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  margin-bottom: 20px;
 
   button {
     width: 31%;
@@ -24,11 +30,10 @@ export const Top = styled.div`
 `;
 
 export const Title = styled.h1`
-  margin: 20px 0;
-
   line-height: 22px;
   font-size: ${rem(16)};
   font-family: ${themes.fonts.bold};
 
-  color: ${themes.colors.darkblue};
+  color: ${({ memory }) =>
+    !!memory ? themes.colors.primary : themes.colors.darkblue};
 `;
