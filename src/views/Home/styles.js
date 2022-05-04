@@ -4,7 +4,9 @@ import themes from "Provider/themes";
 import { motion } from "framer-motion";
 import { NavLink } from "components";
 
-import { Container } from "./components/Item/styles";
+import { Container as ItemContainer } from "./components/Item/styles";
+
+export const Container = styled.div``;
 
 export const Title = styled(motion.h1)`
   line-height: 24px;
@@ -36,7 +38,7 @@ export const Title = styled(motion.h1)`
 
 export const WrapperItems = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 20px;
 
   margin-top: 70px;
@@ -47,7 +49,7 @@ export const WrapperItems = styled(motion.div)`
 `;
 
 export const Item = styled(motion.div)`
-  ${Container}
+  ${ItemContainer}
 `;
 
 export const Link = styled(NavLink)``;

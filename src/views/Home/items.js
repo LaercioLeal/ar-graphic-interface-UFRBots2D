@@ -6,6 +6,8 @@ import studentIcon from "assets/icon/student.png";
 import tutorialIcon from "assets/icon/tutorial.png";
 import experimentsIcon from "assets/icon/experiments.png";
 import watchdIcon from "assets/icon/watch.png";
+import quizIcon from "assets/icon/quiz.png";
+import codingIcon from "assets/icon/coding.png";
 
 const items = [
   {
@@ -28,6 +30,20 @@ const items = [
     icon: studentIcon,
     link: routes.study.material,
     page: "material",
+  },
+  {
+    id: "7",
+    title: "Venha testar seus conhecimentos com um quiz",
+    icon: quizIcon,
+    link: routes.study.quiz,
+    page: "quiz",
+  },
+  {
+    id: "8",
+    title: "Entenda um pouco sobre o código de AR",
+    icon: codingIcon,
+    link: routes.study.code,
+    page: "code",
   },
   {
     id: "4",
