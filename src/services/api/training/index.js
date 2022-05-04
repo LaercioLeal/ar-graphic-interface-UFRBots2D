@@ -1,7 +1,7 @@
+import { generateHash } from "utils";
 import api from "../index";
-import { v4 } from "uuid";
 
-export async function runMatchsForTraining(training) {
+export async function runMatchesForTraining(training) {
   const results = [];
   for (let index = 1; index <= training.episodes; index++) {
     const { data } = await api.get(`/match/run`, {
@@ -11,7 +11,7 @@ export async function runMatchsForTraining(training) {
       },
     });
     results.push({
-      idResult: v4(),
+      idResult: generateHash(),
       idExperiment: training.idExperiment,
       idTraining: training.id,
       orderR: index,
@@ -45,7 +45,7 @@ export async function runTraining(training) {
       gamma: training.gamma,
       epsilon: training.epsilon,
     });
-    await runMatchsForTraining(training).then(async (results) => {
+    await runMatchesForTraining(training).then(async (results) => {
       const response = await api.post("/experiments/training", {
         id: training.id,
         results,

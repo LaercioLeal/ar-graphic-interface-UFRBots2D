@@ -7,8 +7,8 @@ import goalIcon from "assets/icon/goal.png";
 import { Results, Table } from "./components";
 import Queue from "./queue";
 
-import { v4 } from "uuid";
 import { downloadResults } from "./funtcions";
+import { generateHash } from "utils";
 
 function Match() {
   const { enqueueSnackbar } = useSnackbar();
@@ -40,7 +40,7 @@ function Match() {
         status: "wait",
         team1: { ...first, score: "" },
         team2: { ...second, score: "" },
-        id: v4(),
+        id: generateHash(),
       },
     ]);
   };
