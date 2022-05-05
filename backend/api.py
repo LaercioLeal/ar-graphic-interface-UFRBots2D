@@ -11,6 +11,7 @@ app.config["DEBUG"] = True
 
 # importação dos arquivos de rotas
 import routes.data
+import routes.quiz
 import routes.match
 import routes.monitor
 import routes.training

@@ -42,3 +42,12 @@ CREATE TABLE IF NOT EXISTS results (
     REFERENCES training(id)
     ON DELETE CASCADE
 );
+
+-- order === número da partida
+CREATE TABLE IF NOT EXISTS quizResponses ( 
+    id TEXT NOT NULL,
+    correctQuestions INTEGER NOT NULL,
+    incorrectQuestions INTEGER NOT NULL,
+    totalScore INTEGER NOT NULL,
+    createdAt TEXT NOT NULL
+);
