@@ -2,6 +2,7 @@ import axios from "axios";
 
 export * from "./dir";
 export * from "./data";
+export * from "./quiz";
 export * from "./match";
 export * from "./monitor";
 export * from "./results";

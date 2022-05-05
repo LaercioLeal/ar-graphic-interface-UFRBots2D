@@ -9,14 +9,18 @@ function Heading({ title, sizeMB }) {
 
   return (
     <S.Container>
-      <S.Top>
-        <S.Title>{title}</S.Title>
-        <S.Title memory>Total {tagSize}</S.Title>
-      </S.Top>
-      <S.Obs>
-        *Atenção ao acumular muitos arquivos de logs, apague-os periodicamente!
-        Acesse o diretório "/log"
-      </S.Obs>
+      {title && (
+        <>
+          <S.Top>
+            <S.Title>{title}</S.Title>
+            <S.Title memory>Total {tagSize}</S.Title>
+          </S.Top>
+          <S.Obs>
+            *Atenção ao acumular muitos arquivos de logs, apague-os
+            periodicamente! Acesse o diretório "/log"
+          </S.Obs>
+        </>
+      )}
     </S.Container>
   );
 }

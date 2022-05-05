@@ -7,6 +7,7 @@ export default function Empty() {
     <S.Container>
       <S.Image />
       <h1>Não foram encontrados registros :/</h1>
+      <h1>Execute partidas para obtê-los</h1>
       <h3>
         Caso deseja importar algum log, é só colocar uma cópia na pasta "log"
       </h3>
