@@ -11,6 +11,11 @@ export default function Question({ question, onSelect }) {
           <h1>{question.title}</h1>
         </div>
       </S.Title>
+      <S.Legend>
+        {!!question.selected
+          ? "Confira com calma sua resposta"
+          : "Escolha uma das opções"}
+      </S.Legend>
       <S.Options
         initial="hidden"
         animate="visible"

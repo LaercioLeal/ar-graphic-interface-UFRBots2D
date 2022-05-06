@@ -58,10 +58,23 @@ export const Title = styled.div`
   }
 `;
 
+export const Legend = styled.p`
+  transition: all 0.5s;
+  line-height: 22px;
+  font-size: ${rem(16)};
+  font-family: ${themes.fonts.bold};
+
+  color: ${themes.colors.blue};
+
+  margin: 70px 0 20px 0;
+
+  text-align: center;
+`;
+
 export const Options = styled(motion.div)`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   column-gap: 20px;
 
-  margin: 100px 0;
+  margin: 0 0 100px;
 `;

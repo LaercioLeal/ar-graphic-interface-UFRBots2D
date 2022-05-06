@@ -132,6 +132,9 @@ export default function Responding({ setResponding, setLastResult }) {
         >
           <Icons.ArrowBack /> Anterior
         </Button>
+        <Button color="red" onClick={() => setResponding(false)}>
+          <Icons.ExitToApp /> Sair
+        </Button>
         {canFinish && (
           <Button color="success" isDisabled={!canFinish} onClick={finish}>
             <Icons.Check /> Finalizar
