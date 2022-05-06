@@ -20,7 +20,7 @@ export const Title = styled.div`
     }
   }
   animation-name: showQuestion;
-  animation-duration: 1s;
+  animation-duration: 0.5s;
 
   display: flex;
   width: 100%;

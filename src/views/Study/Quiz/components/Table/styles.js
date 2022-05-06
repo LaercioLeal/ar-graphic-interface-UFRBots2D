@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { rem, rgba, size } from "polished";
 import themes from "Provider/themes";
 
-const getCategoria = (note) => {
+export const getCategoria = (note) => {
   return note === 100
     ? 100
     : note >= 75
@@ -14,7 +14,7 @@ const getCategoria = (note) => {
     : 0;
 };
 
-const notes = {
+export const notes = {
   100: themes.colors.success,
   75: themes.colors.darkblue,
   50: themes.colors.blue,

@@ -5,12 +5,13 @@ import * as S from "./styles";
 
 import quizIcon from "assets/icon/quiz.png";
 import { getQuizResponses } from "services";
-import { Responding, Table } from "./components";
+import { LastResult, Responding, Table } from "./components";
 
 function Quiz() {
   const [data, setData] = useState([]);
   const [isLoading, setLoading] = useState(true);
   const [isResponding, setResponding] = useState(false);
+  const [lastResult, setLastResult] = useState(null);
 
   useEffect(() => {
     if (!isResponding)
@@ -34,13 +35,21 @@ function Quiz() {
               : "Faça sua primeira tentativa ;D"}
           </S.Title>
           <S.CustomButton onClick={() => setResponding(!isResponding)}>
-            <S.Title>Responder Quiz</S.Title>
+            <S.Title>
+              {!!lastResult ? "Responder Novamente" : "Responder Quiz"}
+            </S.Title>
             <Icons.PlayArrow />
           </S.CustomButton>
+          {!!lastResult && <LastResult data={lastResult} />}
           {data.length > 0 && <Table data={data} />}
         </S.Container>
       )}
-      {isResponding && <Responding setResponding={setResponding} />}
+      {isResponding && (
+        <Responding
+          setResponding={setResponding}
+          setLastResult={setLastResult}
+        />
+      )}
     </Container>
   );
 }

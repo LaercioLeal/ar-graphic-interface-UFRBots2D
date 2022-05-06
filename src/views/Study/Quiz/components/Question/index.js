@@ -17,8 +17,8 @@ export default function Question({ question, onSelect }) {
         variants={{
           visible: {
             transition: {
-              delayChildren: 0.3,
-              staggerChildren: 0.1,
+              delayChildren: 0.2,
+              staggerChildren: 0.05,
             },
           },
         }}

@@ -10,7 +10,7 @@ import { useSnackbar } from "notistack";
 
 const NUM_OF_QUESTIONS = 3;
 
-export default function Responding({ setResponding }) {
+export default function Responding({ setResponding, setLastResult }) {
   const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setLoading] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -42,35 +42,47 @@ export default function Responding({ setResponding }) {
     );
   }, []);
 
-  const finish = useCallback(() => {
-    setLoading(true);
-    setTimeout(async () => {
-      await add().then((_) => {
-        setLoading(false);
-        setResponding(false);
-      });
-    }, 1000);
-  }, [setResponding]);
-
-  const add = async () => {
+  const add = useCallback(async () => {
     const date = new Date();
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
 
-    const correctQuestions = 3;
-    const incorrectQuestions = 0;
-    const totalScore = 100;
+    const correctQuestions = questions.filter(
+      (item) => item.selected === item.correct
+    ).length;
+    const incorrectQuestions = NUM_OF_QUESTIONS - correctQuestions;
+    const totalScore = Math.trunc(100 / NUM_OF_QUESTIONS) * correctQuestions;
 
-    await addQuizResponses({
+    return await addQuizResponses({
       correctQuestions,
       incorrectQuestions,
       totalScore,
       createdAt: `${day < 10 ? "0" + day : day}/${
         month < 10 ? "0" + month : month
       }/${year}`,
+    }).then((_) => {
+      return {
+        correctQuestions,
+        incorrectQuestions,
+        totalScore,
+        createdAt: `${day < 10 ? "0" + day : day}/${
+          month < 10 ? "0" + month : month
+        }/${year}`,
+      };
     });
-  };
+  }, [questions]);
+
+  const finish = useCallback(() => {
+    setLoading(true);
+    setTimeout(async () => {
+      await add().then((response) => {
+        setLastResult(response);
+        setLoading(false);
+        setResponding(false);
+      });
+    }, 1000);
+  }, [setResponding, setLastResult, add]);
 
   const onSelect = useCallback(
     (option) => {
