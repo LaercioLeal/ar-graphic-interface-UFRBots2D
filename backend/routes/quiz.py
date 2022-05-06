@@ -1,5 +1,5 @@
 from __main__ import app
-from requests import request
+from flask import request
 from codes.methods import formatResponse, generateHash, get_db_connection
 
 # retornar todos os experimentos cadastrados
