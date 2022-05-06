@@ -5,16 +5,19 @@ import { questions as items } from "./questions";
 
 import * as S from "./styles";
 import { Button, Loading } from "components";
+import Question from "../Question";
+import { useSnackbar } from "notistack";
 
 const NUM_OF_QUESTIONS = 3;
 
 export default function Responding({ setResponding }) {
+  const { enqueueSnackbar } = useSnackbar();
   const [isLoading, setLoading] = useState(false);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [questions, setQuestions] = useState([]);
 
   const canFinish = useMemo(() => {
-    return !questions.find((item) => !item.answered);
+    return !questions.find((item) => item.selected === null);
   }, [questions]);
 
   const scrollToTop = () => {
@@ -34,7 +37,7 @@ export default function Responding({ setResponding }) {
     const selectees = items.filter((item) => drawn.includes(item.id));
     setQuestions(
       selectees.map((item) => {
-        return { ...item, answered: false, selected: null };
+        return { ...item, selected: null };
       })
     );
   }, []);
@@ -43,8 +46,8 @@ export default function Responding({ setResponding }) {
     setLoading(true);
     setTimeout(async () => {
       await add().then((_) => {
-        setResponding(false);
         setLoading(false);
+        setResponding(false);
       });
     }, 1000);
   }, [setResponding]);
@@ -54,19 +57,44 @@ export default function Responding({ setResponding }) {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
+
+    const correctQuestions = 3;
+    const incorrectQuestions = 0;
+    const totalScore = 100;
+
     await addQuizResponses({
-      correctQuestions: "",
-      incorrectQuestions: "",
-      totalScore: "",
+      correctQuestions,
+      incorrectQuestions,
+      totalScore,
       createdAt: `${day < 10 ? "0" + day : day}/${
         month < 10 ? "0" + month : month
       }/${year}`,
     });
   };
 
+  const onSelect = useCallback(
+    (option) => {
+      setQuestions(
+        questions.map((question, index) => {
+          if (index === currentQuestion) {
+            return {
+              ...question,
+              selected: option,
+            };
+          }
+          return question;
+        })
+      );
+    },
+    [currentQuestion, questions, setQuestions]
+  );
+
   useEffect(() => {
     getQuestions();
-  }, [getQuestions]);
+    enqueueSnackbar("Selecione uma alternativa para cada questão!", {
+      variant: "info",
+    });
+  }, [getQuestions, enqueueSnackbar]);
 
   if (isLoading) return <Loading />;
 
@@ -74,12 +102,11 @@ export default function Responding({ setResponding }) {
     <S.Container>
       <S.Middle>
         {!!questions && questions.length > 0 && (
-          <div>
-            <div>{questions[currentQuestion].title}</div>
-            {questions[currentQuestion].options.map((option) => {
-              return <div>{option}</div>;
-            })}
-          </div>
+          <Question
+            key={currentQuestion}
+            onSelect={onSelect}
+            question={questions[currentQuestion]}
+          />
         )}
       </S.Middle>
       <S.Bottom>
