@@ -4,7 +4,9 @@ import * as S from "./styles";
 
 function Heading({ title, sizeMB }) {
   const tagSize = useMemo(() => {
-    return sizeMB >= 900 ? `${(sizeMB / 1000).toFixed(2)} GB` : `${sizeMB} MB`;
+    return sizeMB >= 900
+      ? `${(sizeMB / 1000).toFixed(2)} GB`
+      : `${sizeMB.toFixed(2)} MB`;
   }, [sizeMB]);
 
   return (

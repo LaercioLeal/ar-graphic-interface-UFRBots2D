@@ -1,6 +1,7 @@
 from __main__ import app
 from flask import request
 from codes.methods import formatResponse, generateHash, get_db_connection, userName
+import os
 
 # cadastrar um ensaio
 @app.route('/experiments/training/data/params', methods=['POST'])
@@ -44,6 +45,8 @@ def setTrainingParams():
         for elemento in linha:
             f_.write(elemento)
     f_.close()
+
+    os.system("cd && cd TIMES/AR_System/ && ./configure && make")
     
     return formatResponse(False, [], "Parâmetros adicionados")
 
