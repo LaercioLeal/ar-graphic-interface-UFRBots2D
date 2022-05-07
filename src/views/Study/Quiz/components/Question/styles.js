@@ -30,7 +30,10 @@ export const Title = styled.div`
   overflow: hidden;
 
   > div {
-    padding: 30px;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    text-align: justify;
     margin: 10px 50px 10px 10px;
     width: 100%;
     border-radius: 12px;

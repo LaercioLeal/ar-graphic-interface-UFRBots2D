@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { addQuizResponses } from "services";
 import * as Icons from "@material-ui/icons";
-import { questions as items } from "./questions";
+import { questions as items } from "../../questions";
 
 import * as S from "./styles";
 import { Button, Loading } from "components";
@@ -24,25 +24,22 @@ export default function Responding({ setResponding, setLastResult }) {
     window.scrollTo(0, 0);
   };
 
-  const sort = () => {
+  const getIds = useCallback(() => {
     let ids = [];
-    for (let index = 0; index < NUM_OF_QUESTIONS; index++) {
+    for (let index = 0; index < items.length; index++) {
       ids.push(index + 1);
     }
-    return ids;
-  };
+    return ids.sort(() => Math.random() - 0.5).slice(0, NUM_OF_QUESTIONS);
+  }, []);
 
   const getQuestions = useCallback(() => {
-    const drawn = sort();
+    const drawn = getIds();
     const selectees = items.filter((item) => drawn.includes(item.id));
-    setQuestions(
-      selectees
-        .map((item) => {
-          return { ...item, selected: null };
-        })
-        .sort(() => Math.random() - 0.5)
-    );
-  }, []);
+    let q = selectees.map((item, index) => {
+      return { ...item, id: index + 1, selected: null };
+    });
+    setQuestions(q);
+  }, [setQuestions, getIds]);
 
   const add = useCallback(async () => {
     const date = new Date();
@@ -54,7 +51,10 @@ export default function Responding({ setResponding, setLastResult }) {
       (item) => item.selected === item.correct
     ).length;
     const incorrectQuestions = NUM_OF_QUESTIONS - correctQuestions;
-    const totalScore = Math.trunc(100 / NUM_OF_QUESTIONS) * correctQuestions;
+    const totalScore =
+      correctQuestions === NUM_OF_QUESTIONS
+        ? 100
+        : Math.trunc(100 / NUM_OF_QUESTIONS) * correctQuestions;
 
     return await addQuizResponses({
       correctQuestions,
