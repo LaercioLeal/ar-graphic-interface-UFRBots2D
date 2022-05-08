@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { darken, rem } from "polished";
+import { darken, rem, transparentize } from "polished";
 import themes from "Provider/themes";
 import { motion } from "framer-motion";
 
@@ -16,7 +16,7 @@ export const Title = styled.div`
     }
     to {
       width: 100%;
-      background-color: ${darken(0.1, themes.colors.primary)};
+      background-color: ${transparentize(0.8, themes.colors.gray)};
     }
   }
   animation-name: showQuestion;
@@ -26,7 +26,7 @@ export const Title = styled.div`
   width: 100%;
   padding: 0;
   border-radius: 0 999px 999px 0;
-  background-color: ${darken(0.1, themes.colors.primary)};
+  background-color: ${transparentize(0.8, themes.colors.gray)};
   overflow: hidden;
 
   > div {
@@ -37,7 +37,7 @@ export const Title = styled.div`
     margin: 10px 50px 10px 10px;
     width: 100%;
     border-radius: 12px;
-    background-color: ${themes.colors.primary};
+    background-color: ${transparentize(0.3, themes.colors.blue)};
     box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px;
   }
 
@@ -76,8 +76,9 @@ export const Legend = styled.p`
 
 export const Options = styled(motion.div)`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: ${({ qtd }) => `repeat(${qtd}, 1fr)`};
   column-gap: 20px;
 
   margin: 0 0 100px;
+  align-items: flex-start;
 `;

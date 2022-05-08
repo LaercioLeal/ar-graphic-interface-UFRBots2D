@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
 import themes from "Provider/themes";
-import { rem, transparentize } from "polished";
+import { darken, rem, transparentize } from "polished";
 
 export const Container = styled(motion.div)`
   transition: all 0.3s;
@@ -13,15 +13,15 @@ export const Container = styled(motion.div)`
   cursor: pointer;
 
   background-color: ${({ active }) =>
-    active ? themes.colors.success : transparentize(0.6, themes.colors.gray)};
+    active ? themes.colors.success : darken(0.08, themes.colors.white)};
 
   p {
     transition: all 0.5s;
     line-height: 22px;
     font-size: ${rem(14)};
-    font-family: ${themes.fonts.medium};
+    font-family: ${themes.fonts.bold};
 
-    color: ${themes.colors.white};
+    color: ${themes.colors.gray};
   }
 
   ${({ active }) =>
@@ -31,7 +31,7 @@ export const Container = styled(motion.div)`
 
       p {
         font-size: ${rem(15)};
-        font-family: ${themes.fonts.bold};
+        color: ${themes.colors.white};
       }
 
       :before {
@@ -56,6 +56,7 @@ export const Container = styled(motion.div)`
     p {
       font-size: ${rem(15)};
       font-family: ${themes.fonts.bold};
+      color: ${themes.colors.white};
     }
   }
 `;

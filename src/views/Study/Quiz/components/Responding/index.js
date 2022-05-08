@@ -36,7 +36,12 @@ export default function Responding({ setResponding, setLastResult }) {
     const drawn = getIds();
     const selectees = items.filter((item) => drawn.includes(item.id));
     let q = selectees.map((item, index) => {
-      return { ...item, id: index + 1, selected: null };
+      return {
+        ...item,
+        id: index + 1,
+        selected: null,
+        options: item.options.sort(() => Math.random() - 0.5),
+      };
     });
     setQuestions(q);
   }, [setQuestions, getIds]);

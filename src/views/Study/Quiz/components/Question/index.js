@@ -17,6 +17,7 @@ export default function Question({ question, onSelect }) {
           : "Escolha uma das opções"}
       </S.Legend>
       <S.Options
+        qtd={question.options.length}
         initial="hidden"
         animate="visible"
         variants={{

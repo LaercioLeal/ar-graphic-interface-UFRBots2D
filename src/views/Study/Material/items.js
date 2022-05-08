@@ -26,6 +26,12 @@ const articles = [
     doi: "",
     link: "https://ieeexplore.ieee.org/abstract/document/9049466",
   },
+  {
+    id: "4",
+    title: "Aprendizado por Reforço | Turing Talks",
+    doi: "",
+    link: "https://medium.com/turing-talks/aprendizado-por-refor%C3%A7o-1-introdu%C3%A7%C3%A3o-7382ebb641ab",
+  },
 ];
 
 const movies = [
