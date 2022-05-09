@@ -8,6 +8,7 @@ export * from "./monitor";
 export * from "./results";
 export * from "./training";
 export * from "./logPlayer";
+export * from "./dashboard";
 export * from "./experiments";
 
 const api = axios.create({

@@ -4,7 +4,7 @@ import { Container } from "components";
 
 import * as S from "./styles";
 import items from "./items";
-import { Item } from "./components";
+import { Item, Resume } from "./components";
 import { motion } from "framer-motion";
 
 import animate from "./animation.config";
@@ -25,6 +25,7 @@ function Home() {
             Aprendizado por Reforço com Futebol de Robôs
           </S.Title>
         </motion.div>
+        <Resume />
         <S.WrapperItems
           initial="hidden"
           animate="visible"
