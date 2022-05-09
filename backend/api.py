@@ -14,11 +14,12 @@ import routes.data
 import routes.quiz
 import routes.match
 import routes.monitor
-import routes.training
 import routes.results
+import routes.training
+import routes.logPlayer
+import routes.dashboard
 import routes.directory
 import routes.experiments
-import routes.logPlayer
 
 # inicializando api
 port = 3001
