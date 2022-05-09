@@ -218,6 +218,39 @@ const graphic_interface = [
     options: ["Verdadeiro", "Falso"],
     correct: "Falso",
   },
+  {
+    title:
+      "Na tela de assistir jogos já realizados é possível rever somente os jogos realizados dentro do módulo 'experimentos', não listando por exemplo jogos do módulo 'partidas'.",
+    options: [
+      "Para assistir um rever uma partida basta que seus arquivos de registro estejam dentro do diretório padrão de logs, onde são salvos os realizados em ambos módulos citados.",
+      "Falso, todos os jogos realizados dentro da plataforma podem ser assistidos, deste que tenham sido realizados no mesmo dia, após 24h todos os logs são apagados.",
+      "Verdadeiro, tudo que é realizado dentro da tela de 'partidas' é perdido após ser fechado o sistema ou navegar para outra tela, inclusive os arquivos de registro das partidas.",
+    ],
+    correct:
+      "Para assistir um rever uma partida basta que seus arquivos de registro estejam dentro do diretório padrão de logs, onde são salvos os realizados em ambos módulos citados.",
+  },
+  {
+    title:
+      "Na tela partidas, ao selecionar 2 times para disputarem e corretor afirmar que sem o time 1 será posicionado no lado esquerdo do campo?",
+    options: [
+      "Sim, além de que esse posicionamento em campo se mantém durante os dois tempos de jogo.",
+      "O lado do qual os times serão posicionados será com base na ordem alfabética.",
+    ],
+    correct:
+      "Sim, além de que esse posicionamento em campo se mantém durante os dois tempos de jogo.",
+  },
+  {
+    title:
+      "Antes de iniciar uma partida você pode escolher entre o modo normal e rápido, com relação a essas opções marque a alternativa correta.",
+    options: [
+      "O modo normal se refere a uma partida com variação natural do tempo (em ciclos), já o modo rápido se refere a um tempo acelerado com uma movimentação mais rápida dos jogadores, resultando assim em um tempo de partida reduzido.",
+      "O modo normal é com primeiro e segundo tempo de jogo e o modo rápido apenas um tempo de jogo.",
+      "No modo rápido apenas muda a velocidade dos jogadores, mas o tempo de partida é o mesmo",
+      "No modo normal cada time vai possuir 11 jogadores e no modo rápido apenas 5.",
+    ],
+    correct:
+      "O modo normal se refere a uma partida com variação natural do tempo (em ciclos), já o modo rápido se refere a um tempo acelerado com uma movimentação mais rápida dos jogadores, resultando assim em um tempo de partida reduzido.",
+  },
 ];
 
 const questions = [
