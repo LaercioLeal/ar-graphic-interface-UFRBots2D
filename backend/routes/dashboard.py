@@ -7,14 +7,14 @@ def getResumeDashboard():
   
   querySelect= '''
     SELECT count(t.id) as training, sum(t.episodes) as episodes,
-      (
+      ifnull((
         SELECT count(e.id)
         FROM experiments e
-      ) as experiments,
-      (
+      ),0) as experiments,
+      ifnull((
         SELECT sum(qr.totalScore)/count(qr.id)
         FROM quizResponses qr
-      ) as quiz
+      ),0) as quiz
     FROM training t 
   '''
 
@@ -23,10 +23,10 @@ def getResumeDashboard():
   conn.close()
   response = []
   for experiment in experiments:
-    response.append({
+    response = {
       "quiz": experiment["quiz"], 
       "training": experiment["training"], 
       "episodes": experiment["episodes"], 
       "experiments": experiment["experiments"], 
-    })
+    }
   return formatResponse(False, response)
