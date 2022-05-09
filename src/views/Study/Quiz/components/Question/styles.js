@@ -76,7 +76,7 @@ export const Legend = styled.p`
 
 export const Options = styled(motion.div)`
   display: grid;
-  grid-template-columns: ${({ qtd }) => `repeat(${qtd}, 1fr)`};
+  grid-template-columns: ${({ qtd }) => `repeat(${qtd > 4 ? 4 : qtd}, 1fr)`};
   column-gap: 20px;
 
   margin: 0 0 100px;

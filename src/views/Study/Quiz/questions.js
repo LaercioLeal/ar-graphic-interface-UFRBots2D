@@ -79,7 +79,7 @@ const reinforcement_learning = [
   },
   {
     title:
-      "Qual a relação do Aprendizado por Reforço com o aprendizado supervisionado e não supervisionado",
+      "Qual a relação do Aprendizado por Reforço com o aprendizado supervisionado e não supervisionado?",
     options: [
       "Não existem relações.",
       "O Aprendizado por Reforço se assemelha com o aprendizado supervisionado, pois apesar de não receber uma base de dados com conhecimento prévio (dataset), ele utiliza o conhecimento armazenado na tabela de aprendizado de forma similar.",
@@ -116,6 +116,39 @@ const q_learning = [
     correct:
       "Maximizar o total de recompensas recebidas a medida que os estados vão sendo bastante visitados.",
   },
+  {
+    title:
+      "A tabela Q é a responsável por armazenar o aprendizado adquirido ao longo dos episódios. Suas dimensões (nº de linhas x nº de colunas) são com base em quais parâmetros?",
+    options: [
+      "Número de estados e ações",
+      "Quantidade de reforços possíveis e ações.",
+      "Número de ações e quantidade de agentes",
+      "Número de estados e quantidade de agentes",
+    ],
+    correct: "Número de estados e ações",
+  },
+  {
+    title: "Antes de iniciar um aprendizado, os valores da tabela Q são:",
+    options: [
+      "Iguais a zero ou aleatórios",
+      "Iguais a zero sempre, para que valores iniciais não interfiram no aprendizado",
+      "Iguais a qualquer número, desde que sejam diferentes de zero",
+      "Devem ser com base nos valores de recompensa que o ambiente pode retornar",
+    ],
+    correct: "Iguais a zero ou aleatórios",
+  },
+  {
+    title:
+      "Supondo que os episódios necessários para que o aprendizado aconteça sejam finalizados, como vamos definir qual a melhor ação para um estado qualquer?",
+    options: [
+      "Basta consultar na linha da tabela correspondente ao estado, a ação que possuir o maior valor estimado será a melhor ação",
+      "Basta consultar na linha da tabela correspondente ao estado, a ação que possuir o menor valor estimado será a melhor ação",
+      "Basta consultar os valores que cada ação assume no ambiente, a que tiver o maior valor dentro de toda a tabela, poderá ser considerada a melhor em qualquer estado",
+      "Devemos olhar para cada estado o maior valor de ação que cada 1 possui, dentre esses valores vamos olhar qual é o menor e assim todas ações que superarem esse valor pode ser considerada como a melhor em seus respectivos estados",
+    ],
+    correct:
+      "Basta consultar na linha da tabela correspondente ao estado, a ação que possuir o maior valor estimado será a melhor ação",
+  },
 ];
 
 // ! Parâmetros (alpha e gamma)
@@ -136,6 +169,38 @@ const parameters = [
       "Quanto maior o valor do parâmetro Epsilon, menor é a chance de uma ação ser escolhida de forma aleatória.",
     options: ["Verdadeiro", "Falso"],
     correct: "Falso",
+  },
+  {
+    title:
+      "Quanto ao parâmetro alpha (taxa de aprendizado), é corretor afirmar que:",
+    options: [
+      "Ele é responsável por definir a atuação das novas atualizações de valores, ou seja, quanto maior o seu valor, maior será alteração dos valores.",
+      "É responsável por definir qual a porcentagem do valor da recompensa recebida deve ser considerada.",
+      "Se valor depende da quantidade de estados do ambiente.",
+    ],
+    correct:
+      "Ele é responsável por definir a atuação das novas atualizações de valores, ou seja, quanto maior o seu valor, maior será alteração dos valores.",
+  },
+  {
+    title:
+      "Quanto ao parâmetro gamma (fator de desconto), é corretor afirmar que:",
+    options: [
+      "Seu objetivo principal é maximizar o valor das somas de recompensas.",
+      "Seu valor define a relevância da última recompensa recebida, quanto maior o seu valor, maior será a relevância da recompensa com relação ao valor atual da tabela.",
+      "Se valor está diretamente ligado a quantidade de ações do ambiente, onde quanto maior a quantidade de ações maior deve ser seu valor.",
+    ],
+    correct:
+      "Seu objetivo principal é maximizar o valor das somas de recompensas.",
+  },
+  {
+    title: "Quanto ao parâmetro epsilon (e-greedy), é corretor afirmar que:",
+    options: [
+      "Serve para controlar a quantidade de ações que vão ser escolhidas aleatoriamente, onde quanto maior o seu valor, mais ações serão escolhidas de maneira aleatória.",
+      "Serve para controlar a quantidade de ações que vão ser escolhidas aleatoriamente, onde quanto menor o seu valor, mais ações serão escolhidas de maneira aleatória..",
+      "Será utilizado apenas enquanto todos os estados não sejam visitados ou todas as ações não sejam executadas pelo menos 1 vez.",
+    ],
+    correct:
+      "Serve para controlar a quantidade de ações que vão ser escolhidas aleatoriamente, onde quanto maior o seu valor, mais ações serão escolhidas de maneira aleatória.",
   },
 ];
 

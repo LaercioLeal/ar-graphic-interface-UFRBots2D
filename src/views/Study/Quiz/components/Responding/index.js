@@ -34,7 +34,11 @@ export default function Responding({ setResponding, setLastResult }) {
 
   const getQuestions = useCallback(() => {
     const drawn = getIds();
-    const selectees = items.filter((item) => drawn.includes(item.id));
+    const selectees = items
+      .map((item, index) => {
+        return { ...item, id: index + 1 };
+      })
+      .filter((item) => drawn.includes(item.id));
     let q = selectees.map((item, index) => {
       return {
         ...item,
