@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS experiments (
 CREATE TABLE IF NOT EXISTS training ( 
     id TEXT NOT NULL,
     idExperiment INTEGER NOT NULL,
-    status TEXT DEFAULT 'wait',
+    status TEXT check (status in ('wait', 'queue', 'running', 'done')) DEFAULT 'wait',
     createdAt TEXT NOT NULL,
     episodes INTEGER NOT NULL,
     epsilon DECIMAL(1,3) NOT NULL,

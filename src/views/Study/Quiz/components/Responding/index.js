@@ -8,7 +8,7 @@ import { Button, Loading } from "components";
 import Question from "../Question";
 import { useSnackbar } from "notistack";
 
-const NUM_OF_QUESTIONS = 3;
+const NUM_OF_QUESTIONS = 5;
 
 export default function Responding({ setResponding, setLastResult }) {
   const { enqueueSnackbar } = useSnackbar();
