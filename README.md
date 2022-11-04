@@ -1,84 +1,51 @@
-# Getting Started with Create React App
+## Arbot
+![GitHub package.json version](https://img.shields.io/github/package-json/v/higorst/ar-graphic-interface) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=flat&logo=node.js&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=flat&logo=react&logoColor=%2361DAFB) ![Python](https://img.shields.io/badge/python-3670A0?style=flat&logo=python&logoColor=ffdd54)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+É um sistema, dedicada ao auxílio nos estudos do Aprendizado por Reforço (AR), uma técnica de Inteligência Artificial bastante conhecida e útil. O futebol de robôs aqui abordado, dispõe de um execelente ambiente para execução de experimentos.
 
-## Available Scripts
+Seu fomento ocorreu dentro da UFRBots, a equipe de futebol de robôs da UFRB (Universidade Federal do Recôncavo da Bahia), como uma das etapas de Trabalho de Conclusão de Curso, do Bacharelado em Engenharia de Computação.
 
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
+------------
+###### Para Utilizar
+------------
+##### Clonar este repositório
+```sh
+git clone https://github.com/higorst/ar-graphic-interface.git
 ```
 
+##### Instalar Dependências
+
+- [Node JS](https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions "nodejs")
+- [Python v3](https://python.org.br/instalacao-linux/) com os pacotes:
+	`flask flask_cors sqlite3 hashlib`
+
+##### Executando projeto
+
+- Acessando pasta do projeto
+	```sh
+cd ar-graphic-interface
 ```
 
-### API
-
-## Dependências python3
-
+- Instalando dependências
+	```sh
+npm install
 ```
-  pip3 install flask flask_cors
+ou
+	```sh
+yarn
+```
 
-  apt-get install python3-tk
+- Para executar *frontend* + *backend* com um só comando:
+	```sh
+yarn start
+```
+
+- Para executar separadamente:
+	- Primeiro
+	```sh
+yarn start:api
+```
+	- Segundo (*em outra instância de terminal*)
+	```sh
+yarn start:app
 ```
