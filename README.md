@@ -14,7 +14,7 @@ Seu fomento ocorreu dentro da UFRBots, a equipe de futebol de robôs da UFRB (Un
 
 ##### Clonar este repositório
 
-```sh
+```bash
 git clone https://github.com/higorst/ar-graphic-interface.git
 ```
 
@@ -27,38 +27,39 @@ git clone https://github.com/higorst/ar-graphic-interface.git
 ##### Executando projeto
 
 - Acessando pasta do projeto
-  ```sh
+  ```bash
   cd ar-graphic-interface/
   ```
 
 ````
 
 - Instalando dependências
-	```sh
+	```bash
 npm install
 ````
 
 ou
 
-```sh
+```bash
 yarn
 
 ```
 
 - Para executar _frontend_ + _backend_ com um só comando:
-  ```sh
+  ```bash
   yarn start
+  ```
 
 ````
 
 - Para executar separadamente: - Primeiro
-  ```sh
+  ```bash
   yarn start:api
 
 ````
 
     - Segundo (*em outra instância de terminal*)
-    ```sh
+    ```bash
 
 yarn start:app
 
