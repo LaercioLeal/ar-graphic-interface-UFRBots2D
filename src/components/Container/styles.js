@@ -12,6 +12,13 @@ const styles = css`
 
   ${themes.medias.lessThan("hd")`
     padding: 0;
+    padding-top: 50px;
+    padding-bottom: 200px;
+  `}
+
+  ${themes.medias.greaterThan("ultra")`
+    margin-left: auto;
+    margin-right: auto;
   `}
 `;
 
