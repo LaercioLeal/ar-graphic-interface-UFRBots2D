@@ -57,12 +57,11 @@ fi
 
 echo -e "\n${Reset}${BgCyan}[PASSO 2]${Reset} ${FgMagenta}:: ${FgBlue} Instalando NodeJs${FgYellow}"
 sudo apt-get update
-sudo apt autoremove -y
-sudo apt autoclean -y
 sudo apt-get install curl -y
 curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
 sudo apt-get install -y nodejs
-sudo npm install --global yarn -y
+sudo apt-get install npm -y
+sudo apt-get update && sudo apt-get install yarn
 
 echo -e "\n${Reset}${BgCyan}[PASSO 3]${Reset} ${FgMagenta}:: ${FgBlue} Clonando projeto${FgYellow}"
 

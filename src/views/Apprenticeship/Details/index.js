@@ -58,7 +58,7 @@ export default function Details() {
       const data = await getTrainingData(id);
       if (data.isError) {
         enqueueSnackbar(data.message, { variant: "error" });
-        history.replace(routes.apprenticeship.details);
+        history.replace(`${routes.apprenticeship.details}`);
       }
       if (queue.queue.length === 0 && first) {
         for (const item of data.data) {
@@ -153,7 +153,7 @@ export default function Details() {
           }&openM=${value === 1 ? "true" : "false"}`
       );
     }
-  }, [value]); // eslint-disable-line
+  }, [value, experiment]); // eslint-disable-line
 
   useEffect(() => {
     if (!queue.running && !!queue.queue.length) {
