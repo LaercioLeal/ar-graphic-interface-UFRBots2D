@@ -2,6 +2,7 @@ from flask import jsonify
 import subprocess
 import sqlite3
 from hashlib import blake2b
+from time import sleep
 import time
 
 def userName():
@@ -16,7 +17,12 @@ def generateHash():
   return h.hexdigest()
 
 def get_db_connection():
-  conn = sqlite3.connect('./backend/db/database.db')
+  try:
+    conn = sqlite3.connect('./backend/db/database.db')
+  except sqlite3.OperationalError:
+    sleep(2)
+    conn = sqlite3.connect('./backend/db/database.db')
+
   conn.row_factory = sqlite3.Row
   return conn
 
