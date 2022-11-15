@@ -19,6 +19,8 @@ git clone https://github.com/higorst/ar-graphic-interface.git
 - [Python v3](https://python.org.br/instalacao-linux/) com os pacotes:
 `flask flask_cors sqlite3 hashlib`
 
+- Ou apenas executar o script `./prepare.bash` na pasta raiz do projeto 😀
+
 ##### Executando projeto
 
 - Acessando pasta do projeto
