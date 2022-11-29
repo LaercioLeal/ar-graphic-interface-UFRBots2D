@@ -8,12 +8,13 @@ import * as S from "./styles";
 import { Navigation } from "./components";
 import { OpenMonitor } from "components";
 import routes from "constants/routes";
-import { useQueue } from "modules/queue";
+import { useQueue, useTraining } from "modules/queue";
 import { useSnackbar } from "notistack";
 
 function Default({ children, pageTitle }) {
   const { enqueueSnackbar } = useSnackbar();
   const { setQueue, queue } = useQueue();
+  const { setDoneTraining } = useTraining();
   const location = useLocation();
 
   const showOpenMonitor = useMemo(() => {
@@ -32,7 +33,7 @@ function Default({ children, pageTitle }) {
       !location.pathname.includes(routes.apprenticeship.details)
     ) {
       queue.updateLast().then((_) => {
-        queue.run().then((_) => {
+        queue.run(setDoneTraining).then((_) => {
           setQueue(queue);
           enqueueSnackbar("Ensaio finalizado", { variant: "success" });
         });
@@ -45,6 +46,7 @@ function Default({ children, pageTitle }) {
     enqueueSnackbar,
     setQueue,
     queue,
+    setDoneTraining,
   ]);
 
   return (

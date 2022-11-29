@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import { transparentize } from "polished";
 import themes from "Provider/themes";
 import { motion } from "framer-motion";
@@ -17,6 +17,12 @@ export const Percentage = styled.p`
   margin-top: auto;
 
   color: ${transparentize(0.5, themes.colors.gray)};
+
+  ${({ center }) =>
+    center &&
+    css`
+      text-align: center;
+    `}
 `;
 
 export const Progress = styled.div`

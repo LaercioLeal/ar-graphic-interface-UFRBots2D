@@ -5,7 +5,7 @@ import DataTable from "react-data-table-component";
 import { sortDate, Status } from "./functions";
 import * as S from "./styles";
 import { Empty, Heading } from "./components";
-import { Button } from "components";
+import { Button, Percentage } from "components";
 
 const paginationOptions = {
   rowsPerPageText: "Linhas por página",
@@ -16,6 +16,7 @@ const paginationOptions = {
 
 export default function Table({
   data,
+  done,
   runAll,
   handleAdd,
   handleRemove,
@@ -62,41 +63,49 @@ export default function Table({
       sortFunction: (a, b) => sortDate(a, b, "createdAt"),
     },
     {
-      cell: (row) => (
-        <S.Buttons>
-          {!["wait"].includes(row.status) && (
-            <Button
-              color="blue"
-              isDisabled={["queue", "running"].includes(row.status)}
-              onClick={() => setSelectedToDetails(row)}
-            >
-              <Icons.RemoveRedEyeOutlined />
-            </Button>
-          )}
-          {["wait", "done"].includes(row.status) && (
-            <>
-              {row.status !== "done" && (
-                <Button color="success" onClick={() => setSelectedToSee(row)}>
-                  <Icons.PlayArrowOutlined />
-                </Button>
-              )}
-              <Button color="red" onClick={() => handleRemove(row.id)}>
-                <Icons.DeleteForeverOutlined />
+      cell: (row) =>
+        ["running"].includes(row.status) ? (
+          <Percentage
+            center
+            noHover
+            id={row.id}
+            percentage={((done / row.episodes) * 100).toFixed(0)}
+          />
+        ) : (
+          <S.Buttons>
+            {!["wait"].includes(row.status) && (
+              <Button
+                color="blue"
+                isDisabled={["queue", "running"].includes(row.status)}
+                onClick={() => setSelectedToDetails(row)}
+              >
+                <Icons.RemoveRedEyeOutlined />
               </Button>
-            </>
-          )}
-          {["running"].includes(row.status) && (
-            <Button color="blue" onClick={() => {}}>
-              <Icons.SportsSoccerOutlined />
-            </Button>
-          )}
-          {["queue"].includes(row.status) && (
-            <Button isDisabled>
-              <Icons.WatchLaterOutlined />
-            </Button>
-          )}
-        </S.Buttons>
-      ),
+            )}
+            {["wait", "done"].includes(row.status) && (
+              <>
+                {row.status !== "done" && (
+                  <Button color="success" onClick={() => setSelectedToSee(row)}>
+                    <Icons.PlayArrowOutlined />
+                  </Button>
+                )}
+                <Button color="red" onClick={() => handleRemove(row.id)}>
+                  <Icons.DeleteForeverOutlined />
+                </Button>
+              </>
+            )}
+            {/* {["running"].includes(row.status) && (
+              <Button color="blue" onClick={() => {}}>
+                <Icons.SportsSoccerOutlined />
+              </Button>
+            )} */}
+            {["queue"].includes(row.status) && (
+              <Button isDisabled>
+                <Icons.WatchLaterOutlined />
+              </Button>
+            )}
+          </S.Buttons>
+        ),
       ignoreRowClick: true,
       allowOverflow: true,
     },

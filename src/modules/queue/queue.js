@@ -15,12 +15,12 @@ class Queue {
     });
   }
 
-  async run() {
+  async run(useTraining = () => {}) {
     this.running = true;
     const training = this.queue[0];
     this.queue = this.queue.filter((item) => item.id !== training.id);
     console.log(`[QUEUE][E] >> running ${training.id}`);
-    await runTraining(training)
+    await runTraining(training, useTraining)
       .then(async (_) => {
         console.log(`[QUEUE][E] >> finished ${training.id}`);
         this.running = false;

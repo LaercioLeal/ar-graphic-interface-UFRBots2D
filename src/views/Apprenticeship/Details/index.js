@@ -22,7 +22,7 @@ import routes from "constants/routes";
 import { addTraining, deleteTraining } from "services";
 
 import { getTrainingData } from "services/api/training";
-import { useQueue } from "modules/queue";
+import { useQueue, useTraining } from "modules/queue";
 
 export default function Details() {
   const { enqueueSnackbar } = useSnackbar();
@@ -33,6 +33,7 @@ export default function Details() {
   const query = useQuery();
 
   const { setQueue, queue } = useQueue();
+  const { setDoneTraining, done } = useTraining();
 
   const [trainingData, setTrainingData] = useState([]);
   const [selectedToDetails, setSelectedToDetails] = useState();
@@ -159,7 +160,7 @@ export default function Details() {
     if (!queue.running && !!queue.queue.length) {
       queue.updateLast().then((_) => {
         fetchData();
-        queue.run().then((_) => {
+        queue.run(setDoneTraining).then((_) => {
           fetchData();
           setQueue(queue);
           enqueueSnackbar("Ensaio finalizado", { variant: "success" });
@@ -244,6 +245,7 @@ export default function Details() {
                   runAll={runAll}
                   data={trainingData}
                   handleAdd={handleAdd}
+                  done={done}
                   handleRemove={handleRemove}
                   setSelectedToSee={SelectedToSee}
                   setSelectedToDetails={(training) => {

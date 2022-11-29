@@ -5,6 +5,7 @@ import * as S from "./styles";
 
 export default function Page2({
   data,
+  done,
   runAll,
   handleAdd,
   handleRemove,
@@ -15,6 +16,7 @@ export default function Page2({
     <S.Container>
       <Table
         data={data}
+        done={done}
         runAll={runAll}
         isLoading={false}
         handleAdd={handleAdd}

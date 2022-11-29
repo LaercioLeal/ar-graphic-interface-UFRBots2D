@@ -1,8 +1,10 @@
 import { generateHash } from "utils";
 import api from "../index";
 
-export async function runMatchesForTraining(training) {
+export async function runMatchesForTraining(training, setDoneTraining) {
   const results = [];
+  let done = 0;
+  setDoneTraining(done);
   for (let index = 1; index <= training.episodes; index++) {
     const { data } = await api.get(`/match/run`, {
       params: {
@@ -10,6 +12,8 @@ export async function runMatchesForTraining(training) {
         training: "training",
       },
     });
+    done = done + 1;
+    setDoneTraining(done);
     results.push({
       idResult: generateHash(),
       idExperiment: training.idExperiment,
@@ -38,21 +42,24 @@ export async function setTrainingParams(params) {
   }
 }
 
-export async function runTraining(training) {
+export async function runTraining(training, setDoneTraining = () => {}) {
   try {
+    setDoneTraining(0);
     await setTrainingParams({
       alpha: training.alpha,
       gamma: training.gamma,
       epsilon: training.epsilon,
     });
-    await runMatchesForTraining(training).then(async (results) => {
-      const response = await api.post("/experiments/training", {
-        id: training.id,
-        results,
-      });
+    await runMatchesForTraining(training, setDoneTraining).then(
+      async (results) => {
+        const response = await api.post("/experiments/training", {
+          id: training.id,
+          results,
+        });
 
-      return response.data;
-    });
+        return response.data;
+      }
+    );
   } catch (error) {
     if (error?.response?.status === 404) return false;
 

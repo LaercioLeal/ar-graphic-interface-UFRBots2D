@@ -6,6 +6,9 @@ export default function Percentage({
   id = "percentage",
   percentage,
   width = 100,
+  noTitle = false,
+  center = false,
+  noHover = false,
 }) {
   return (
     <S.Legend
@@ -15,9 +18,11 @@ export default function Percentage({
       initial="hidden"
       animate="visible"
       variants={ANIMATION}
-      whileHover={{ scale: 1.2 }}
+      whileHover={{ scale: noHover ? 1 : 1.2 }}
     >
-      <S.Percentage>{`${percentage}%`}</S.Percentage>
+      {!noTitle && (
+        <S.Percentage center={center}>{`${percentage}%`}</S.Percentage>
+      )}
       <S.Progress>
         <S.Bar width={percentage} />
         <S.BarOff width={percentage} />

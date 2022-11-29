@@ -11,3 +11,12 @@ export function useQueue() {
     ...actions,
   };
 }
+
+export function useTraining() {
+  const { done } = useStore(store);
+
+  return {
+    done,
+    ...actions,
+  };
+}
