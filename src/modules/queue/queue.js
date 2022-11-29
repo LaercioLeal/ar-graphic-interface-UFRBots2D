@@ -24,6 +24,7 @@ class Queue {
       .then(async (_) => {
         console.log(`[QUEUE][E] >> finished ${training.id}`);
         this.running = false;
+        useTraining(0);
         return true;
       })
       .catch(
