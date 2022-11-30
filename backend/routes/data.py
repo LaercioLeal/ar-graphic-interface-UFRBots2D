@@ -1,6 +1,6 @@
 from __main__ import app
 from flask import request
-from codes.methods import formatResponse, generateHash, get_db_connection
+from codes.methods import formatResponse, get_db_connection
 
 # retornar todos os experimentos cadastrados
 @app.route('/experiments/general/data', methods=['GET'])

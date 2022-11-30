@@ -21,6 +21,8 @@ def get_db_connection():
     conn = sqlite3.connect('./backend/db/database.db')
   except sqlite3.OperationalError:
     sleep(2)
+    sqlite3.connect('./backend/db/database.db').close()
+    sleep(2)
     conn = sqlite3.connect('./backend/db/database.db')
 
   conn.row_factory = sqlite3.Row
