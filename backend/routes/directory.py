@@ -1,5 +1,5 @@
 from __main__ import app
-from codes.methods import getUserName
+from codes.methods import getTeamDirectory
 from codes.methods import formatResponse
 
 
@@ -14,7 +14,7 @@ def getDirectory():
   gui.geometry('')
   gui.withdraw()
   gui.directory = filedialog.askdirectory(
-            initialdir = "/home/" + getUserName() + '/TIMES',
+            initialdir = "/home/" + getTeamDirectory(),
             title = "Acesse diretório do time",
         )
   path = gui.directory

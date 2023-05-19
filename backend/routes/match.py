@@ -1,6 +1,6 @@
 from flask import request
 from __main__ import app
-from codes.methods import getUserName, formatResponse, generateHash, userName
+from codes.methods import formatResponse, getTeamDirectory, getLogDirectory
 
 import os             
 import subprocess
@@ -31,14 +31,14 @@ def startMatch(local=False, mode=2, path1='',path2=''):
     path1 = request.args.get('path1', default='1').replace("\"","").replace(" ","\ ")
     path2 = request.args.get('path2', default='1').replace("\"","").replace(" ","\ ")
   if (training == "training"):
-    path1=f"/home/{userName()}/TIMES/AR_System"
-    path2=f"/home/{userName()}/TIMES/AR_System_Reserva"
+    path1=f"/home/{getTeamDirectory()}/AR_System"
+    path2=f"/home/{getTeamDirectory()}/AR_System_Reserva"
 
   # modo normal
-  input_ = "cd && cd /home/" + getUserName() + "/log && rcssserver server::auto_mode = true"
+  input_ = "cd && cd /home/" + getLogDirectory() + " && rcssserver server::auto_mode = true"
 
   if (int(mode) == 2):
-    input_ = "cd && cd /home/" + getUserName() + "/log && rcssserver server::auto_mode = true server::nr_extra_halfs = 0 server::penalty_shoot_outs = false  server::synch_mode=true"
+    input_ = "cd && cd /home/" + getLogDirectory() + " && rcssserver server::auto_mode = true server::nr_extra_halfs = 0 server::penalty_shoot_outs = false  server::synch_mode=true"
 
 
   #  iniciando servidor

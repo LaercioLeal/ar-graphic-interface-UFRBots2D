@@ -1,6 +1,6 @@
 from __main__ import app
 from flask import request
-from codes.methods import formatResponse, generateHash, get_db_connection, userName
+from codes.methods import formatResponse, generateHash, get_db_connection, getTeamDirectory
 import os
 
 # cadastrar um ensaio
@@ -12,7 +12,7 @@ def setTrainingParams():
     gamma = data["gamma"]
 
     # !inserir parâmetros (alpha, gamma, epsilon)
-    path = f"/home/{userName()}/TIMES/AR_System/src/PlayerTeams.cpp"
+    path = f"/home/{getTeamDirectory()}/AR_System/src/PlayerTeams.cpp"
     file = open(path, 'r')
 
     new = ''
@@ -33,7 +33,7 @@ def setTrainingParams():
     f.close()
 
     # !zerar tabela
-    pathQ = f"/home/{userName()}/TIMES/AR_System/q.bin"
+    pathQ = f"/home/{getTeamDirectory()}/AR_System/q.bin"
     f_ = open(pathQ, 'wb')
     matriz = []
     num_states = 15
@@ -46,7 +46,7 @@ def setTrainingParams():
             f_.write(elemento)
     f_.close()
 
-    os.system("cd && cd TIMES/AR_System/ && ./configure && make")
+    os.system("cd && cd " + getTeamDirectory() + "/AR_System/ && ./configure && make")
     
     return formatResponse(False, [], "Parâmetros adicionados")
 

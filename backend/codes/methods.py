@@ -35,6 +35,18 @@ def getUserName():
   user_name = var[0]
   return user_name
 
+def getFullDirectory():
+  fullDirectory = getUserName() + "/UFRBots/simulacoes"
+  return fullDirectory
+
+def getTeamDirectory():
+  teamDirectory = getFullDirectory() + "/TIMES"
+  return teamDirectory
+
+def getLogDirectory():
+  logDirectory = getFullDirectory() + "/logs"
+  return logDirectory
+
 def formatResponse(error, res, message="empty"):
   statusCode = 400 if error else 200
   msg = message if message != "empty" else "Error" if error else "Success"

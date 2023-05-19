@@ -1,6 +1,6 @@
 from __main__ import app
 from flask import request
-from codes.methods import formatResponse, getUserName, userName
+from codes.methods import formatResponse, getLogDirectory, getTeamDirectory
 
 import os, glob
 import subprocess
@@ -11,7 +11,7 @@ def getLogs():
   dir = request.args.get('dir', default=1)
   logs = []
   if (dir == 'default'): 
-    dir = f"/home/{userName()}/log"
+    dir = f"/home/{getLogDirectory()}"
 
   try:
     os.chdir(dir)
@@ -53,6 +53,6 @@ def getLogs():
 def startLogPlayer():
   data = request.get_json()
   path = data["path"]
-  path = path.replace(f"/home/{getUserName()}","")
+  path = path.replace(f"/home/{getTeamDirectory}","")
   os.system(f"cd && rcssmonitor {path}")
   return formatResponse(False, { "message": "Sucesso" })
