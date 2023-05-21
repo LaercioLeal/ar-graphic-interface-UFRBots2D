@@ -39,6 +39,9 @@ function Form({ handleAdd, show }) {
       alpha: "0.1",
       gamma: "0.1",
       epsilon: "0.1",
+      ourPath: "",
+      oppPath: "",
+      parametersPath: "",
     },
     onSubmit: handleSubmit,
     validationSchema,
@@ -62,6 +65,45 @@ function Form({ handleAdd, show }) {
                 </Grid>
               </Grid>
               <Grid container spacing={3}>
+                <Grid item xs={12}>
+                  <Input
+                    type="text"
+                    id="ourPath"
+                    name="ourPath"
+                    placeholder="Diretório do seu time"
+                    label="Diretório do seu time"
+                    onChange={form.handleChange}
+                    value={form.values.ourPath}
+                    error={form.errors.ourPath}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Input
+                    type="text"
+                    id="oppPath"
+                    name="oppPath"
+                    placeholder="Diretório do time oponente"
+                    label="Diretório do time oponente"
+                    onChange={form.handleChange}
+                    value={form.values.oppPath}
+                    error={form.errors.oppPath}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <Input
+                    type="text"
+                    id="parametersPath"
+                    name="parametersPath"
+                    placeholder="Caminho do arquivo dos parâmetros"
+                    label="Caminho do arquivo dos parâmetros"
+                    onChange={form.handleChange}
+                    value={form.values.parametersPath}
+                    error={form.errors.parametersPath}
+                  />
+                </Grid>
+
                 <Grid item xs={8}>
                   <Input
                     type="number"
