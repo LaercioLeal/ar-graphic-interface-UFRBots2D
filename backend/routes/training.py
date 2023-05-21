@@ -10,10 +10,11 @@ def setTrainingParams():
     epsilon = data["epsilon"]
     alpha = data["alpha"]
     gamma = data["gamma"]
+    ourPath = data["ourPath"]
+    parametersPath = data["parametersPath"]
 
     # !inserir parâmetros (alpha, gamma, epsilon)
-    path = f"/home/{getTeamDirectory()}/AR_System/src/PlayerTeams.cpp"
-    file = open(path, 'r')
+    file = open(parametersPath, 'r')
 
     new = ''
     for line in file:
@@ -28,25 +29,11 @@ def setTrainingParams():
 
     file.close()
 
-    f = open(path, 'w')
+    f = open(parametersPath, 'w')
     f.write(new)
     f.close()
 
-    # !zerar tabela
-    pathQ = f"/home/{getTeamDirectory()}/AR_System/q.bin"
-    f_ = open(pathQ, 'wb')
-    matriz = []
-    num_states = 15
-    num_actions = 6
-    for i in range(0,num_states):
-      matriz.append( [bytes(0)] * num_actions )
-    # adicionando matriz em arquivo binário
-    for linha in matriz:
-        for elemento in linha:
-            f_.write(elemento)
-    f_.close()
-
-    os.system("cd && cd " + getTeamDirectory() + "/AR_System/ && ./configure && make")
+    os.system("cd && cd UFRBots/simulacao/TIMES/" +  ourPath + " && ./configure && make")
     
     return formatResponse(False, [], "Parâmetros adicionados")
 
@@ -84,6 +71,9 @@ def addTraining():
     epsilon = data["epsilon"]
     alpha = data["alpha"]
     gamma = data["gamma"]
+    ourPath = data["ourPath"]
+    oppPath = data["oppPath"]
+    parametersPath = data["parametersPath"]
     id = generateHash()
 
     connection = get_db_connection()
@@ -96,8 +86,11 @@ def addTraining():
         'episodes,'+
         'epsilon,'+
         'alpha,'+
-        'gamma'+
-        ') VALUES (?, ?, ?, ?, ?, ?, ?, ?)',
+        'gamma,'+
+        'ourPath,'+
+        'oppPath,'+
+        'parametersPath'+
+        ') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
       (
         id, 
         idExperiment, 
@@ -106,7 +99,10 @@ def addTraining():
         episodes,
         epsilon,
         alpha,
-        gamma
+        gamma,
+        ourPath,
+        oppPath,
+        parametersPath
       )
     )
     connection.commit()
