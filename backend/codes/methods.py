@@ -6,7 +6,7 @@ from time import sleep
 import time
 
 def userName():
-  input_ = "who"
+  input_ = "who" 
   var = subprocess.getoutput(input_)
   var = var.split()
   return var[0]
@@ -36,16 +36,13 @@ def getUserName():
   return user_name
 
 def getFullDirectory():
-  fullDirectory = getUserName() + "/UFRBots/simulacoes"
-  return fullDirectory
+  return getUserName() + "/UFRBots/simulacoes"
 
 def getTeamDirectory():
-  teamDirectory = getFullDirectory() + "/TIMES"
-  return teamDirectory
+  return getFullDirectory() + "/TIMES"
 
 def getLogDirectory():
-  logDirectory = getFullDirectory() + "/logs"
-  return logDirectory
+  return getFullDirectory() + "/logs"
 
 def formatResponse(error, res, message="empty"):
   statusCode = 400 if error else 200

@@ -2,6 +2,7 @@ import * as yup from "yup";
 
 const validDecimal = (value) => (value + "").match(/^\d*\.{1}\d*$/);
 const validRange = (value) => value > 0 && value <= 1;
+const opponentRange = (value) => value >= 2 && value <= 6;
 const validLength = (value) => value && value.trim().length > 0;
 
 export default yup.object().shape({
@@ -29,16 +30,8 @@ export default yup.object().shape({
     .required("Campo obrigatório")
     .test("is-decimal", "número deve estar em 0 e 1", validDecimal)
     .test("is-decimal", "número deve estar em 0 e 1", validRange),
-  ourPath: yup
-    .string()
-    .required("Campo obrigatório")
-    .test("path", "campo não pode ser vazio", validLength),
   oppPath: yup
-    .string()
+    .number()
     .required("Campo obrigatório")
-    .test("path", "campo não pode ser vazio", validLength),
-  parametersPath: yup
-    .string()
-    .required("Campo obrigatório")
-    .test("path", "campo não pode ser vazio", validLength),
+    .test("is-less-than", "O número deve estar entre 2 e 6", opponentRange),
 });

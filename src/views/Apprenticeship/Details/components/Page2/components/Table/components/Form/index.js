@@ -1,5 +1,5 @@
 import React, { useCallback } from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, InputLabel, MenuItem, Select } from "@material-ui/core";
 import { FormikProvider, useFormik } from "formik";
 
 import * as S from "./styles";
@@ -39,9 +39,7 @@ function Form({ handleAdd, show }) {
       alpha: "0.1",
       gamma: "0.1",
       epsilon: "0.1",
-      ourPath: "",
-      oppPath: "",
-      parametersPath: "",
+      oppPath: 0,
     },
     onSubmit: handleSubmit,
     validationSchema,
@@ -69,39 +67,29 @@ function Form({ handleAdd, show }) {
                   <Input
                     type="text"
                     id="ourPath"
+                    label="Seu Time"
                     name="ourPath"
-                    placeholder="Diretório do seu time"
-                    label="Diretório do seu time"
-                    onChange={form.handleChange}
-                    value={form.values.ourPath}
-                    error={form.errors.ourPath}
+                    value="UFRBots"
+                    disabled
                   />
                 </Grid>
 
                 <Grid item xs={12}>
-                  <Input
-                    type="text"
+                  <InputLabel id="oppPath-label" aria-label><b>Selecione o time adversário</b></InputLabel>
+                  <Select
                     id="oppPath"
+                    labelId="oppPath-label"
                     name="oppPath"
-                    placeholder="Diretório do time oponente"
-                    label="Diretório do time oponente"
                     onChange={form.handleChange}
                     value={form.values.oppPath}
-                    error={form.errors.oppPath}
-                  />
-                </Grid>
-
-                <Grid item xs={12}>
-                  <Input
-                    type="text"
-                    id="parametersPath"
-                    name="parametersPath"
-                    placeholder="Caminho do arquivo dos parâmetros"
-                    label="Caminho do arquivo dos parâmetros"
-                    onChange={form.handleChange}
-                    value={form.values.parametersPath}
-                    error={form.errors.parametersPath}
-                  />
+                    error={form.errors.oppPath}>
+                      <MenuItem value={0}>Selecione</MenuItem>
+                      <MenuItem value={2}>Bull Russia</MenuItem>
+                      <MenuItem value={3}>Titãs</MenuItem>
+                      <MenuItem value={4}>FUTVASF</MenuItem>
+                      <MenuItem value={5}>Robot Bulls</MenuItem>
+                      <MenuItem value={6}>Zombie</MenuItem>
+                  </Select>
                 </Grid>
 
                 <Grid item xs={8}>

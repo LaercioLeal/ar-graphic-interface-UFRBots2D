@@ -1,7 +1,9 @@
 from __main__ import app
 from flask import request
-from codes.methods import formatResponse, generateHash, get_db_connection, getTeamDirectory
+from codes.methods import formatResponse, generateHash, get_db_connection
 import os
+from codes.ufrbots2d_constants import  getParamsPath
+from codes.path_constants import UFRBOTS_PATH, getTeamName
 
 # cadastrar um ensaio
 @app.route('/experiments/training/data/params', methods=['POST'])
@@ -10,11 +12,9 @@ def setTrainingParams():
     epsilon = data["epsilon"]
     alpha = data["alpha"]
     gamma = data["gamma"]
-    ourPath = data["ourPath"]
-    parametersPath = data["parametersPath"]
 
     # !inserir parâmetros (alpha, gamma, epsilon)
-    file = open(parametersPath, 'r')
+    file = open(getParamsPath(), 'r')
 
     new = ''
     for line in file:
@@ -29,11 +29,11 @@ def setTrainingParams():
 
     file.close()
 
-    f = open(parametersPath, 'w')
+    f = open(getParamsPath(), 'w')
     f.write(new)
     f.close()
 
-    os.system("cd && cd UFRBots/simulacao/TIMES/" +  ourPath + " && ./configure && make")
+    os.system("cd && cd " + UFRBOTS_PATH + " && ./configure && make")
     
     return formatResponse(False, [], "Parâmetros adicionados")
 
@@ -51,6 +51,7 @@ def getTrainingData():
         {
           "id": d["id"], 
           'idExperiment': d["idExperiment"],
+          'opp': getTeamName(d["oppPath"]),
           'status': d["status"],
           'createdAt': d["createdAt"],
           'episodes': d["episodes"],
@@ -71,9 +72,7 @@ def addTraining():
     epsilon = data["epsilon"]
     alpha = data["alpha"]
     gamma = data["gamma"]
-    ourPath = data["ourPath"]
     oppPath = data["oppPath"]
-    parametersPath = data["parametersPath"]
     id = generateHash()
 
     connection = get_db_connection()
@@ -87,10 +86,8 @@ def addTraining():
         'epsilon,'+
         'alpha,'+
         'gamma,'+
-        'ourPath,'+
         'oppPath,'+
-        'parametersPath'+
-        ') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+        ') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
       (
         id, 
         idExperiment, 
@@ -100,9 +97,7 @@ def addTraining():
         epsilon,
         alpha,
         gamma,
-        ourPath,
-        oppPath,
-        parametersPath
+        oppPath
       )
     )
     connection.commit()

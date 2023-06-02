@@ -27,6 +27,11 @@ export default function Table({
 
   const tableColumns = [
     {
+      name: "Adversário",
+      selector: ({ opp }) => opp,
+      sortable: true,
+    },
+    {
       name: "Status",
       selector: ({ status }) => status,
       sortable: true,

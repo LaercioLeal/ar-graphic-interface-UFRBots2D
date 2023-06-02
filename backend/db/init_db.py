@@ -1,8 +1,9 @@
 import sqlite3
 import os
-
+from codes.methods import getLogDirectory, getTeamDirectory
+ 
 def init():
-  os.system('cd && mkdir -p UFRBots/simulacao/log && mkdir -p UFRBots/simulacao/TIMES')
+  os.system('cd && mkdir -p ' + getLogDirectory() + ' && mkdir -p ' + getTeamDirectory())
 
   with open('backend/db/schema.sql') as f:
     myPath = 'backend/db/database.db'

@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS experiments (
     createdAt TEXT NOT NULL,
     title TEXT NOT NULL
 );
-
+ 
 -- trainning - ensaios
 -- status: wait / queue / running / done
 CREATE TABLE IF NOT EXISTS training ( 
@@ -15,9 +15,7 @@ CREATE TABLE IF NOT EXISTS training (
     epsilon DECIMAL(1,3) NOT NULL,
     alpha DECIMAL(1,3) NOT NULL,
     gamma DECIMAL(1,3) NOT NULL,
-    ourPath VARCHAR(255),
-    oppPath VARCHAR(255),
-    parametersPath VARCHAR(255),
+    oppPath INTEGER NOT NULL,
 
     CONSTRAINT fk_experiments
     FOREIGN KEY (idExperiment)
