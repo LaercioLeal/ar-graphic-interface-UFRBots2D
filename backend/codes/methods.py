@@ -36,7 +36,7 @@ def getUserName():
   return user_name
 
 def getFullDirectory():
-  return getUserName() + "/UFRBots/simulacoes"
+  return getUserName() + "/UFRBots2D/simulacoes"
 
 def getTeamDirectory():
   return getFullDirectory() + "/TIMES"
