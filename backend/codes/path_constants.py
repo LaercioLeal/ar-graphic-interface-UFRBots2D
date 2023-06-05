@@ -1,4 +1,4 @@
-from methods import getTeamDirectory
+from codes.methods import getTeamDirectory
 
 UFRBOTS_PATH = getTeamDirectory() + '/UFRBots2D'
 BULLRUSSIA_PATH = getTeamDirectory() + '/bullrussia/src'

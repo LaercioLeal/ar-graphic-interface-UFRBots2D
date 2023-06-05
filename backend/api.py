@@ -9,11 +9,6 @@ app = flask.Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*", "Access-Control-Allow-Origin": '*'}}, supports_credentials=True)
 app.config["DEBUG"] = True
 
-@app.after_request
-def add_cors_headers(response):
-    response.headers.add('Access-Control-Allow-Origin', '*')  # Permitindo qualquer origem
-    return response
-
 # importação dos arquivos de rotas
 import routes.data
 import routes.quiz

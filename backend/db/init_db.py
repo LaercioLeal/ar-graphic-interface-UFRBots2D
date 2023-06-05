@@ -3,7 +3,7 @@ import os
 from codes.methods import getLogDirectory, getTeamDirectory
  
 def init():
-  os.system('cd && mkdir -p ' + getLogDirectory() + ' && mkdir -p ' + getTeamDirectory())
+  os.system('cd && mkdir -p ' + getLogDirectory().replace('recodejr/', '') + ' && mkdir -p ' + getTeamDirectory().replace('recodejr/', ''))
 
   with open('backend/db/schema.sql') as f:
     myPath = 'backend/db/database.db'

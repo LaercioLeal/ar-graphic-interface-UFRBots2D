@@ -1,4 +1,4 @@
-from path_constants import UFRBOTS_PATH
+from codes.path_constants import UFRBOTS_PATH
  
 def getStartPath():
     return UFRBOTS_PATH + '/src/start.sh'
