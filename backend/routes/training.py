@@ -1,3 +1,5 @@
+import sys
+sys.path.append("../codes")
 from __main__ import app
 from flask import request
 from codes.methods import formatResponse, generateHash, get_db_connection
