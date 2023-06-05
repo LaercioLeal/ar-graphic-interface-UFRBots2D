@@ -1,11 +1,14 @@
-import sys
-sys.path.append("../codes")
+
 from __main__ import app
 from flask import request
 from codes.methods import formatResponse, generateHash, get_db_connection
 import os
+
+import sys
+sys.path.append("./backend/codes")
 from codes.ufrbots2d_constants import  getParamsPath
 from codes.path_constants import UFRBOTS_PATH, getTeamName
+sys.path.remove("./backend/codes")
 
 # cadastrar um ensaio
 @app.route('/experiments/training/data/params', methods=['POST'])
