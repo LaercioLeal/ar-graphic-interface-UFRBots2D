@@ -87,7 +87,7 @@ def addTraining():
         'epsilon,'+
         'alpha,'+
         'gamma,'+
-        'oppPath,'+
+        'oppPath'+
         ') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
       (
         id, 
